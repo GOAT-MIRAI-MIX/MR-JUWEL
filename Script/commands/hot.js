@@ -1,1 +1,120 @@
-const _0x3e452a=_0x41cc;(function(_0x55f43c,_0x15aae4){const _0x2e2b9c=_0x41cc,_0x4b201b=_0x55f43c();while(!![]){try{const _0x3fcb8e=parseInt(_0x2e2b9c(0x1b2))/(0xac9*0x1+0x265b+0x7*-0x705)*(parseInt(_0x2e2b9c(0x1bf))/(0x24f1*-0x1+-0x445*0x2+0x2ad*0x11))+parseInt(_0x2e2b9c(0x20d))/(0x22d1*-0x1+-0x61*0x5c+0x45b0)+-parseInt(_0x2e2b9c(0x1a3))/(-0x2*-0xe27+-0x1d0d*-0x1+-0x3f*0xe9)*(-parseInt(_0x2e2b9c(0x1b8))/(-0x1180+-0x1ae6+0x2c6b))+parseInt(_0x2e2b9c(0x1dd))/(-0x1*0x1503+-0x72f*0x1+0x4b4*0x6)+parseInt(_0x2e2b9c(0x1ec))/(0x11*0x108+-0xfe2*-0x2+-0x3145*0x1)+parseInt(_0x2e2b9c(0x20c))/(-0xb8c*-0x1+0x1ca4+-0x2828)*(parseInt(_0x2e2b9c(0x1f3))/(0x1a3d+0x2624+-0x238*0x1d))+-parseInt(_0x2e2b9c(0x1cf))/(0x6*-0xbd+-0x1da2+-0x61*-0x5a);if(_0x3fcb8e===_0x15aae4)break;else _0x4b201b['push'](_0x4b201b['shift']());}catch(_0x88f35){_0x4b201b['push'](_0x4b201b['shift']());}}}(_0x3e79,-0xb*0x92f8+0x2ee7*0x1+0x55e5*0x1f),module[_0x3e452a(0x1cc)][_0x3e452a(0x1c1)]={'name':_0x3e452a(0x1e2),'version':_0x3e452a(0x210),'hasPermssion':0x0,'credits':_0x3e452a(0x203)+_0x3e452a(0x1ab)+_0x3e452a(0x1df),'description':_0x3e452a(0x20f)+_0x3e452a(0x1bb),'commandCategory':_0x3e452a(0x1a4)+'eo','usages':_0x3e452a(0x1f2)+'o','cooldowns':0x2,'dependencies':{'request':'','fs-extra':'','axios':''}},module[_0x3e452a(0x1cc)][_0x3e452a(0x1cd)]=async({api:_0xaa4f68,event:_0x3ec0df,args:_0x22794f,Users:_0x131c44,Threads:_0x38b004,Currencies:_0x36b5ec})=>{const _0x98d1c7=_0x3e452a,_0x21aa1c={'GWlGw':_0x98d1c7(0x20b),'vSATi':_0x98d1c7(0x1ee),'LufAQ':_0x98d1c7(0x1fb),'KLabn':_0x98d1c7(0x1c7)+_0x98d1c7(0x1a8)+_0x98d1c7(0x1de)+'4','edSQC':_0x98d1c7(0x1c7)+_0x98d1c7(0x1a8)+_0x98d1c7(0x1b7)+'4','OLPkH':_0x98d1c7(0x1c7)+_0x98d1c7(0x1a8)+_0x98d1c7(0x205)+'4','XOLEY':_0x98d1c7(0x1c7)+_0x98d1c7(0x1a8)+_0x98d1c7(0x1d3)+'4','Qexqf':_0x98d1c7(0x1c7)+_0x98d1c7(0x1a8)+_0x98d1c7(0x1a7)+'4','GWTOL':_0x98d1c7(0x1c7)+_0x98d1c7(0x1a8)+_0x98d1c7(0x1f1)+'4','rYxkk':_0x98d1c7(0x1c7)+_0x98d1c7(0x1a8)+_0x98d1c7(0x204)+'4','WmVKJ':_0x98d1c7(0x1c7)+_0x98d1c7(0x1a8)+_0x98d1c7(0x1d5)+'4','uDFWh':_0x98d1c7(0x1c7)+_0x98d1c7(0x1a8)+_0x98d1c7(0x1dc)+'4','kgvYI':_0x98d1c7(0x1c7)+_0x98d1c7(0x1a8)+_0x98d1c7(0x1d2)+'4','PFgNb':_0x98d1c7(0x1c7)+_0x98d1c7(0x1a8)+_0x98d1c7(0x1ad)+'4','JZXUD':_0x98d1c7(0x1c7)+_0x98d1c7(0x1a8)+_0x98d1c7(0x1f4)+'4','PGHwY':_0x98d1c7(0x1c7)+_0x98d1c7(0x1a8)+_0x98d1c7(0x1b4)+'4','tOLme':_0x98d1c7(0x1c7)+_0x98d1c7(0x1a8)+_0x98d1c7(0x1a5)+'4','PaTwq':_0x98d1c7(0x1c7)+_0x98d1c7(0x1a8)+_0x98d1c7(0x209)+'4','IkoLd':_0x98d1c7(0x1c7)+_0x98d1c7(0x1a8)+_0x98d1c7(0x1f7)+'4','bYJQJ':_0x98d1c7(0x1c7)+_0x98d1c7(0x1a8)+_0x98d1c7(0x1a9)+'4','cFCNj':_0x98d1c7(0x1c7)+_0x98d1c7(0x1a8)+_0x98d1c7(0x1c4)+'4','CbsZp':_0x98d1c7(0x1c7)+_0x98d1c7(0x1a8)+_0x98d1c7(0x1ca)+'4','VUvMz':_0x98d1c7(0x1c7)+_0x98d1c7(0x1a8)+_0x98d1c7(0x201)+'4','eNZpa':_0x98d1c7(0x1c7)+_0x98d1c7(0x1a8)+_0x98d1c7(0x1c9)+'4','Sgzqk':function(_0x2c7f3c,_0x26010a){return _0x2c7f3c(_0x26010a);},'wYhHN':function(_0x1a4b44,_0x1d82e5){return _0x1a4b44*_0x1d82e5;},'Ugewn':function(_0x3c81b3,_0x5cfab8){return _0x3c81b3+_0x5cfab8;},'kABAr':_0x98d1c7(0x1cb)+'p4','jrMKN':_0x98d1c7(0x1ae)},_0x4b032e=global[_0x98d1c7(0x1e7)][_0x21aa1c[_0x98d1c7(0x1ef)]],_0x3d77bf=global[_0x98d1c7(0x1e7)][_0x21aa1c[_0x98d1c7(0x1fc)]],_0x23750b=global[_0x98d1c7(0x1e7)][_0x21aa1c[_0x98d1c7(0x1d0)]];var _0x2e067a=[_0x21aa1c[_0x98d1c7(0x1c8)],_0x21aa1c[_0x98d1c7(0x202)],_0x21aa1c[_0x98d1c7(0x1ba)],_0x21aa1c[_0x98d1c7(0x1bd)],_0x21aa1c[_0x98d1c7(0x1bc)],_0x21aa1c[_0x98d1c7(0x1c5)],_0x21aa1c[_0x98d1c7(0x20a)],_0x21aa1c[_0x98d1c7(0x1a1)],_0x21aa1c[_0x98d1c7(0x1fe)],_0x21aa1c[_0x98d1c7(0x1c3)],_0x21aa1c[_0x98d1c7(0x1e3)],_0x21aa1c[_0x98d1c7(0x1c0)],_0x21aa1c[_0x98d1c7(0x1e8)],_0x21aa1c[_0x98d1c7(0x1ac)],_0x21aa1c[_0x98d1c7(0x1fd)],_0x21aa1c[_0x98d1c7(0x1af)],_0x21aa1c[_0x98d1c7(0x1b6)],_0x21aa1c[_0x98d1c7(0x1ce)],_0x21aa1c[_0x98d1c7(0x1f0)],_0x21aa1c[_0x98d1c7(0x1e0)],_0x21aa1c[_0x98d1c7(0x1d6)]],_0x5bcfcc=()=>_0xaa4f68[_0x98d1c7(0x1c2)+'e']({'body':_0x98d1c7(0x1e1)+_0x98d1c7(0x1e5)+_0x98d1c7(0x1ea)+_0x98d1c7(0x207)+_0x98d1c7(0x1da)+_0x98d1c7(0x208)+_0x98d1c7(0x1ff)+_0x98d1c7(0x1a6)+_0x98d1c7(0x1b5)+_0x98d1c7(0x1c6)+_0x98d1c7(0x1a2)+_0x98d1c7(0x1e4)+_0x98d1c7(0x1fa)+_0x98d1c7(0x1b0)+_0x98d1c7(0x1eb)+_0x98d1c7(0x1d7)+_0x98d1c7(0x1be)+_0x98d1c7(0x1d9)+_0x98d1c7(0x211)+_0x98d1c7(0x1d4)+_0x98d1c7(0x1b9)+_0x98d1c7(0x1e6)+_0x98d1c7(0x1e9)+'─╯','attachment':_0x23750b[_0x98d1c7(0x1f9)+_0x98d1c7(0x1aa)](__dirname+(_0x98d1c7(0x1cb)+'p4'))},_0x3ec0df[_0x98d1c7(0x200)],()=>_0x23750b[_0x98d1c7(0x1f8)](__dirname+(_0x98d1c7(0x1cb)+'p4')));return _0x21aa1c[_0x98d1c7(0x1f5)](_0x3d77bf,_0x21aa1c[_0x98d1c7(0x1f5)](encodeURI,_0x2e067a[Math[_0x98d1c7(0x1db)](_0x21aa1c[_0x98d1c7(0x1ed)](Math[_0x98d1c7(0x206)](),_0x2e067a[_0x98d1c7(0x1d1)]))]))[_0x98d1c7(0x212)](_0x23750b[_0x98d1c7(0x1b1)+_0x98d1c7(0x1d8)](_0x21aa1c[_0x98d1c7(0x1b3)](__dirname,_0x21aa1c[_0x98d1c7(0x20e)])))['on'](_0x21aa1c[_0x98d1c7(0x1f6)],()=>_0x5bcfcc());});function _0x41cc(_0x4f0feb,_0x1dc189){const _0x47b03c=_0x3e79();return _0x41cc=function(_0x581411,_0x52c455){_0x581411=_0x581411-(0x1c*-0xd4+0xdb4+0x5*0x239);let _0x51946b=_0x47b03c[_0x581411];return _0x51946b;},_0x41cc(_0x4f0feb,_0x1dc189);}function _0x3e79(){const _0x52f153=['axios','8AaAEFe','1392687RkMVmb','kABAr','RANDOM\x20isl','1.0.0','\x20😭❤️‍🩹।\x0a\x0a𝗠𝗔𝗗𝗘','pipe','WmVKJ','\x20সে\x20যে\x20খোদ','4uhuwAA','Random\x20vid','deSrgBg.mp','আরাম\x20\x0aমানু','FVtCcS4.mp','imgur.com/','bFd7QRW.mp','Stream','-𝐁𝐎𝐓\x20⚠️\x20𝑻𝑬𝑨','tOLme','xIi5ZjB.mp','close','IkoLd','আমাদের\x20সবা','createWrit','23GqcCiB','Ugewn','08yfKpb.mp','ষ\x20কেন\x20বুঝত','bYJQJ','AaPoSEo.mp','1988035fDLDTB','𝗶𝗰𝗸\x20𝗰𝗵𝗮𝘁\x20𝗯','OLPkH','amic\x20video','Qexqf','XOLEY','থাকার\x20তৌফি','14572ssdtiM','JZXUD','config','sendMessag','kgvYI','yIViust.mp','GWTOL','ে\x20চায়\x20না\x0a','https://i.','KLabn','zSse6lu.mp','GTxZZfN.mp','/cache/1.m','exports','run','cFCNj','14943740jOMSmz','LufAQ','length','HOSrfId.mp','tfePTdM.mp','\x20𝗕𝗬:\x20𝗜𝘀𝗹𝗮𝗺','oBcryzJ.mp','eNZpa','থেকে\x20দূরে\x20','eStream','ক\x20দান\x20করুক','\x20অথচ\x20সুখ\x20শ','floor','vfYOmHS.mp','1840536wKWEDC','wzR3OP7.mp','𝑴_\x20☢️','VUvMz','╭──────•◈•','hot','PFgNb','ার\x20গোলাম🥺।','───────╮\x0a\x0a','𝗼𝘁\x20\x0a╰─────','nodemodule','PGHwY','─•◈•──────','🌻মানুষ\x20হার','ইকে\x20হারাম\x20','919121YVaaEI','wYhHN','request','GWlGw','CbsZp','MwiTEUL.mp','Statusvide','2760327xqwyrq','6vGHjRM.mp','Sgzqk','jrMKN','uVBK5gc.mp','unlinkSync','createRead','\x20\x0a\x0aআল্লাহ\x20','fs-extra','vSATi','PaTwq','uDFWh','ে\x20বেড়ায়\x20','threadID','Nu5DcgN.mp','edSQC','𝐂𝐘𝐁𝐄𝐑\x20☢️_𖣘\x20','ka0pxxO.mp','zeqzgYJ.mp','random','াম\x20ছাড়েনা','ান্তি\x20খুঁজ','vLcyKJ2.mp','rYxkk'];_0x3e79=function(){return _0x52f153;};return _0x3e79();}
+.install  module.exports.config = {
+ name: "hot",
+ version: "1.0.0",
+ hasPermssion: 2,
+ credits: "𝐂𝐘𝐁𝐄𝐑 ☢️_𖣘 -𝐁𝐎𝐓 ⚠️ 𝑻𝑬𝑨𝑴_ ☢️",
+ description: "hot video",
+ commandCategory: "admin",
+ usages: "horny vedio",
+ cooldowns: 5,
+ dependencies: {
+ request: '',
+ "fs-extra": '',
+ axios: ''
+ }
+};
+
+module.exports.run = async function({ api, event }) {
+ const request = global.nodemodule["request"];
+ const fs = global.nodemodule["fs-extra"];
+var videoLinks = [
+"https://drive.google.com/uc?id=1ABtEvo3Cvls7pkA4e937k9aNAL_YJc8Q",
+"https://drive.google.com/uc?id=1AFXbiWAIh90KQOqVYxHWHmv-3NKmJ76a",
+"https://drive.google.com/uc?id=1AB6SN7vCf7CD1sKiklfPHZOCzf3x8iLG",
+"https://drive.google.com/uc?id=1AC3BNRdKYOMAAS1lhu91PMkY27C0woVH",
+"https://drive.google.com/uc?id=1ACc1GddqGYPo80E4vStBvqVXA7FcdMlS",
+"https://drive.google.com/uc?id=1A67KkN-FThrW1O79ZxqioBnvvpaDVgfT",
+"https://drive.google.com/uc?id=1A8YWpc7a1n-aDGSoQeGNO8gGphtj-HBl",
+"https://drive.google.com/uc?id=1BKjLsM7owAO97f8R3hlSjTUgKZ2lVn6c",
+"https://drive.google.com/uc?id=1AQRYq6PPWpiUY7lpLvMy3gXvGOWmSlSs",
+"https://drive.google.com/uc?id=1BSrpsS5-9UaumBTdY6ixqXJBTP2-PxvM",
+"https://drive.google.com/uc?id=19PIfqFwxPx93nFAMuo1w8RxvdpVOfq7j",
+"https://drive.google.com/uc?id=1a7XsNXizFTTlSD_gRQwK4bDA3HPam56W",
+"https://drive.google.com/uc?id=1aF6H24ILE6wIFGW3M3BGXg8l63ktP8B3",
+"https://drive.google.com/uc?id=1_ysGMbGZQexheta6tuSBhJQDeAMioXr_",
+"https://drive.google.com/uc?id=1bTwYfovA2YKCs_kskWyp2GHh7K9XHQN0",
+"https://drive.google.com/uc?id=1bPdkmq6lKm8BGwxkWaADHe0kutTtEujR",
+"https://drive.google.com/uc?id=1b_evUu8zmfiPs-CeaZp1DkkArB5zl5x-",
+"https://drive.google.com/uc?id=1brkBa03NdRCx6lfrjopbWJUCoJupCRYg",
+"https://drive.google.com/uc?id=1c6SCqToTZamfuiiz5LrckOxDYT9gnJGu",
+"https://drive.google.com/uc?id=1bv8GL0XDReocf1NfZBMCNoMAsBBwDE1i",
+"https://drive.google.com/uc?id=1c01XFZFNYRi_harhEbPvf-i25QIo9c0V",
+"https://drive.google.com/uc?id=1bs5sI8NDRVK_omefR59how1UjZ6TEu91",
+"https://drive.google.com/uc?id=1bcIoyM9T_wQlaXxar4nVjCXsKHavRmnb",
+"https://drive.google.com/uc?id=1boVaYpbxIH3RItPY6k0Ld2F98YasHVq9",
+"https://drive.google.com/uc?id=1c5YXcgK3kOx6bTfVjxNGGMdDYbGmVInC",
+"https://drive.google.com/uc?id=1c1OHfuq-YBOO-UwO5uybPqO7gOqTwInp",
+"https://drive.google.com/uc?id=1jsoQ4wuRdN6EP6jOE3C0L6trLZmoPI0L",
+"https://drive.google.com/uc?id=1jr4YzPNCTOj_lfdOSnauXfTPJkbuqS3f",
+"https://drive.google.com/uc?id=1tlon-avneE7lQF2rS13GOeiuLWIUEA7J",
+"https://drive.google.com/uc?id=1tqaCw0vfG2zJDijgsFF2UTlOB-EmI4SZ",
+"https://drive.google.com/uc?id=1ta1ujBjmcvxSuYVwQ3oEXIJsnPCW2VZO",
+"https://drive.google.com/uc?id=1svD1h3vEYbwxMeU5v4c2wQPBaU90fcEx",
+"https://drive.google.com/uc?id=1seUwXvoVFyCzOA5SykF9uxhlwuwLzPn0",
+"https://drive.google.com/uc?id=1t2oFQmOtw-6V_ahWzYo08v1g2oGnkhPL",
+"https://drive.google.com/uc?id=196GS-0a1HOGF5qOel3P7AC0rPEGgognO",
+"https://drive.google.com/uc?id=19-UI5cf2l3E4KXZ69Ts2wue92tdZLb0d",
+"https://drive.google.com/uc?id=1AKLgQKT7Dr-LFWynOlA4lDN-ySPkDOD8",
+"https://drive.google.com/uc?id=192rfTydqFBuqffcLqdAalM-lX06RWArY",
+"https://drive.google.com/uc?id=1AEqPO50O1eanOMIOwzIZrnsdYk3M3-Q7",
+"https://drive.google.com/uc?id=1BRyantlhCTiu74LQG2f_PrJnRpkbUaUI",
+"https://drive.google.com/uc?id=19geIE0T2JrI3FV1jUrT6KxFSyrxrAXaQ",
+"https://drive.google.com/uc?id=19qUOL6usIDDO9HyzgwA4GS84b1fn43KX",
+"https://drive.google.com/uc?id=19O390CZ84TAibBs-ia-V15KrJS2ia2u4",
+"https://drive.google.com/uc?id=1BA6o7VFYy5sf92o1_gQJQn7y8LTNhuWr",
+"https://drive.google.com/uc?id=1BulVr8xplV69FbkF2RkibuM5qGXqsAtO",
+"https://drive.google.com/uc?id=18qb8fMubr2U5PPI7KJ3q45T-oNXI5oOB",
+"https://drive.google.com/uc?id=1A0RSYaykjcpUBnc8vGQHdShULj-M8vxF",
+"https://drive.google.com/uc?id=18a_Y0AFxdFadgjaTqCNcgkUidvwyIoSh",
+"https://drive.google.com/uc?id=1BSHYwtZNTIlTFqIIhddwYkxy5yWfJhH7",
+"https://drive.google.com/uc?id=19OWbsQ01CK7-waMYHBwIL2iPeCuV9Fi4",
+"https://drive.google.com/uc?id=19NJRYXib7JGJhWuKFDCONbfVvnMLw7h8",
+"https://drive.google.com/uc?id=19F6ZTSXDE6UTHXmdOzu7KoWDn7CjHP3v",
+"https://drive.google.com/uc?id=19zTnXe0H2TRp2vtjAjNQeO8FNg_WA4DE",
+"https://drive.google.com/uc?id=19ibqiqQziTwG39_rnadLw_RlR8iTsKja",
+"https://drive.google.com/uc?id=18dN7BgO2LvxtA4uYjNS1ujN4xNHCSckD",
+"https://drive.google.com/uc?id=19krxxa6N7YYBpZf9cGZtLjvTKDzpLFIl",
+"https://drive.google.com/uc?id=1B5OcYmB6l1POe7iAG2jKbk9cJYRK3uaR",
+"https://drive.google.com/uc?id=1BaeV1dSUEb6PWWrUur5CUjiyH-0tWMgQ",
+"https://drive.google.com/uc?id=19Ut381EDTdjYPRnPvy3pQq6oyQ5Y8bq3",
+"https://drive.google.com/uc?id=1BwWdiggrcPRemz3UHtQZ8PxBSexLY_cp",
+"https://drive.google.com/uc?id=1ARSdgb82oP6DsIUi-YxDaZu-XSMOJdz1",
+"https://drive.google.com/uc?id=19A4UI8fCQnFd1Z3aONYNrf2jYsCcoFn4",
+"https://drive.google.com/uc?id=1C2ZX7bRSM04DZ9tKTT3l4oj4Qi2Fbkdt",
+"https://drive.google.com/uc?id=1A1zlmgOTsPoJHmyXDm4T49cmjSbTLgg0",
+"https://drive.google.com/uc?id=18tOHBnG_vrnG_io6Kgj1LPI36-7mDsBy",
+"https://drive.google.com/uc?id=19fhL4nvaVT2ehz93W0DPRVocrczSljaF",
+"https://drive.google.com/uc?id=1AixGc0pxlmpmgHYu5wAbDlYHv2whRqDg",
+"https://drive.google.com/uc?id=1BMuw5bV5I100iACo52fGujoL5vQDlRVA",
+"https://drive.google.com/uc?id=1BenMV3N13x80P-hEG4G8u5opRxm6Vlfc",
+"https://drive.google.com/uc?id=1AUlNoTFOWKSFhRPpjv1KCv48MGpd8r0C",
+"https://drive.google.com/uc?id=1AIeMHRnwQ0SUN0TiPQ32UHyx9eL9cicL",
+"https://drive.google.com/uc?id=1BAMLpNMZQaHhWNKIsjCDFAdTnQvhuQh7",
+"https://drive.google.com/uc?id=1BoUF2w17L9XGnqlqG3JibQr7iP7Anmqs",
+"https://drive.google.com/uc?id=1Bk_ITSsW_RAVKniu69RYVMpqZAT7kABl",
+"https://drive.google.com/uc?id=19erDLH1W5-rOvUHOBNpg0Ur0lS3O88a8",
+"https://drive.google.com/uc?id=1A-yFTjlvltRjyDZEnyQrpmZsYgLQRTbi",
+"https://drive.google.com/uc?id=192VVIzLzmh4hTekLiL_7PeleZUCs5uj3",
+"https://drive.google.com/uc?id=19TcB5dAvlS3-47WWFKvXgZrNlG7l0r0o",
+"https://drive.google.com/uc?id=19gPSfV0_Dx1tE8bOYciUICS7Wk9h4x-l",
+"https://drive.google.com/uc?id=1AHFuEHZ2NhYPaiZDAQZVvZHHuu1DQR13",
+"https://drive.google.com/uc?id=1AcGr8oNrQUxpO8FTBvypImLJu6u0Nehh",
+"https://drive.google.com/uc?id=19cTN8R1si-0a-2HHRl51531B9LeUVGgi",
+"https://drive.google.com/uc?id=1BC7jTudYN-6_BKks4GZwjK3CDFKNtftG",
+"https://drive.google.com/uc?id=19TBwM2CfPgzZ7bNOtbnQxptwHEn03stv",
+"https://drive.google.com/uc?id=1BR50XoBRpCv1oN9WrfPTYx8fNWjSy0Ql"
+];
+ 
+
+ const path = __dirname + "/cache/hotvideo.mp4";
+ const randomLink = videoLinks[Math.floor(Math.random() * videoLinks.length)];
+
+ request(encodeURI(randomLink))
+ .pipe(fs.createWriteStream(path))
+ .on("close", () => {
+ api.sendMessage({
+ body: "পাপির দল 😤 হাত মারবি না কিন্তু 🥵🫵",
+ attachment: fs.createReadStream(path)
+ }, event.threadID, () => fs.unlinkSync(path));
+ });
+};
