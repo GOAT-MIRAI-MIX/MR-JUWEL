@@ -1,146 +1,186 @@
-[
-    {
-        "key": "dbln",
-        "value": "%7B%22100085384347023%22%3A%22pZWx8jDw%22%2C%2261579247559392%22%3A%226vziogWK%22%7D",
-        "domain": "facebook.com",
-        "path": "/login/device-based/",
-        "hostOnly": false,
-        "creation": "2025-08-23T02:28:23.803Z",
-        "lastAccessed": "2025-08-23T02:28:23.803Z"
-    },
-    {
-        "key": "datr",
-        "value": "b8uhaE2Du3Gw5eHhCajyEv5f",
-        "domain": "facebook.com",
-        "path": "/",
-        "hostOnly": false,
-        "creation": "2025-08-23T02:28:23.803Z",
-        "lastAccessed": "2025-08-23T02:28:23.803Z"
-    },
-    {
-        "key": "sb",
-        "value": "b8uhaLzBPFdBpq9lcZO7yzPl",
-        "domain": "facebook.com",
-        "path": "/",
-        "hostOnly": false,
-        "creation": "2025-08-23T02:28:23.803Z",
-        "lastAccessed": "2025-08-23T02:28:23.803Z"
-    },
-    {
-        "key": "vpd",
-        "value": "v1%3B666x360x2",
-        "domain": "facebook.com",
-        "path": "/",
-        "hostOnly": false,
-        "creation": "2025-08-23T02:28:23.803Z",
-        "lastAccessed": "2025-08-23T02:28:23.803Z"
-    },
-    {
-        "key": "ps_l",
-        "value": "1",
-        "domain": "facebook.com",
-        "path": "/",
-        "hostOnly": false,
-        "creation": "2025-08-23T02:28:23.803Z",
-        "lastAccessed": "2025-08-23T02:28:23.803Z"
-    },
-    {
-        "key": "ps_n",
-        "value": "1",
-        "domain": "facebook.com",
-        "path": "/",
-        "hostOnly": false,
-        "creation": "2025-08-23T02:28:23.803Z",
-        "lastAccessed": "2025-08-23T02:28:23.803Z"
-    },
-    {
-        "key": "dpr",
-        "value": "2",
-        "domain": "facebook.com",
-        "path": "/",
-        "hostOnly": false,
-        "creation": "2025-08-23T02:28:23.803Z",
-        "lastAccessed": "2025-08-23T02:28:23.803Z"
-    },
-    {
-        "key": "pas",
-        "value": "61550582406389%3ARTTvNkNC3F%2C100085384347023%3AITzRp37ScD%2C61579247559392%3Aiaiz9BQK5A",
-        "domain": "facebook.com",
-        "path": "/",
-        "hostOnly": false,
-        "creation": "2025-08-23T02:28:23.803Z",
-        "lastAccessed": "2025-08-23T02:28:23.803Z"
-    },
-    {
-        "key": "m_pixel_ratio",
-        "value": "2",
-        "domain": "facebook.com",
-        "path": "/",
-        "hostOnly": false,
-        "creation": "2025-08-23T02:28:23.803Z",
-        "lastAccessed": "2025-08-23T02:28:23.803Z"
-    },
-    {
-        "key": "wd",
-        "value": "360x806",
-        "domain": "facebook.com",
-        "path": "/",
-        "hostOnly": false,
-        "creation": "2025-08-23T02:28:23.803Z",
-        "lastAccessed": "2025-08-23T02:28:23.803Z"
-    },
-    {
-        "key": "c_user",
-        "value": "61579247559392",
-        "domain": "facebook.com",
-        "path": "/",
-        "hostOnly": false,
-        "creation": "2025-08-23T02:28:23.803Z",
-        "lastAccessed": "2025-08-23T02:28:23.803Z"
-    },
-    {
-        "key": "xs",
-        "value": "3%3AwtH-OV45aOZaSA%3A2%3A1755916092%3A-1%3A-1",
-        "domain": "facebook.com",
-        "path": "/",
-        "hostOnly": false,
-        "creation": "2025-08-23T02:28:23.803Z",
-        "lastAccessed": "2025-08-23T02:28:23.803Z"
-    },
-    {
-        "key": "fr",
-        "value": "0efgYkLMLPD8KCCYd.AWf5Yi8PBK2VSQznO6DVNyrB7guVDx2Vgnb0jGV0T1MjNqPCG3Q.BoqMpn..AAA.0.0.BoqSdB.AWe_rfSJP0A7QrWdN1AHFbDpdyY",
-        "domain": "facebook.com",
-        "path": "/",
-        "hostOnly": false,
-        "creation": "2025-08-23T02:28:23.803Z",
-        "lastAccessed": "2025-08-23T02:28:23.803Z"
-    },
-    {
-        "key": "locale",
-        "value": "bn_IN",
-        "domain": "facebook.com",
-        "path": "/",
-        "hostOnly": false,
-        "creation": "2025-08-23T02:28:23.803Z",
-        "lastAccessed": "2025-08-23T02:28:23.803Z"
-    },
-    {
-        "key": "fbl_st",
-        "value": "101428079%3BT%3A29265268",
-        "domain": "facebook.com",
-        "path": "/",
-        "hostOnly": false,
-        "creation": "2025-08-23T02:28:23.803Z",
-        "lastAccessed": "2025-08-23T02:28:23.803Z"
-    },
-    {
-        "key": "wl_cbv",
-        "value": "v2%3Bclient_version%3A2900%3Btimestamp%3A1755916098",
-        "domain": "facebook.com",
-        "path": "/",
-        "hostOnly": false,
-        "creation": "2025-08-23T02:28:23.803Z",
-        "lastAccessed": "2025-08-23T02:28:23.803Z"
+const axios = require('axios');
+
+const baseApiUrl = async () => {
+    const base = await axios.get(`https://raw.githubusercontent.com/Blankid018/D1PT0/main/baseApiUrl.json`);
+    return base.data.api;
+};
+
+module.exports.config = {
+  name: "baby",
+  version: "6.9.9",
+  credits: "dipto",
+  cooldowns: 0,
+  hasPermssion: 0,
+  description: "better than all sim simi",
+  commandCategory: "chat",
+  category: "chat",
+  usePrefix: true,
+  prefix: true,
+  usages: `[anyMessage] OR\nteach [YourMessage] - [Reply1], [Reply2], [Reply3]... OR\nteach [react] [YourMessage] - [react1], [react2], [react3]... OR\nremove [YourMessage] OR\nrm [YourMessage] - [indexNumber] OR\nmsg [YourMessage] OR\nlist OR\nall OR\nedit [YourMessage] - [NewMessage]`,
+};
+
+module.exports.run = async function ({ api, event, args, Users }) {
+  try {
+    const link = `${await baseApiUrl()}/baby`;
+    const dipto = args.join(" ").toLowerCase();
+    const uid = event.senderID;
+
+    if (!args[0]) {
+      const ran = ["Bolo baby", "hum", "type help baby", "type !baby hi"];
+      const r = ran[Math.floor(Math.random() * ran.length)];
+      return api.sendMessage(r, event.threadID, event.messageID);
     }
-        ]
+
+    if (args[0] === 'remove') {
+      const fina = dipto.replace("remove ", "");
+      const respons = await axios.get(`${link}?remove=${fina}&senderID=${uid}`);
+      return api.sendMessage(respons.data.message, event.threadID, event.messageID);
+    }
+
+    if (args[0] === 'rm' && dipto.includes('-')) {
+      const [fi, f] = dipto.replace("rm ", "").split(/\s*-\s*/);
+      const respons = await axios.get(`${link}?remove=${fi}&index=${f}`);
+      return api.sendMessage(respons.data.message, event.threadID, event.messageID);
+    }
+
+    if (args[0] === 'list') {
+      if (args[1] === 'all') {
+        const res = await axios.get(`${link}?list=all`);
+        const data = res.data.teacher.teacherList;
+        const teachers = await Promise.all(data.map(async (item) => {
+          const number = Object.keys(item)[0];
+          const value = item[number];
+          const name = await Users.getNameUser(number).catch(()=>{}) || "unknown";
+          return { name, value };
+        }));
+        teachers.sort((a, b) => b.value - a.value);
+        const output = teachers.map((teacher, index) => `${index + 1}/ ${teacher.name}: ${teacher.value}`).join('\n');
+        return api.sendMessage(`Total Teach = ${res.data.length}\n\n👑 | List of Teachers of baby\n${output}`, event.threadID, event.messageID);
+      } else {
+        const respo = await axios.get(`${link}?list=all`);
+        return api.sendMessage(`Total Teach = ${respo.data.length}`, event.threadID, event.messageID);
+      }
+    }
+
+    if (args[0] === 'msg' || args[0] === 'message') {
+      const fuk = dipto.replace("msg ", "");
+      const respo = await axios.get(`${link}?list=${fuk}`);
+      return api.sendMessage(`Message ${fuk} = ${respo.data.data}`, event.threadID, event.messageID);
+    }
+
+    if (args[0] === 'edit') {
+      const command = dipto.split(/\s*-\s*/)[1];
+      if (command.length < 2) {
+        return api.sendMessage('❌ | Invalid format! Use edit [YourMessage] - [NewReply]', event.threadID, event.messageID);
+      }
+      const res = await axios.get(`${link}?edit=${args[1]}&replace=${command}`);
+      return api.sendMessage(`changed ${res.data.message}`, event.threadID, event.messageID);
+    }
+
+    if (args[0] === 'teach' && args[1] !== 'amar' && args[1] !== 'react') {
+      const [comd, command] = dipto.split(/\s*-\s*/);
+      const final = comd.replace("teach ", "");
+      if (command.length < 2) {
+        return api.sendMessage('❌ | Invalid format! Use [YourMessage] - [Reply1], [Reply2], [Reply3]... OR remove [YourMessage] OR list OR edit [YourMessage] - [NewReply]', event.threadID, event.messageID);
+      }
+      const re = await axios.get(`${link}?teach=${encodeURIComponent(final)}&reply=${encodeURIComponent(command)}&senderID=${uid}&threadID=${event.threadID}`);
+      const name = await Users.getNameUser(re.data.teacher).catch(() => {}) || "unknown";
+      return api.sendMessage(`✅ Replies added ${re.data.message}\nTeacher: ${name || "unknown"}\nTeachs: ${re.data.teachs}`, event.threadID, event.messageID);
+    }
+
+    if (args[0] === 'teach' && args[1] === 'amar') {
+      const [comd, command] = dipto.split(/\s*-\s*/);
+      const final = comd.replace("teach ", "");
+      if (command.length < 2) {
+        return api.sendMessage('❌ | Invalid format! Use [YourMessage] - [Reply1], [Reply2], [Reply3]... OR remove [YourMessage] OR list OR edit [YourMessage] - [NewReply]', event.threadID, event.messageID);
+      }
+      const re = await axios.get(`${link}?teach=${final}&senderID=${uid}&reply=${command}&key=intro`);
+      return api.sendMessage(`✅ Replies added ${re.data.message}`, event.threadID, event.messageID);
+    }
+
+    if (args[0] === 'teach' && args[1] === 'react') {
+      const [comd, command] = dipto.split(/\s*-\s*/);
+      const final = comd.replace("teach react ", "");
+      if (command.length < 2) {
+        return api.sendMessage('❌ | Invalid format! Use [teach] [YourMessage] - [Reply1], [Reply2], [Reply3]... OR [teach] [react] [YourMessage] - [react1], [react2], [react3]... OR remove [YourMessage] OR list OR edit [YourMessage] - [NewReply]', event.threadID, event.messageID);
+      }
+      const re = await axios.get(`${link}?teach=${final}&react=${command}`);
+      return api.sendMessage(`✅ Replies added ${re.data.message}`, event.threadID, event.messageID);
+    }
+
+    if (['amar name ki', 'amr nam ki', 'amar nam ki', 'amr name ki'].some(phrase => dipto.includes(phrase))) {
+      const response = await axios.get(`${link}?text=amar name ki&senderID=${uid}&key=intro`);
+      return api.sendMessage(response.data.reply, event.threadID, event.messageID);
+    }
+
+     const a = (await axios.get(`${link}?text=${dipto}&senderID=${uid}&font=1`)).data.reply;
+    return api.sendMessage(a, event.threadID,
+        (error, info) => {
+          global.client.handleReply.push({
+            name: this.config.name,
+            type: "reply",
+            messageID: info.messageID,
+            author: event.senderID,
+            lnk: a,
+            apiUrl: link
+          });
+        }, event.messageID);
+
+  } catch (e) {
+    console.error('Error in command execution:', e);
+    return api.sendMessage(`Error: ${e.message}`, event.threadID, event.messageID);
+  }
+};
+
+module.exports.handleReply = async function ({ api, event, handleReply }) {
+try{
+  if (event.type == "message_reply") {
+    const reply = event.body.toLowerCase();
+    if (isNaN(reply)) {
+      const b = (await axios.get(`${await baseApiUrl()}/baby?text=${encodeURIComponent(reply)}&senderID=${event.senderID}&font=1`)).data.reply;
+      await api.sendMessage(b, event.threadID, (error, info) => {
+          global.client.handleReply.push({
+            name: this.config.name,
+            type: "reply",
+            messageID: info.messageID,
+            author: event.senderID,
+            lnk: b
+          });
+        }, event.messageID,
+      )}}
+}catch(err){
+    return api.sendMessage(`Error: ${err.message}`, event.threadID, event.messageID);
+}};
+
+   
+module.exports.handleEvent = async function ({ api, event }) {
+try{
+   const body = event.body ? event.body?.toLowerCase() : ""
+        if (body.startsWith("baby") || body.startsWith("bby") || body.startsWith("bot") || body.startsWith("jan") || body.startsWith("babu") || body.startsWith("janu")) {
+            const arr = body.replace(/^\S+\s*/, "")
+        const randomReplies = ["😚", "Yes 😀, I am here", "What's up?", "Bolo jaan ki korte panmr jonno"];
+            if (!arr) {
+    await api.sendMessage(randomReplies[Math.floor(Math.random() * randomReplies.length)], event.threadID, (error, info) => {
+            global.client.handleReply.push({
+            name: this.config.name,
+            type: "reply",
+            messageID: info.messageID,
+            author: event.senderID
+          });
+        }, event.messageID,
+      )
+    }
+    const a = (await axios.get(`${await baseApiUrl()}/baby?text=${encodeURIComponent(arr)}&senderID=${event.senderID}&font=1`)).data.reply;     
+        await api.sendMessage(a, event.threadID, (error, info) => {
+          global.client.handleReply.push({
+            name: this.config.name,
+            type: "reply",
+            messageID: info.messageID,
+            author: event.senderID,
+            lnk: a
+          });
+        }, event.messageID,
+      )}
+}catch(err){
+    return api.sendMessage(`Error: ${err.message}`, event.threadID, event.messageID);
+}};
