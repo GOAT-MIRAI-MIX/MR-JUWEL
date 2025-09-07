@@ -1,9 +1,3 @@
-/**
- * Mirai JS Auto AppState Refresh Bot (Persistent FB Login)
- * Creator: Raj
- * Version: 1.5.0
- */
-
 const express = require("express");
 const axios = require("axios");
 const login = require("fb-chat-api");
@@ -17,8 +11,8 @@ const REFRESH_INTERVAL = 5 * 60 * 1000; // 5 মিনিট
 const RETRY_DELAY = 30 * 1000; // 30 সেকেন্ড
 
 const CREDENTIALS = {
-    email: "YOUR_FB_EMAIL",
-    password: "YOUR_FB_PASSWORD"
+    email: "ydjjfdddyfjfu@gmail.com",
+    password: "ffjuwel99"
 };
 
 const APPSTATE_FILE = "appstate.json";
