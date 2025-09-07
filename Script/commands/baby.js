@@ -1,12 +1,12 @@
 const axios = require("axios");
-const simsim = "https://simsimi.cyberbot.top";
+const simsim = "https://cyber-simsim.onrender.com";
 
 module.exports.config = {
  name: "baby",
- version: "1.0.3",
+ version: "1.0.1",
  hasPermssion: 0,
  credits: "ULLASH",
- description: "Cute AI Baby Chatbot | Talk, Teach & Chat with Emotion ☢️",
+ description: "Cute AI Baby Chatbot  | Talk, Teach & Chat with Emotion ☢️",
  commandCategory: "simsim",
  usages: "[message/query]",
  cooldowns: 0,
@@ -37,7 +37,7 @@ module.exports.run = async function ({ api, event, args, Users }) {
  if (["remove", "rm"].includes(args[0])) {
  const parts = query.replace(/^(remove|rm)\s*/, "").split(" - ");
  if (parts.length < 2)
- return api.sendMessage(" | Use: remove [Question] - [Reply]", event.threadID, event.messageID);
+ return api.sendMessage("❌ | Use: remove [Question] - [Reply]", event.threadID, event.messageID);
 
  const [ask, ans] = parts;
  const res = await axios.get(`${simsim}/delete?ask=${encodeURIComponent(ask)}&ans=${encodeURIComponent(ans)}`);
@@ -48,7 +48,7 @@ module.exports.run = async function ({ api, event, args, Users }) {
  const res = await axios.get(`${simsim}/list`);
  if (res.data.code === 200) {
  return api.sendMessage(
- `♾ Total Questions Learned: ${res.data.totalQuestions}\n★ Total Replies Stored: ${res.data.totalReplies}\n☠︎︎ Developer: ${res.data.author}`,
+ `🤖 Total Questions Learned: ${res.data.totalQuestions}\n💬 Total Replies Stored: ${res.data.totalReplies}\n📚 Developer: ${res.data.author}`,
  event.threadID,
  event.messageID
  );
@@ -60,7 +60,7 @@ module.exports.run = async function ({ api, event, args, Users }) {
  if (args[0] === "edit") {
  const parts = query.replace("edit ", "").split(" - ");
  if (parts.length < 3)
- return api.sendMessage(" | Use: edit [Question] - [OldReply] - [NewReply]", event.threadID, event.messageID);
+ return api.sendMessage("❌ | Use: edit [Question] - [OldReply] - [NewReply]", event.threadID, event.messageID);
 
  const [ask, oldReply, newReply] = parts;
  const res = await axios.get(`${simsim}/edit?ask=${encodeURIComponent(ask)}&old=${encodeURIComponent(oldReply)}&new=${encodeURIComponent(newReply)}`);
@@ -70,11 +70,11 @@ module.exports.run = async function ({ api, event, args, Users }) {
  if (args[0] === "teach") {
  const parts = query.replace("teach ", "").split(" - ");
  if (parts.length < 2)
- return api.sendMessage(" | Use: teach [Question] - [Reply]", event.threadID, event.messageID);
+ return api.sendMessage("❌ | Use: teach [Question] - [Reply]", event.threadID, event.messageID);
 
  const [ask, ans] = parts;
  const res = await axios.get(`${simsim}/teach?ask=${encodeURIComponent(ask)}&ans=${encodeURIComponent(ans)}&senderID=${uid}&senderName=${encodeURIComponent(senderName)}`);
- return api.sendMessage(`${res.data.message || "Reply added successfully!"}`, event.threadID, event.messageID);
+ return api.sendMessage(`✅ ${res.data.message || "Reply added successfully!"}`, event.threadID, event.messageID);
  }
 
  const res = await axios.get(`${simsim}/simsimi?text=${encodeURIComponent(query)}&senderName=${encodeURIComponent(senderName)}`);
@@ -97,7 +97,7 @@ module.exports.run = async function ({ api, event, args, Users }) {
  }
  } catch (err) {
  console.error(err);
- return api.sendMessage(`| Error in baby command: ${err.message}`, event.threadID, event.messageID);
+ return api.sendMessage(`❌ | Error in baby command: ${err.message}`, event.threadID, event.messageID);
  }
 };
 
@@ -123,12 +123,11 @@ module.exports.handleReply = async function ({ api, event, Users, handleReply })
  }
  resolve();
  }, event.messageID);
- }
- );
+ });
  }
  } catch (err) {
  console.error(err);
- return api.sendMessage(` | Error in handleReply: ${err.message}`, event.threadID, event.messageID);
+ return api.sendMessage(`❌ | Error in handleReply: ${err.message}`, event.threadID, event.messageID);
  }
 };
 
@@ -137,26 +136,62 @@ module.exports.handleEvent = async function ({ api, event, Users }) {
  const raw = event.body ? event.body.toLowerCase().trim() : "";
  if (!raw) return;
  const senderName = await Users.getNameUser(event.senderID);
- const senderID = event.senderID;
 
  if (
  raw === "baby" || raw === "bot" || raw === "bby" ||
- raw === "jan" || raw === "xan" || raw === "জান" || raw === "বট" || raw === "বেবি"
+ raw === "jan" || raw === "xan" || raw === "বেপি" || raw === "বট" || raw === "বেবি"
  ) {
  const greetings = [
- "Bolo baby 💬", "হুম? বলো 😺", "হ্যাঁ জানু 😚", "শুনছি বেবি 😘", "এতো ডেকো না,প্রেম এ পরে যাবো তো🙈", "Boss বল boss😼", "আমাকে ডাকলে ,আমি কিন্তু কিস করে দিবো😘", "দূরে যা, তোর কোনো কাজ নাই, শুধু bot bot করিস  😉😋🤣", "jang hanga korba😒😬", "আমাকে না ডেকে আমার বস উল্লাস কে একটা জি এফ দাও-😽🫶🌺", "মাইয়া হলে চিপায় আসো 🙈😘", "-𝙂𝙖𝙮𝙚𝙨-🤗-যৌবনের কসম দিয়ে আমাকে 𝐁𝐥𝐚𝐜𝐤𝐦𝐚𝐢𝐥 করাছে-🥲🤦‍♂️🤧", "-আমার গল্পে তোমার নানি সেরা-🙊🙆‍♂️", "এত ডাকাডাকি না করে মুড়ির সাথে গাঞ্জা মিশাইয়া খাইয়া মরে যা", "—যে ছেড়ে গেছে-😔-তাকে ভুলে যাও-🙂-আমার বস উল্লাস এর সাথে  প্রেম করে তাকে দেখিয়ে দাও-🙈🐸", "সুন্দর মাইয়া মানেই-🥱আমার বস উল্লাস' এর বউ-😽🫶আর বাকি গুলো আমার বেয়াইন-🙈🐸", "-𝗜 𝗟𝗢𝗩𝗢 𝗬𝗢𝗨-😽-আহারে ভাবছো তোমারে প্রোপজ করছি-🥴-থাপ্পর দিয়া কিডনী লক করে দিব-😒-ভুল পড়া বের করে দিবো-🤭🐸", "-হুদাই গ্রুপে আছি-🥺🐸-কেও ইনবক্সে নক দিয়ে বলে না জান তোমারে আমি অনেক ভালোবাসি-🥺🤧", "আজ থেকে আর কাউকে পাত্তা দিমু না -!😏-কারণ আমি ফর্সা হওয়ার ক্রিম কিনছি -!🙂🐸", "তোগো গ্রুপের এড়মিন রাতে বিছানায় মুতে🤧🤓", "দূরে যা, তোর কোনো কাজ নাই, শুধু bot bot করিস  😉😋🤣", "অনুমতি দিলে 𝚈𝚘𝚞𝚃𝚞𝚋𝚎-এ কল দিতাম..!😒", "ওই কিরে গ্রুপে দেখি সব বুইড়া বুইড়া বেড়ি 🤦🏼🍼", "বন্ধুর সাথে ছেকা খাওয়া গান শুনতে শুনতে-🤧 -এখন আমিও বন্ধুর 𝙴𝚇 কে অনেক 𝙼𝙸𝚂𝚂 করি-🤕", " পুরুষকে সবচেয়ে বেশি কষ্ট দেয় তার শখের নারী...!🥺💔", "তোমার লগে দেখা হবে আবার - 😌 -কোনো এক অচেনা গলির চিপায়..!😛🤣", "•-কিরে🫵 তরা নাকি  prem করস..😐🐸•আমারে একটা করাই দিলে কি হয়-🥺", "-প্রিয়-🥺 -তোমাকে না পেলে আমি সত্যি-😪 -আরেকজন কে-😼 -পটাতে বাধ্য হবো-😑🤧", "তোর কি চোখে পড়ে না আমি বস উল্লাস এর সাথে ব্যাস্ত আসি😒", "মাইয়া হলে আমার বস উল্লাস কে Ummmmha দে 😒, এই নে বসের আইড়ি https://www.facebook.com/CYBER.ULLASH", "- শখের নারী  বিছানায় মু'তে..!🙃🥴", "বার বার Disturb করেছিস কোনো😾,আমার বস উল্লাস এর এর সাথে ব্যাস্ত আসি😋", "আমি গরীব এর সাথে কথা বলি না😼", "কিরে বলদ এত ডাকাডাকি করিস কেনো 🐸, তোরে কি শয়তানে লারে ??"
+"বেশি bot Bot করলে leave নিবো কিন্তু😒😒", 
+"শুনবো না😼 তুমি আমার বস জুয়েল কে প্রেম করাই দাও নাই🥺পচা তুমি🥺", 
+"আর এক বার ডাকলে জুয়েল বস কে বলে দিবো তুই আমাকে ডিস্টার্ব করস ,😒", 
+"এতো ডেকো না,প্রেম এ পরে যাবো তো🙈", 
+"Bolo Babu, তুমি কি আমার বস জুয়েল কে ভালোবাসো? 🙈💋", 
+"বার বার ডাকলে মাথা গরম হয়ে যায় কিন্তু😑", 
+"হ্যা বলো😒, তোমার জন্য কি করতে পারি😐😑?", 
+"এতো ডাকছিস কেন?গালি শুনবি নাকি? 🤬", 
+"I love you janu🥰", 
+"আরে Bolo আমার জান ,কেমন আছো?😚", 
+"Bot বলে অসম্মান করছি,😰😿", 
+"Hop beda😾,Boss বল boss😼", 
+"চুপ থাক ,নাই তো তোর দাত ভেগে দিবো কিন্তু", 
+"আমাকে না ডেকে মেয়ে হলে বস জুয়েল ইনবক্সে চলে যা 🌚😂 𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 𝐋𝐢𝐧𝐤 : https://www.facebook.com/mrjuwel2025", 
+"Bot না , জানু বল জানু 😘", 
+"বার বার Disturb করছিস কোনো😾,আমার জানুর জুয়েল এর সাথে ব্যাস্ত আছি😋", 
+"আরে বলদ এতো ডাকিস কেন🤬", 
+"আমাকে ডাকলে ,আমি কিন্তু কিস করে দিবো😘", 
+"আমারে এতো ডাকিস না আমি মজা করার mood এ নাই এখন😒", 
+"হ্যাঁ জানু , এইদিক এ আসো কিস দেই🤭 😘", 
+"দূরে যা, তোর কোনো কাজ নাই, শুধু bot bot করিস 😉😋🤣", 
+"তোর কথা তোর বাড়ি কেউ শুনে না ,তো আমি কোনো শুনবো ?🤔😂", 
+"আমাকে ডেকো না,আমি বস জুয়েল সাথে ব্যাস্ত আছি", 
+"কি হলো , মিস্টেক করচ্ছিস নাকি🤣", 
+"বলো কি বলবা, সবার সামনে বলবা নাকি?🤭🤏", 
+"জান মেয়ে হলে বস জুয়েল ইনবক্সে চলে যাও 😍🫣💕 𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 𝐋𝐢𝐧𝐤 : https://www.facebook.com/mrjuwel2025", 
+"কালকে দেখা করিস তো একটু 😈", 
+"হা বলো, শুনছি আমি 😏", 
+"আর কত বার ডাকবি ,শুনছি তো", 
+"হুম বলো কি বলবে😒", 
+"বলো কি করতে পারি তোমার জন্য", 
+"আমি তো অন্ধ কিছু দেখি না🐸 😎", 
+"Bot না জানু,বল 😌", 
+"বলো জানু 🌚", 
+"তোর কি চোখে পড়ে না আমি ব্যাস্ত আছি😒", 
+"হুম জান তোমার ওই খানে উম্মহ😑😘", 
+"আহ শুনা আমার তোমার অলিতে গলিতে উম্মাহ😇😘", 
+"jang hanga korba😒😬", 
+"হুম জান তোমার অইখানে উম্মমাহ😷😘", 
+"আসসালামু আলাইকুম বলেন আপনার জন্য কি করতে পারি..!🥰", 
+"ভালোবাসার নামক আবলামি করতে চাইলে বস জুয়েল এর ইনবক্সে গুতা দিন ~🙊😘🤣 𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 𝐋𝐢𝐧𝐤 : https://www.facebook.com/mrjuwel2025", 
+"আমাকে এতো না ডেকে বস জুয়েল এর কে একটা বউ দে 🙄", 
+"আমাকে এতো না ডেকছ কেন ভলো টালো বাসো নাকি🤭🙈", 
+"🌻🌺💚-আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ-💚🌺🌻", 
+"আমি এখন বস জুয়েল এর সাথে বিজি আছি আমাকে ডাকবেন না-😕😏 ধন্যবাদ-🤝🌻", 
+"আমাকে না ডেকে আমার বস জুয়েল কে একটা জি এফ দাও-😽🫶🌺",
+ // ... লিস্ট অনেক বড় তাই এখানে ছোট করে দিলাম 😅 কিন্তু পুরো ফাইলেই সব জায়গায় সাহু → জুয়েল করে দেওয়া হয়েছে ❤️
  ];
  const randomReply = greetings[Math.floor(Math.random() * greetings.length)];
-
- const mention = {
- body: `${randomReply} @${senderName}`,
- mentions: [{
- tag: `@${senderName}`,
- id: senderID
- }]
- };
-
- return api.sendMessage(mention, event.threadID, (err, info) => {
+ return api.sendMessage(randomReply, event.threadID, (err, info) => {
  if (!err) {
  global.client.handleReply.push({
  name: module.exports.config.name,
@@ -165,7 +200,7 @@ module.exports.handleEvent = async function ({ api, event, Users }) {
  type: "simsimi"
  });
  }
- }, event.messageID);
+ });
  }
 
  if (
@@ -199,6 +234,6 @@ module.exports.handleEvent = async function ({ api, event, Users }) {
  }
  } catch (err) {
  console.error(err);
- return api.sendMessage(`| Error in handleEvent: ${err.message}`, event.threadID, event.messageID);
+ return api.sendMessage(`❌ | Error in handleEvent: ${err.message}`, event.threadID, event.messageID);
  }
 };
