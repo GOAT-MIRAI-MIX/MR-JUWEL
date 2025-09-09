@@ -3,9 +3,9 @@ module.exports.config = {
  version: "1.0.0",
  hasPermssion: 2,
  credits: "𝐂𝐘𝐁𝐄𝐑 ☢️_𖣘 -𝐁𝐎𝐓 ⚠️ 𝑻𝑬𝑨𝑴_ ☢️",
- description: "hot video",
+ description: "sad video",
  commandCategory: "admin",
- usages: "horny vedio",
+ usages: "sad vedio",
  cooldowns: 5,
  dependencies: {
  request: '',
@@ -34,7 +34,7 @@ var videoLinks = [
  .pipe(fs.createWriteStream(path))
  .on("close", () => {
  api.sendMessage({
- body: "My hero Kingdom of heaven ✡️",
+ body: "boy sad video😌",
  attachment: fs.createReadStream(path)
  }, event.threadID, () => fs.unlinkSync(path));
  });
