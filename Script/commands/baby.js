@@ -46,18 +46,56 @@ const CREDIT_WARNING =
   `✅ অরিজিনাল ক্রেডিট দিন:\n乛 M𝆠፝֟R ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐\n\n` +
   `অরিজিনাল ক্রেডিট দিলে BABY কোড আবার কাজ করবে।`;
 
+// ====== ডাবল রিপ্লাই গার্ড ======
+// একই মেসেজ একাধিকবার প্রসেস হলে দ্বিতীয়বার থেকে স্কিপ করবে
+const handledMessages = new Set();
+function alreadyHandled(id) {
+  if (!id) return false;
+  if (handledMessages.has(id)) return true;
+  handledMessages.add(id);
+  setTimeout(() => handledMessages.delete(id), 60000);
+  return false;
+}
+
+// ====== বেবি কোডের নিজের পাঠানো মেসেজ ট্র্যাক করা ======
+// শুধু এই কোডের পাঠানো মেসেজে রিপ্লাই দিলেই AI রিপ্লাই যাবে, অন্য কমান্ডের মেসেজে নয়
+const babyMessageIDs = new Set();
+function trackMessage(id) {
+  if (!id) return;
+  babyMessageIDs.add(id);
+  if (babyMessageIDs.size > 3000) {
+    babyMessageIDs.delete(babyMessageIDs.values().next().value);
+  }
+}
+
+function sendTracked(api, msg, threadID, replyToID) {
+  return new Promise((resolve) => {
+    let done = false;
+    const finish = (info) => { if (!done) { done = true; resolve(info); } };
+    const cb = (err, info) => {
+      if (!err && info && info.messageID) trackMessage(info.messageID);
+      finish(info);
+    };
+    try {
+      if (replyToID) api.sendMessage(msg, threadID, cb, replyToID);
+      else api.sendMessage(msg, threadID, cb);
+    } catch (e) { finish(null); }
+    setTimeout(() => finish(null), 15000);
+  });
+}
+
 // ====== ট্রিগার লিস্ট (বাংলা + ইংরেজি) ======
 const TRIGGER_WORDS = [
   "baby", "bot", "bby", "jan", "bbz", "kolixa", "babu",
   "nila", "jui", "tisha", "pia", "pakhi", "mim", "maria", "hippi", "mari", "xan",
   "নিলা", "নীলা", "জুই", "তিশা", "পিয়া", "পাখি", "মিম",
-  "জান", "বট", "বেবি",, "বাবু"
+  "জান", "বট", "বেবি", "বাবু"
 ];
 
 // ====== বোল্ড ফন্ট ======
 function toBoldFont(text) {
   const map = {
-    'A':'𝗔','B':'𝗕','C':'𝗖','D':'𝗗','E':'𝗘','F':'𝗙','G':'𝗚','H':'𝗛','I':'𝗜','J':'𝗝','K':'𝗞','L':'𝗟''M':'𝗠','N':'𝗡','O':'𝗢','P':'𝗣','Q':'𝗤','R':'𝗥','S':'𝗦','T':'𝗧','U':'𝗨','V':'𝗩','W':'𝗪','X':'𝗫','Y':'𝗬','Z':'𝗭',
+    'A':'𝗔','B':'𝗕','C':'𝗖','D':'𝗗','E':'𝗘','F':'𝗙','G':'𝗚','H':'𝗛','I':'𝗜','J':'𝗝','K':'𝗞','L':'𝗟','M':'𝗠','N':'𝗡','O':'𝗢','P':'𝗣','Q':'𝗤','R':'𝗥','S':'𝗦','T':'𝗧','U':'𝗨','V':'𝗩','W':'𝗪','X':'𝗫','Y':'𝗬','Z':'𝗭',
     'a':'𝗮','b':'𝗯','c':'𝗰','d':'𝗱','e':'𝗲','f':'𝗳','g':'𝗴','h':'𝗵','i':'𝗶','j':'𝗷','k':'𝗸','l':'𝗹','m':'𝗺','n':'𝗻','o':'𝗼','p':'𝗽','q':'𝗾','r':'𝗿','s':'𝘀','t':'𝘁','u':'𝘂','v':'𝘃','w':'𝘄','x':'𝘅','y':'𝘆','z':'𝘇',
     '0':'𝟬','1':'𝟭','2':'𝟮','3':'𝟯','4':'𝟰','5':'𝟱','6':'𝟲','7':'𝟳','8':'𝟴','9':'𝟵'
   };
@@ -343,21 +381,13 @@ async function sendFunnyReplyWithImage(api, event, userID, userName) {
       attachment: fs.createReadStream(avatarPath)
     };
 
-    if (event.messageID) {
-      await api.sendMessage(msg, event.threadID, event.messageID);
-    } else {
-      await api.sendMessage(msg, event.threadID);
-    }
+    await sendTracked(api, msg, event.threadID, event.messageID);
 
     setTimeout(() => {
       if (fs.existsSync(avatarPath)) fs.unlinkSync(avatarPath);
     }, 5000);
   } else {
-    if (event.messageID) {
-      await api.sendMessage(styledReply, event.threadID, event.messageID);
-    } else {
-      await api.sendMessage(styledReply, event.threadID);
-    }
+    await sendTracked(api, styledReply, event.threadID, event.messageID);
   }
 }
 
@@ -366,12 +396,13 @@ module.exports.config = {
   name: "baby",
   aliases: [
     "maria", "hippi", "bby", "bbz", "xan", "mari",
+    "jan", "babu", "kolixa",
     "বট", "bot",
     "নিলা", "নীলা", "জুই", "তিশা", "পিয়া", "পাখি", "মিম",
     "nila", "jui", "tisha", "pia", "pakhi", "mim"
   ],
   premium: false,
-  version: "1.6.0",
+  version: "1.6.2",
   hasPermssion: 0,
   credits: "乛 M𝆠፝֟R ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐",
   description: `AI auto teach + Typing effect | Credit: ${BOT_CREDIT}`,
@@ -428,26 +459,35 @@ async function handleTeach(api, event, uid, query) {
 }
 
 // ====== RUN ======
+// run শুধু teach / remove / list / edit কমান্ড সামলাবে।
+// সাধারণ চ্যাট রিপ্লাই handleEvent দেবে (ডাবল রিপ্লাই ঠেকাতে)।
 module.exports.run = async function ({ api, event, args, Users }) {
   if (event.senderID === api.getCurrentUserID()) return;
-  if (!isCreditValid()) return api.sendMessage(CREDIT_WARNING, event.threadID, event.messageID);
 
   const uid = event.senderID;
-  const senderName = await Users.getNameUser(uid);
-  const query = args.join(" ").toLowerCase();
   const rawQuery = args.join(" ");
+  const firstWord = args[0] ? args[0].toLowerCase() : "";
+
+  const isTeach = ["teach", "tc", "t", "টিস", "শিখাও", "শেখাও"].includes(firstWord);
+  const isRemove = ["remove", "rm", "ডিলিট", "delete", "del"].includes(firstWord);
+  const isList = ["list", "লিস্ট"].includes(firstWord);
+  const isEdit = ["edit", "এডিট"].includes(firstWord);
+
+  // সাব-কমান্ড না হলে কিছু করবে না — handleEvent রিপ্লাই দেবে
+  if (!isTeach && !isRemove && !isList && !isEdit) return;
+
+  if (!isCreditValid()) return api.sendMessage(CREDIT_WARNING, event.threadID, event.messageID);
 
   try {
     if (!baseApiUrl) return api.sendMessage("❌ API not loaded yet.", event.threadID, event.messageID);
 
     // ✅ TEACH / TC / টিস / শিখাও
-    const firstWord = args[0] ? args[0].toLowerCase() : "";
-    if (["teach", "tc", "t", "টিস", "শিখাও", "শেখাও"].includes(firstWord)) {
+    if (isTeach) {
       return handleTeach(api, event, uid, rawQuery);
     }
 
     // ✅ REMOVE / RM
-    if (["remove", "rm", "ডিলিট", "delete", "del"].includes(firstWord)) {
+    if (isRemove) {
       const cleaned = rawQuery.replace(/^(remove|rm|ডিলিট|delete|del)\s+/i, "").trim();
       const parts = cleaned.split(" - ");
       if (parts.length < 1 || !parts[0].trim())
@@ -468,7 +508,7 @@ module.exports.run = async function ({ api, event, args, Users }) {
     }
 
     // ✅ LIST
-    if (["list", "লিস্ট"].includes(firstWord)) {
+    if (isList) {
       try {
         const res = await axios.get(`${baseApiUrl}?list=all`);
         if (res.data) {
@@ -483,7 +523,7 @@ module.exports.run = async function ({ api, event, args, Users }) {
     }
 
     // ✅ EDIT
-    if (["edit", "এডিট"].includes(firstWord)) {
+    if (isEdit) {
       const cleaned = rawQuery.replace(/^(edit|এডিট)\s+/i, "").trim();
       const parts = cleaned.split(" - ");
       if (parts.length < 2)
@@ -503,93 +543,40 @@ module.exports.run = async function ({ api, event, args, Users }) {
         return api.sendMessage(`❌ | এডিট করা যায়নি!\n\n💠 Credit: ${BOT_CREDIT}`, event.threadID, event.messageID);
       }
     }
-
-    // ✅ কোনো query নেই → ফানি রিপ্লাই
-    if (!query) {
-      const texts = ["Hey baby 💖", "Yes, I'm here 😘"];
-      const reply = texts[Math.floor(Math.random() * texts.length)];
-      return api.sendMessage(processReply(reply), event.threadID);
-    }
-
-    // ✅ AI REPLY
-    await sendTypingIndicator(api, event.threadID);
-    await new Promise(r => setTimeout(r, 3000));
-    await stopTypingIndicator(api, event.threadID);
-
-    const res = await axios.get(`${baseApiUrl}?text=${encodeURIComponent(query)}&senderID=${uid}&font=1`);
-    let aiReply = res.data.reply || res.data.response || "Sorry, I couldn't understand 😅";
-    const styledReply = processReply(aiReply);
-    return api.sendMessage(styledReply, event.threadID, (err, info) => {
-      if (!err) {
-        global.client.handleReply.push({
-          name: module.exports.config.name,
-          messageID: info.messageID,
-          author: event.senderID,
-          type: "simsimi"
-        });
-      }
-    }, event.messageID);
-
   } catch (e) {
     console.error("Run Error:", e.message);
-    await sendFunnyReplyWithImage(api, event, uid, senderName);
-  }
-};
-
-// ====== HANDLE REPLY ======
-module.exports.handleReply = async function ({ api, event, Users }) {
-  if (event.senderID === api.getCurrentUserID()) return;
-  if (!isCreditValid()) return api.sendMessage(CREDIT_WARNING, event.threadID, event.messageID);
-
-  const senderName = await Users.getNameUser(event.senderID);
-  const text = event.body?.toLowerCase();
-  if (!text || !baseApiUrl) return;
-
-  try {
-    await sendTypingIndicator(api, event.threadID);
-    await new Promise(r => setTimeout(r, 3000));
-    await stopTypingIndicator(api, event.threadID);
-
-    const res = await axios.get(`${baseApiUrl}?text=${encodeURIComponent(text)}&senderID=${event.senderID}&font=1`);
-    let aiReply = res.data.reply || res.data.response || "Sorry, I couldn't understand 😅";
-    const styledReply = processReply(aiReply);
-    return api.sendMessage(styledReply, event.threadID, (err, info) => {
-      if (!err) {
-        global.client.handleReply.push({
-          name: module.exports.config.name,
-          messageID: info.messageID,
-          author: event.senderID,
-          type: "simsimi"
-        });
-      }
-    }, event.messageID);
-  } catch (e) {
-    console.error("HandleReply Error:", e.message);
-    await sendFunnyReplyWithImage(api, event, event.senderID, senderName);
   }
 };
 
 // ====== HANDLE EVENT ======
+// সব চ্যাট রিপ্লাই (ট্রিগার শব্দ / প্রিফিক্স / বটের মেসেজে রিপ্লাই) এখানেই হ্যান্ডেল হয়
 module.exports.handleEvent = async function ({ api, event, Users }) {
   if (event.senderID === api.getCurrentUserID()) return;
 
   const text = event.body?.toLowerCase().trim();
   if (!text || !baseApiUrl) return;
 
-  // ✅ যদি "baby teach ..." বা "baby tc ..." টাইপ কমান্ড হয় → handleEvent skip
+  // ✅ যদি "baby teach ..." বা "baby tc ..." টাইপ কমান্ড হয় → handleEvent skip (run সামলাবে)
   if (COMMAND_SKIP_REGEX.test(text)) return;
 
-  const senderName = await Users.getNameUser(event.senderID);
   const senderID = event.senderID;
 
+  // শুধু বেবি কোডের নিজের পাঠানো মেসেজে রিপ্লাই হলেই true
   const isReplyToBot = !!(event.messageReply &&
-    event.messageReply.senderID === api.getCurrentUserID());
+    event.messageReply.senderID === api.getCurrentUserID() &&
+    babyMessageIDs.has(event.messageReply.messageID));
 
   const isExactTrigger = TRIGGER_WORDS.some(t => text === t.toLowerCase());
   const hasPrefix = TRIGGER_REGEX.test(text);
 
   if (!isExactTrigger && !hasPrefix && !isReplyToBot) return;
+
+  // ✅ একই মেসেজে দ্বিতীয়বার রিপ্লাই দেওয়া বন্ধ
+  if (alreadyHandled(event.messageID)) return;
+
   if (!isCreditValid()) return api.sendMessage(CREDIT_WARNING, event.threadID, event.messageID);
+
+  const senderName = await Users.getNameUser(senderID);
 
   if (isExactTrigger) {
     await sendTypingIndicator(api, event.threadID);
@@ -623,7 +610,7 @@ module.exports.handleEvent = async function ({ api, event, Users }) {
       }
 
       const styledReply = processReply(aiReply);
-      return api.sendMessage(styledReply, event.threadID, event.messageID);
+      return sendTracked(api, styledReply, event.threadID, event.messageID);
     } catch (e) {
       console.error("AI Error:", e.message);
       await sendFunnyReplyWithImage(api, event, senderID, senderName);
@@ -632,6 +619,20 @@ module.exports.handleEvent = async function ({ api, event, Users }) {
   }
 
   if (isReplyToBot) {
+    // ✅ অটো-টিচ: রিপ্লাই পাঠানোর আগেই চালু হবে (আগে return এর কারণে কখনো চলত না)
+    const ask = event.messageReply.body?.toLowerCase().trim();
+    const ans = event.body?.toLowerCase().trim();
+    if (ask && ans && ask !== ans) {
+      setTimeout(async () => {
+        try {
+          await axios.get(`${baseApiUrl}?teach=${encodeURIComponent(ask)}&reply=${encodeURIComponent(ans)}&senderID=${senderID}&threadID=${event.threadID}`);
+          console.log("✅ Auto-taught:", ask, "→", ans);
+        } catch (err) {
+          console.error("❌ Auto-teach error:", err.message);
+        }
+      }, 300);
+    }
+
     try {
       await sendTypingIndicator(api, event.threadID);
       await new Promise(r => setTimeout(r, 3000));
@@ -646,23 +647,10 @@ module.exports.handleEvent = async function ({ api, event, Users }) {
       }
 
       const styledReply = processReply(aiReply);
-      return api.sendMessage(styledReply, event.threadID, event.messageID);
+      return sendTracked(api, styledReply, event.threadID, event.messageID);
     } catch (e) {
       console.error("Reply AI Error:", e.message);
       await sendFunnyReplyWithImage(api, event, senderID, senderName);
-    }
-
-    const ask = event.messageReply.body?.toLowerCase().trim();
-    const ans = event.body?.toLowerCase().trim();
-    if (ask && ans && ask !== ans) {
-      setTimeout(async () => {
-        try {
-          await axios.get(`${baseApiUrl}?teach=${encodeURIComponent(ask)}&reply=${encodeURIComponent(ans)}&senderID=${senderID}&threadID=${event.threadID}`);
-          console.log("✅ Auto-taught:", ask, "→", ans);
-        } catch (err) {
-          console.error("❌ Auto-teach error:", err.message);
-        }
-      }, 300);
     }
   }
 };
