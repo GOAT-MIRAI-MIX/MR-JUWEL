@@ -1,31 +1,106 @@
-module.exports.config = {
- name: "tag",
- version: "1.0.0",
- hasPermssion: 2,
- credits: "Shahadat Islam",
- description: "Group এ সবাইকে নির্দিষ্ট সংখ্যায় মেনশন পাঠানো",
- commandCategory: "group",
- usages: "/tag [everyone]",
- cooldowns: 2
-};
+module.exports = {
+  config: {
+    name: "tag",
+    category: "box chat",
+    role: 0,
+    author: "EryXenX",
+    countDown: 3,
+    description: {
+      en: "Tag members by name, reply or everyone"
+    },
+    guide: {
+      en: "{p}tag [name] [msg]\n{p}tag all [msg]\nReply + {p}tag [msg]"
+    }
+  },
 
-module.exports.run = async ({ api, event, args }) => {
- const threadID = event.threadID;
- const threadInfo = await api.getThreadInfo(threadID);
- const memberIDs = threadInfo.participantIDs;
+  onStart: async ({ api, event, usersData, threadsData, args }) => {
+    const { threadID, messageID, messageReply } = event;
 
- const repeatCount = parseInt(args[0]) || 1;
+    try {
+      const threadData = await threadsData.get(threadID);
 
- const mentions = memberIDs
- .filter(id => id != api.getCurrentUserID())
- .map(id => ({ tag: "@everyone", id }));
+      const members = threadData.members
+        .filter(member => member.inGroup)
+        .map(member => ({
+          name: member.name,
+          id: member.userID
+        }));
 
- for (let i = 0; i < repeatCount; i++) {
- await api.sendMessage({
- body: `📢 @everyone\nসবাই চিপা থেকে বের হও 🐸`,
- mentions
- }, threadID);
+      let tagUsers = [];
+      let text = "";
 
- await new Promise(resolve => setTimeout(resolve, 2000)); 
- }
+      if (messageReply) {
+        const uid = messageReply.senderID;
+        const name = await usersData.getName(uid);
+
+        tagUsers.push({
+          name,
+          id: uid
+        });
+
+        text = args.join(" ");
+      }
+
+      else if (
+        args[0] &&
+        ["all", "everyone", "cdi"].includes(args[0].toLowerCase())
+      ) {
+        tagUsers = members;
+        text = args.slice(1).join(" ");
+      }
+
+      else {
+        if (!args[0]) {
+          return api.sendMessage(
+            "⚠️ | Reply, name or all use korun.",
+            threadID,
+            messageID
+          );
+        }
+
+        const searchName = args[0].toLowerCase();
+        text = args.slice(1).join(" ");
+
+        tagUsers = members.filter(member =>
+          member.name.toLowerCase().includes(searchName)
+        );
+
+        if (tagUsers.length === 0) {
+          return api.sendMessage(
+            "❌ | User Not Found.",
+            threadID,
+            messageID
+          );
+        }
+      }
+
+      const mentions = tagUsers.map(user => ({
+        tag: user.name,
+        id: user.id
+      }));
+
+      const namesText = tagUsers
+        .map(user => `• ${user.name}`)
+        .join("\n");
+
+      const body = text
+        ? `╭─ Tag Notice\n${namesText}\n├──────────\n💬 ${text}\n╰──────────`
+        : `╭─ Tag Notice\n${namesText}\n╰──────────`;
+
+      return api.sendMessage(
+        {
+          body,
+          mentions
+        },
+        threadID,
+        messageReply ? messageReply.messageID : messageID
+      );
+    } catch (error) {
+      return api.sendMessage(
+        `❌ | Error: ${error.message}`,
+        threadID,
+        messageID
+      );
+    }
+  }
 };
