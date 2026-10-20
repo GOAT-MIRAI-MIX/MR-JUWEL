@@ -1,0 +1,61 @@
+{
+  "Author": "SHAHADAT SAHU",
+  "version": "3.0.0",
+  "language": "en",
+  "adminOnly": false,
+  "autoSent": true,
+  "allowInbox": true,
+  "DeveloperMode": false,
+  "autoCreateDB": true,
+  "autoClean": true,
+  "notiGroup": true,
+  "NOTIFICATION": true,
+  "EMAIL": "Facebook number/ID",
+  "PASSWORD": "Facebook password",
+  "OTPKEY": "Facebook 2FA Secret Key",
+  "BOTNAME": " ⎯꯭𓆩꯭𝆺𝅥😻⃞𝐑⃞𝐈⃞𝐘𝐀⃞༢࿐",
+  "PREFIX": "/",
+  "usePrefix": true,
+  "reactUnsend": [
+    "😡",
+    "🤧",
+    "😤",
+    "😠"
+  ],
+  "ADMINBOT": [
+    "61594400795920",
+    "61594400795920",
+    "61594400795920"
+  ],
+  "DEVELOPER": [
+    "61594400795920"
+  ],
+  "APPSTATEPATH": "appstate.json",
+  "FCAOption": {
+    "selfListen": false,
+    "listenEvents": true,
+    "autoReconnect": true,
+    "online": true,
+    "autoMarkDelivery": false,
+    "autoMarkRead": false,
+    "enableTypingIndicator": true,
+    "typingDuration": 100
+  },
+  "Login": {
+    "autoRetryLogin": true,
+    "maxLoginRetries": 100,
+    "reconnectOnListenError": true,
+    "maxReconnectAttempts": 100,
+    "reconnectBaseDelay": 3000,
+    "reconnectMaxDelay": 30000,
+    "persistAppState": true,
+    "backupAppState": true
+  },
+  "DATABASE": {
+    "sqlite": {
+      "storage": "data.sqlite"
+    }
+  },
+  "commandDisabled": [],
+  "eventDisabled": []
+}
