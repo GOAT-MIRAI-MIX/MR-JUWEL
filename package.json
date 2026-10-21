@@ -1,0 +1,67 @@
+{
+  "name": "mirai-goat-mix",
+  "version": "3.0.0",
+  "description": "Mirai + GoatBot hybrid Messenger bot - runs Mirai AND GoatBot commands/events side by side. Based on Mirai (SHAHADAT SAHU).",
+  "main": "Juwel.js",
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0 <13.0.0"
+  },
+  "scripts": {
+    "start": "node Juwel.js",
+    "login": "node login"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/shahadat-sahu/SHAHADAT-CHAT-BOT.git"
+  },
+  "keywords": [
+    "bot",
+    "facebook",
+    "shahadatproject",
+    "messenger",
+    "javascript",
+    "shadat",
+    "UhasSahu",
+    "shahadat sahu",
+    "shahadat chat bot",
+    "goatbot",
+    "mirai-goat-mix",
+    "hybrid"
+  ],
+  "author": "SHAHADAT SAHU",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/shahadat-sahu/SHAHADAT-CHAT-BOT/issues"
+  },
+  "homepage": "https://gitlab.com/shahadat-sahu/SHAHADAT-CHAT-BOT/issues",
+  "dependencies": {
+    "@miraipr0ject/assets": "^1.0.9",
+    "axios": "^1.6.0",
+    "canvas": "^3.2.0",
+    "chalk": "^4.1.2",
+    "cheerio": "1.0.0-rc.12",
+    "express": "^4.19.2",
+    "form-data": "^4.0.0",
+    "fs-extra": "^11.2.0",
+    "image-downloader": "^4.3.0",
+    "lodash": "^4.17.21",
+    "mime-db": "^1.52.0",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
+    "node-cron": "^3.0.2",
+    "node-schedule": "^2.1.1",
+    "qrcode": "^1.5.4",
+    "qs": "^6.11.0",
+    "request": "^2.88.2",
+    "sahu-fca": "latest",
+    "searchitunes": "^2.5.4",
+    "sequelize": "^6.21.4",
+    "shaon-videos-downloader": "^1.0.1",
+    "sqlite3": "^5.1.7",
+    "string-similarity": "^4.0.4",
+    "youtube-search-api": "^2.0.1",
+    "yt-search": "^2.10.4",
+    "ytdl-core": "^4.11.2"
+  }
+}
