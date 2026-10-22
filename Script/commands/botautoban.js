@@ -249,7 +249,64 @@ const englishKeywords = [
     "𝗞𝗼𝘁𝗵𝗮𝗶😆",
     "𝗢𝗼🐤",
     "𝗢𝗼🥳",
-    "𝗛𝘂𝗺😛"
+    "𝗛𝘂𝗺😛",
+    // ================== নতুন যোগ করা কীওয়ার্ড (২) ==================
+    "𝗛𝗼𝗼𝗼𝗼𝗼🫰",
+    "𝗛𝘂𝗺𝗺𝗺😑",
+    "𝗢𝗸𝗵🥳",
+    "𝗛𝘂𝗺𝗺𝗺❤️‍🩹",
+    "𝗢𝘄𝗵😿🥲😑",
+    "𝗞𝗶𝘁𝘂 𝗻𝗮𝗵😎",
+    "𝗞𝗶 𝗵𝗼𝗶𝘀𝗲🫶🏻",
+    "𝗖𝘂😑",
+    "𝗡𝗮😒😒",
+    "𝗮𝘀𝗵𝗼 𝗸𝗮𝗰𝗵𝗲🤒🐤🐤🙂",
+    "ভালো🦆",
+    "𝗝𝗮𝗻𝗶 𝗮𝗺𝗶🦆",
+    "𝗛𝗺𝗺🐐",
+    "𝗞𝗶𝘀𝘀 😘👽",
+    "𝗛𝗼 𝗵𝗼😒",
+    "𝗛𝗺𝗺😗",
+    "𝗞𝗻🦆",
+    "𝗢𝗸𝗮𝘆 𝟯😒😒",
+    "𝗢𝗸𝗮𝘆❤️‍🩹",
+    "𝗔𝗺𝗶 𝗸𝗶 𝗷𝗮𝗻𝗶🤗",
+    "𝗞𝗶 𝗮𝗰𝗰𝗵𝗮😒🤗",
+    "𝗔𝗰𝗰𝗵𝗮😚",
+    "𝗧𝘂𝗺𝗶 𝗮𝗺𝗮𝗿 𝗸𝘂𝘀 𝗻𝗮😡",
+    "🐤𝘁𝗺𝗶 𝗯𝗼𝗹𝗼 🐤🐤😒",
+    "𝗞𝗶 𝗯𝗼𝗹𝗯𝗼?😛",
+    "𝗛𝗺.🥳🥳",
+    "𝗞𝗶𝘁𝘂 𝗻𝗮𝗵🐤🐤",
+    "𝗛𝗮𝗲😆",
+    "𝗛𝘂𝗵𝗵𝗵👋",
+    "𝗕𝘆𝗲 𝗼𝗸🐸",
+    "𝗛𝗺𝗺😒😒",
+    "𝗝𝗶👋",
+    "𝗞𝗶𝗰𝗵𝘂 𝗻𝗮👋👋",
+    "𝗧𝘂𝗿 𝘀𝗮𝘁𝗵𝗲 𝗞𝗼𝘁𝗵𝗮 𝗸𝗼𝗶🤷",
+    "𝗖𝗵𝘂𝗽👀",
+    "𝗧𝘂𝗶 𝗴𝗼𝗿𝘂🥳🥳",
+    "𝗞𝗶🚶",
+    "𝗔𝗹𝗮𝗯𝘂🐤",
+    "𝗔𝗹𝗮𝗮𝗯𝘂𝘂 𝗧𝗼𝗼🤗",
+    "𝗢𝗸 𝘁𝗲𝗻𝗸𝘂𝘂😎",
+    "𝗸𝗶 𝗼𝗻𝗸🙂",
+    "𝗔𝗺𝗶 𝗸𝗶 𝗷𝗮𝗻𝗶🫡",
+    "𝗧𝘂𝗺𝗸 𝘁𝗵𝗮𝗽𝗽𝗼𝗿 𝗱𝗶𝗯𝗼 𝗮𝗺𝗶👋",
+    "𝗜𝗹𝗼𝘃𝗲 𝗬𝗢𝗨👽",
+    "𝗣𝗮𝗸𝘂😒😒",
+    "𝗞𝗲𝗻 𝗵𝗼𝘆 𝗻𝗶😛",
+    "𝗡𝗵𝗵 𝗵𝗼𝗶 𝗻𝗵𝗶😡",
+    "𝗛𝗼🫶🏻",
+    "𝗞𝗶🐥",
+    "𝗚𝘂😏",
+    "𝗣𝗮𝗿𝗺𝘂𝗻𝗮👀",
+    "𝗞𝗶 𝗽𝗮𝗿𝗯𝗶😑",
+    "𝗸𝗮😵‍💫",
+    "𝗸𝗻𝗼🤠",
+    "𝗞𝗮𝗻𝗶 𝗻𝗮😆",
+    "𝗢𝗼 𝗮𝗰𝗰𝗵𝗮👽"
 ];
 
 // ================== বাংলা বট ডিটেক্ট কীওয়ার্ড ==================
@@ -307,6 +364,44 @@ const banglaKeywords = [
 // ================== সব কীওয়ার্ড একত্রে ==================
 const botKeywords = [...englishKeywords, ...banglaKeywords];
 
+// ================== ইমোজি-ইনডিপেন্ডেন্ট ম্যাচিং ==================
+// কীওয়ার্ডের লেখা একই থাকলে ইমোজি যেটাই হোক, ম্যাচ হবে।
+// যেমন: "𝗞𝗶𝘁𝘂 𝗻𝗮𝗵😎" থাকলে "𝗞𝗶𝘁𝘂 𝗻𝗮𝗵🫡", "𝗞𝗶𝘁𝘂 𝗻𝗮𝗵🤧" সবই ধরা পড়বে।
+const EMOJI_REGEX = /\p{Extended_Pictographic}[\uFE0F\u{1F3FB}-\u{1F3FF}]?(?:\u200D\p{Extended_Pictographic}[\uFE0F\u{1F3FB}-\u{1F3FF}]?)*|\uFE0F|[\u{1F3FB}-\u{1F3FF}]/gu;
+
+function stripEmoji(text) {
+    return String(text).replace(EMOJI_REGEX, "").replace(/\s+/g, " ").trim().toLowerCase();
+}
+
+// শুধু যেসব কীওয়ার্ডে ইমোজি + লেখা দুটোই আছে, সেগুলো (ইমোজি-শুধু কীওয়ার্ড আগের মতোই কাজ করবে)
+const textVariantKeywords = [];
+{
+    const seen = new Set();
+    for (const word of botKeywords) {
+        const text = stripEmoji(word);
+        if (!text || text === word.toLowerCase().trim()) continue; // ইমোজি নেই বা লেখা নেই
+        if (seen.has(text)) continue;
+        seen.add(text);
+        textVariantKeywords.push({ original: word, text });
+    }
+}
+
+function findMatches(body) {
+    const msg = body.toLowerCase().trim();
+
+    // ১) আগের নিয়মে ম্যাচ (হুবহু / ভেতরে থাকলে)
+    const matched = botKeywords.filter(word => msg === word.toLowerCase() || msg.includes(word.toLowerCase()));
+
+    // ২) ইমোজি বাদ দিয়ে পুরো মেসেজের লেখা কীওয়ার্ডের লেখার সমান হলে
+    const msgText = stripEmoji(body);
+    if (msgText) {
+        for (const k of textVariantKeywords) {
+            if (k.text === msgText && !matched.includes(k.original)) matched.push(k.original);
+        }
+    }
+    return matched;
+}
+
 // ================== অ্যাডমিন লিস্ট লোড ==================
 function loadAdminList() {
     try {
@@ -349,18 +444,15 @@ module.exports.handleEvent = async ({ event, api, Users, Threads }) => {
 
     // ================== 🛡️ অ্যাডমিন সুরক্ষা ==================
     if (isAdmin(senderID)) {
-        const adminMsg = body.toLowerCase().trim();
-        const adminMatched = botKeywords.filter(word => adminMsg === word.toLowerCase() || adminMsg.includes(word.toLowerCase()));
+        const adminMatched = findMatches(body);
         if (adminMatched.length > 0) {
             console.log(`🛡️ অ্যাডমিন ${senderID} কীওয়ার্ড ম্যাচ করেছে কিন্তু ব্যান করা হয়নি: ${adminMatched.join(', ')}`);
         }
         return;
     }
 
-    const msg = body.toLowerCase().trim();
-
     // কীওয়ার্ড চেক করা (আগে চেক করলে অপ্রয়োজনীয় API কল হয় না)
-    const matchedWords = botKeywords.filter(word => msg === word.toLowerCase() || msg.includes(word.toLowerCase()));
+    const matchedWords = findMatches(body);
     if (matchedWords.length === 0) return;
 
     const time = moment().tz("Asia/Dhaka").format("HH:mm:ss DD/MM/YYYY");
