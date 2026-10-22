@@ -38,7 +38,7 @@
   <img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6,11,20&height=6&section=header" width="60%"/>
 </p>
 <p align="center">
-  <img src="https://files.catbox.moe/fu54e0.jpg" width="85%" />
+  <img src="https://i.imgur.com/ua0ZVBQ.jpeg" width="85%" />
 </p>
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20,11,6&height=6&section=header" width="60%"/>
