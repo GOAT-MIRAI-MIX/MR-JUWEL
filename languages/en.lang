@@ -24,7 +24,7 @@ Main.banDevice=Your device have been banned from JUWEL, please contact to facebo
 Main.keyNotSameFormat=Wrong format, code must contain 6 number.
 Main.codeInputExpired=Your code is wrong or out of date.
 Main.unbanDeviceSuccess=Your device are unban now, please restart to use.
-Main.userBanned=You had been banned from sahu when %1 with reason: %2. Please contact to facebook m.me/61575698041722 to have more information!
+Main.userBanned=You had been banned from Juwel when %1 with reason: %2. Please contact to facebook m.me/61575698041722 to have more information!
 Main.finishCheckListGban=Checked global ban list
 Main.handleListenError=handleListene has occurred some unexpected errorr, error : %1
 Main.warningSourceCode=DETECTED THAT SOURCE CODE'S STRUCTURE HAD BEEN CHANGED , STOP NOW!
@@ -91,7 +91,7 @@ handleCommand.threadBanned=╭────────────────�
 handleCommand.commandNotExist=╭──────────────╮\n│ ⚠️ 𝗪𝗥𝗢𝗡𝗚 𝗖𝗠𝗗 \n╰──────────────╯\nএই কমান্ড আমার সিস্টেমে নেই 🤦‍♂️\n✅ সঠিক কমান্ড দাও, বেবি 🎀
 handleCommand.commandThreadBanned=╭───────────────╮\n│ ✅ 𝗖𝗢𝗥𝗥𝗘𝗖𝗧 𝗖𝗠𝗗 \n╰───────────────╯\n✅ সঠিক কমান্ড: "%1"
 handleCommand.commandUserBanned=You are unable to use command "%1"
-handleCommand.threadNotAllowNSFW=This Commnd Only use Andmin
+handleCommand.threadNotAllowNSFW=This Commnd Only use Boss MR JUWEL 
 handleCommand.cantGetInfoThread=Can't get your thread's info, error: %1
 handleCommand.cantGetUserInfo=Can't get user's info, error: %1
 handleCommand.permssionNotEnough=╭──────────────╮\n  🚫 𝗔𝗖𝗖𝗘𝗦𝗦 𝗗𝗘𝗡𝗜𝗘𝗗 \n╰──────────────╯\n👤 %1, এটা কমান্ড শুধু আমার বস  🐸\n👑 乛 M𝆠፝֟R ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐ ব্যাবহার করতে পারবে🎀🙌
@@ -102,7 +102,7 @@ handleCommand.wrongSyntax=Wrong syntax! Please use: %1
 handleCommand.missingArgument=Missing required argument!
 handleCommand.cooldown=Please wait %1 seconds before using this command again
 handleCommand.adminOnly=This command is only for group admins!
-handleCommand.botAdminOnly=This command is only for bot admins!
+handleCommand.botAdminOnly=This command is only for MR JUWEL!
 
 # ==================== includes/handle/handleCommandEvent.js ====================
 handleCommandEvent.moduleError=Having some unexpected error when using command %1, error: %2
