@@ -1,10 +1,11 @@
 # ─⃞𝐉𝐔𝐖𝐄𝐋-𝐂𝐇𝐀𝐓-𝐁𝐎𝐓🪽
 ### 🎀 Ultra Premium Messenger Automation System
 
-> ## 🐐🪽 Mirai-Goat-Mix
-> এই ফর্কে **Mirai** ও **GoatBot** দুই ধরনের কমান্ড/ইভেন্টই চলে — `Script/commands` ও `Script/events` এ যেকোনো একটার কোড রাখলেই কাজ করবে।
-> This fork runs **both Mirai and GoatBot** commands/events — drop either style into `Script/commands` or `Script/events`.
-> 📖 Details: [GOAT_COMPAT.md](GOAT_COMPAT.md) · Start with `npm install` then `npm start`.
+<p align="center"><img src="assets/banner.svg" alt="Mirai × Goat" width="100%"></p>
+<p align="center"><img src="assets/both.svg" alt="Mirai + Goat both work" width="100%"></p>
+
+<h2 align="center"><font color="#00e5ff">Script/commands ও Script/events — যেকোনো একটার কোড রাখলেই কাজ করবে!</font></h2>
+<p align="center"><b>Drop either Mirai or GoatBot commands/events — both just work.</b><br>📖 <a href="GOAT_COMPAT.md">GOAT_COMPAT.md</a> · <code>npm install</code> → <code>npm start</code></p>
 
 ---
 
