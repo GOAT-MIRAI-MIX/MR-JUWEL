@@ -1,106 +1,162 @@
 module.exports.config = {
- name: "file",
- version: "1.0.1",
- hasPermssion: 2,
- credits: "nazrul",
- description: "Delete the file or folder in the commands folder",
- commandCategory: "Admin",
- usages: "\ncommands start <text>\ncommands ext <text>\ncommands <text>\ncommands [leave blank]\ncommands help\nNOTE: <text> is the character you want to enter",
- cooldowns: 5
+  name: "file",
+  version: "1.0.3",
+  hasPermssion: 2,
+  credits: "乛 M𝆠፝֟R ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐",
+  description: "Delete the file or folder in the commands folder",
+  commandCategory: "Admin",
+  usages: "\nfile start <text>\nfile ext <text>\nfile <text>\nfile [leave blank]\nfile help",
+  cooldowns: 5
 };
 
-module.exports.handleReply = ({ api, event, args, handleReply }) => {
- if(event.senderID != handleReply.author) return; 
- const fs = require("fs-extra");
- var arrnum = event.body.split(" ");
- var msg = "";
- var nums = arrnum.map(n => parseInt(n));
+// 𝙰𝙱𝙲𝙳 ফন্ট কনভার্টার (শুধু লেখার জন্য, ফাইলের নাম বদলায় না)
+const mono = (str) => [...String(str)].map(c => {
+  const k = c.charCodeAt(0);
+  if (k >= 65 && k <= 90) return String.fromCodePoint(0x1D670 + k - 65);
+  if (k >= 97 && k <= 122) return String.fromCodePoint(0x1D68A + k - 97);
+  if (k >= 48 && k <= 57) return String.fromCodePoint(0x1D7F6 + k - 48);
+  return c;
+}).join("");
 
- for(let num of nums) {
- var target = handleReply.files[num-1];
- var fileOrdir = fs.statSync(__dirname+'/'+target);
- if(fileOrdir.isDirectory() == true) {
- var typef = "[Folder🗂️]";
- fs.rmdirSync(__dirname+'/'+target, {recursive: true});
- }
- else if(fileOrdir.isFile() == true) {
- var typef = "[File📄]";
- fs.unlinkSync(__dirname+"/"+target);
- }
- msg += typef+' '+handleReply.files[num-1]+"\n";
- }
- api.sendMessage("⚡️Deleted the following files in the commands folder:\n\n"+msg, event.threadID, event.messageID);
-}
+const header = (title) =>
+`╭━━━━━━━━━━━━━━━━━━╮
+   ⚡ ${mono(title)}
+╰━━━━━━━━━━━━━━━━━━╯`;
 
+const line = "━━━━━━━━━━━━━━━━━━━━";
 
-module.exports.run = async function({ api, event, args, Threads }) {
- 
- const fs = require("fs-extra");
- var files = fs.readdirSync(__dirname+"/") || [];
- var msg = "", i = 1;
- 
-//
+module.exports.handleReply = async function ({ api, event, handleReply }) {
+  if (event.senderID != handleReply.author) return;
+  const fs = require("fs-extra");
+  const path = require("path");
 
- if(args[0] == 'help') {
- var msg = `
-How to use the command:
-•Key: start <text>
-•Effect: Filter out files to be deleted with an optional starting character
-•Example: commands rank
-•Key: ext <text>
-•Effect: Filter out files to be deleted with optional extension
-•Effect: filter out files in the name with custom text
-•Example: commands a
-•Key: leave blank
-•Effect: filter out all files in the cache
-•Example: commands
-•Key: help
-•Effect: see how to use the command
-•Example: commands help`;
- 
- return api.sendMessage(msg, event.threadID, event.messageID);
- }
- else if(args[0] == "start" && args[1]) {
- var word = args.slice(1).join(" ");
- var files = files.filter(file => file.startsWith(word));
- 
- if(files.length == 0) return api.sendMessage(`⚡️There are no files in the cache that begin with: ${word}`, event.threadID ,event. messageID);
- var key = `⚡️Có ${files.length} The file has a character that starts with .: ${word}`;
- }
- 
- //đuôi file là..... 
- else if(args[0] == "ext" && args[1]) {
- var ext = args[1];
- var files = files.filter(file => file.endsWith(ext));
- 
- if(files.length == 0) return api.sendMessage(`⚡️There are no files in commands that end with: ${ext}`, event.threadID ,event. messageID);
- var key = `⚡️Có ${files.length} file có đuôi là: ${ext}`;
- }
- //all file
- else if (!args[0]) {
- if(files.length == 0) return api.sendMessage("⚡️Your commands have no files or folders", event.threadID ,event. messageID);
- var key = "⚡️All files in commands folder:";
- }
- //trong tên có ký tự.....
- else {
- var word = args.slice(0).join(" ");
- var files = files.filter(file => file.includes(word));
- if(files.length == 0) return api.sendMessage(`⚡️There are no files in the name with the character: ${word}`, event.threadID ,event. messageID);
- var key = `⚡️Có ${files.length} file in the name has the character: ${word}`;
- }
- 
- files.forEach(file => {
- var fileOrdir = fs.statSync(__dirname+'/'+file);
- if(fileOrdir.isDirectory() == true) var typef = "[Folder🗂️]";
- if(fileOrdir.isFile() == true) var typef = "[File📄]";
- msg += (i++)+'. '+typef+' '+file+'\n';
- });
- 
- api.sendMessage(`⚡️Reply message by number to delete the corresponding file, can rep multiple numbers, separated by space.\n${key}\n\n`+msg, event.threadID, (e, info) => global.client.handleReply.push({
- name: this.config.name,
- messageID: info.messageID,
- author: event.senderID,
- files
- }))
- 
- }
+  const nums = [...new Set(
+    event.body
+      .split(/\s+/)
+      .map(n => parseInt(n))
+      .filter(n => !isNaN(n) && n >= 1 && n <= handleReply.files.length)
+  )];
+
+  if (nums.length == 0)
+    return api.sendMessage(
+      `${header("Invalid")}\n\n⚠️ ${mono("Please reply with valid number(s) from the list.")}`,
+      event.threadID, event.messageID
+    );
+
+  let done = "", failed = "";
+
+  for (const num of nums) {
+    const target = handleReply.files[num - 1];
+
+    if (target === path.basename(__filename)) {
+      failed += `⛔ ${target} ${mono("(this command itself)")}\n`;
+      continue;
+    }
+
+    const fullPath = path.join(__dirname, target);
+    try {
+      const stat = fs.statSync(fullPath);
+      let icon = "";
+      if (stat.isDirectory()) { icon = "🗂️"; fs.removeSync(fullPath); }
+      else if (stat.isFile()) { icon = "📄"; fs.unlinkSync(fullPath); }
+      done += `✅ ${icon} ${target}\n`;
+    } catch (e) {
+      failed += `❌ ${target} → ${e.message}\n`;
+    }
+  }
+
+  let out = `${header("Delete Result")}\n\n`;
+  if (done) out += `🗑️ ${mono("Deleted")}:\n${line}\n${done}`;
+  if (failed) out += `\n⚠️ ${mono("Problems")}:\n${line}\n${failed}`;
+  out += `\n${line}\n📊 ${mono("Total")}: ${nums.length}`;
+
+  return api.sendMessage(out, event.threadID, event.messageID);
+};
+
+module.exports.run = async function ({ api, event, args }) {
+  const fs = require("fs-extra");
+  const path = require("path");
+
+  let files = fs.readdirSync(__dirname + "/") || [];
+  let key = "";
+
+  if (args[0] == "help") {
+    const helpMsg =
+`${header("File Help")}
+
+📌 ${mono("file")}
+   ↳ ${mono("show all files")}
+
+📌 ${mono("file start <text>")}
+   ↳ ${mono("names starting with text")}
+   ↳ ${mono("e.g.")} file start rank
+
+📌 ${mono("file ext <text>")}
+   ↳ ${mono("filter by extension")}
+   ↳ ${mono("e.g.")} file ext .js
+
+📌 ${mono("file <text>")}
+   ↳ ${mono("names containing text")}
+   ↳ ${mono("e.g.")} file help
+
+${line}
+💡 ${mono("Reply with number(s) to delete")}
+💡 ${mono("Multiple: 1 3 5")}`;
+    return api.sendMessage(helpMsg, event.threadID, event.messageID);
+  }
+  else if (args[0] == "start" && args[1]) {
+    const word = args.slice(1).join(" ");
+    files = files.filter(f => f.startsWith(word));
+    if (files.length == 0)
+      return api.sendMessage(`⚠️ ${mono("No files start with")}: ${word}`, event.threadID, event.messageID);
+    key = `🔎 ${mono("Starts with")}: ${word}`;
+  }
+  else if (args[0] == "ext" && args[1]) {
+    const ext = args[1];
+    files = files.filter(f => f.endsWith(ext));
+    if (files.length == 0)
+      return api.sendMessage(`⚠️ ${mono("No files end with")}: ${ext}`, event.threadID, event.messageID);
+    key = `🔎 ${mono("Extension")}: ${ext}`;
+  }
+  else if (!args[0]) {
+    if (files.length == 0)
+      return api.sendMessage(`⚠️ ${mono("Commands folder is empty")}`, event.threadID, event.messageID);
+    key = `📂 ${mono("All files")}`;
+  }
+  else {
+    const word = args.join(" ");
+    files = files.filter(f => f.includes(word));
+    if (files.length == 0)
+      return api.sendMessage(`⚠️ ${mono("No files contain")}: ${word}`, event.threadID, event.messageID);
+    key = `🔎 ${mono("Contains")}: ${word}`;
+  }
+
+  let list = "";
+  files.forEach((file, idx) => {
+    let icon = "📄";
+    try {
+      if (fs.statSync(path.join(__dirname, file)).isDirectory()) icon = "🗂️";
+    } catch (e) {}
+    list += `${mono(String(idx + 1).padStart(2, "0"))} ┃ ${icon} ${file}\n`;
+  });
+
+  const body =
+`${header("File Manager")}
+
+${key}
+📊 ${mono("Total")}: ${files.length}
+${line}
+${list}${line}
+💬 ${mono("Reply with number(s) to delete")}
+💬 ${mono("Multiple numbers: 1 3 5")}`;
+
+  return api.sendMessage(body, event.threadID, (e, info) => {
+    if (e) return console.log(e);
+    global.client.handleReply.push({
+      name: module.exports.config.name,
+      messageID: info.messageID,
+      author: event.senderID,
+      files
+    });
+  });
+};
