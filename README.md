@@ -8,8 +8,8 @@
   <img src="assets/juwel-logo.svg" alt="Mirai + Goat — JUWEL — MR JUWEL BOT" width="640"/>
 </p>
 
-<h1 align="center">─⃞𝐉𝐔𝐖𝐄𝐋-𝐂𝐇𝐀𝐓-𝐁𝐎𝐓🪽</h1>
-<h3 align="center">🎀 Ultra Premium Messenger Automation System</h3>
+<h1 align="center">𝙼𝚁 𝙹𝚄𝚆𝙴𝙻</h1>
+<h3 align="center">⚡Ultra Premium Messenger Automation System</h3>
 
 <!-- HERO ANIMATION -->
 <p align="center">
@@ -24,7 +24,7 @@
   <img src="https://img.shields.io/badge/📥_INBOX-ENABLED-00b2ff?style=for-the-badge"/>
 </p>
 
-> ## 🐐🪽 Mirai-Goat-Mix
+> ## 🤖🐐 Mirai-Goat-Mix
 > এই ফর্কে **Mirai** ও **GoatBot** দুই ধরনের কমান্ড/ইভেন্টই চলে — `Script/commands` ও `Script/events` এ যেকোনো একটার কোড রাখলেই কাজ করবে।
 >
 > This fork runs **both Mirai and GoatBot** commands/events — drop either style into `Script/commands` or `Script/events`.
