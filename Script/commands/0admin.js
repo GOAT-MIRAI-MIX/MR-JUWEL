@@ -1,251 +1,205 @@
-var request = require("request");const { readdirSync, readFileSync, writeFileSync, existsSync, copySync, createWriteStream, createReadStream } = require("fs-extra");
+const { readFileSync, writeFileSync, existsSync } = require("fs-extra");
+const { resolve } = require("path");
+
+// Converts A-Z a-z 0-9 to bold math font (𝐀𝐁𝐂𝐃). Skips %1, %2 placeholders.
+const B = (s) => String(s).replace(/%\d|[A-Za-z0-9]/g, (c) => {
+    if (c[0] === "%") return c;
+    const n = c.charCodeAt(0);
+    if (n >= 65 && n <= 90) return String.fromCodePoint(0x1D400 + n - 65);
+    if (n >= 97 && n <= 122) return String.fromCodePoint(0x1D41A + n - 97);
+    return String.fromCodePoint(0x1D7CE + n - 48);
+});
+
 module.exports.config = {
-	name: "0admin",
-	version: "1.0.5",
-	hasPermssion: 3,
-	credits: "𝐂𝐘𝐁𝐄𝐑 ☢️_𖣘 -𝐁𝐎𝐓 ⚠️ 𝑻𝑬𝑨𝑴_ ☢️",
-	description: "Admin Config",
-	commandCategory: "Admin",
-	usages: "Admin",
+    name: "0admin",
+    version: "1.0.6",
+    hasPermssion: 3,
+    credits: "乛 M𝆠፝֟R ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐",
+    description: "Admin Config",
+    commandCategory: "Admin",
+    usages: "Admin",
     cooldowns: 2,
     dependencies: {
         "fs-extra": ""
     }
 };
 
-module.exports.languages = {
-    "vi": {
-        "listAdmin": `===「 𝗗𝗔𝗡𝗛 𝗦𝗔́𝗖𝗛 𝗔𝗗𝗠𝗜𝗡 」===\n━━━━━━━━━━━━━━━\n%1\n\n==「 𝗡𝗚𝗨̛𝗢̛̀𝗜 𝗛𝗢̂̃ 𝗧𝗥𝗢̛̣ 𝗕𝗢𝗧 」==\n━━━━━━━━━━━━━━━\n%2`,
-        "notHavePermssion": '𝗠𝗢𝗗𝗘 - Bạn không đủ quyền hạn để có thể sử dụng chức năng "%1"',
-        "addedNewAdmin": '𝗠𝗢𝗗𝗘 - Đã thêm thành công %1 người dùng trở thành Admin Bot\n\n%2',
-      "addedNewNDH": '𝗠𝗢𝗗𝗘 - Đã thêm thành công %1 người dùng trở thành Người hỗ trợ\n\n%2',
-        "removedAdmin": '𝗠𝗢𝗗𝗘 - Đã gỡ thành công vai trò Admin %1 người dùng trở lại làm thành viên\n\n%2',
-      "removedNDH": '𝗠𝗢𝗗𝗘 - Đã gỡ thành công vai trò Người hỗ trợ %1 người dùng trở lại làm thành viên\n\n%2'
+const TEXT = {
+    listAdmin: B("===「 ADMIN LIST 」===\n━━━━━━━━━━━━━━━\n%1\n\n==「 BOT SUPPORTERS 」==\n━━━━━━━━━━━━━━━\n%2"),
+    notHavePermssion: B('MODE - You do not have permission to use "%1"'),
+    addedNewAdmin: B("MODE - Successfully added %1 Admin\n\n%2"),
+    addedNewNDH: B("MODE - Successfully added %1 Supporter\n\n%2"),
+    removedAdmin: B("MODE - Successfully removed %1 Admin\n\n%2"),
+    removedNDH: B("MODE - Successfully removed %1 Supporter\n\n%2")
+};
 
-    },
-    "en": {
-        "listAdmin": '[Admin] Admin list: \n\n%1',
-        "notHavePermssion": '[Admin] You have no permission to use "%1"',
-        "addedNewAdmin": '[Admin] Added %1 Admin :\n\n%2',
-        "removedAdmin": '[Admin] Remove %1 Admin:\n\n%2'
+module.exports.languages = { vi: TEXT, en: TEXT };
+
+module.exports.onLoad = function () {
+    const path = resolve(__dirname, "cache", "data.json");
+    let data = { adminbox: {} };
+    if (existsSync(path)) {
+        try { data = JSON.parse(readFileSync(path, "utf8")); } catch (e) { data = {}; }
+        if (!data.adminbox) data.adminbox = {};
     }
-}
-module.exports.onLoad = function() {
-    const { writeFileSync, existsSync } = require('fs-extra');
-    const { resolve } = require("path");
-    const path = resolve(__dirname, 'cache', 'data.json');
-    if (!existsSync(path)) {
-        const obj = {
-            adminbox: {}
-        };
-        writeFileSync(path, JSON.stringify(obj, null, 4));
-    } else {
-        const data = require(path);
-        if (!data.hasOwnProperty('adminbox')) data.adminbox = {};
-        writeFileSync(path, JSON.stringify(data, null, 4));
+    writeFileSync(path, JSON.stringify(data, null, 4));
+};
+
+module.exports.run = async function ({ api, event, args, Users, permssion, getText }) {
+    const { threadID, messageID, mentions, type, messageReply } = event;
+    const send = (msg) => api.sendMessage(msg, threadID, messageID);
+
+    if (args.length == 0) {
+        const p = global.config.PREFIX;
+        return send(
+            B("==== [ ADMIN SETTING ] ====\n━━━━━━━━━━━━━━━\n") +
+            B(`MODE - ${p}admin list => View Admin and Supporter list\n`) +
+            B(`MODE - ${p}admin add => Add user as Admin\n`) +
+            B(`MODE - ${p}admin remove => Remove Admin role\n`) +
+            B(`MODE - ${p}admin addndh => Add user as Supporter\n`) +
+            B(`MODE - ${p}admin removendh => Remove Supporter role\n`) +
+            B(`MODE - ${p}admin qtvonly => Toggle only group admins can use bot\n`) +
+            B(`MODE - ${p}admin ndhonly => Toggle only supporters can use bot\n`) +
+            B(`MODE - ${p}admin only => Toggle only admins can use bot\n`) +
+            B(`MODE - ${p}admin ibonly => Toggle only admins can use bot in inbox\n`) +
+            B("━━━━━━━━━━━━━━━\n") +
+            B(`Guide => ${p}admin commands to use`)
+        );
     }
-}
-module.exports.run = async function ({ api, event, args, Users, permssion, getText }) {  
-    const content = args.slice(1, args.length);
-    if (args.length == 0) return api.sendMessage({body:`==== [ 𝗔𝗗𝗠𝗜𝗡 𝗦𝗘𝗧𝗧𝗜𝗡𝗚 ] ====\n━━━━━━━━━━━━━━━\n𝗠𝗢𝗗𝗘 - 𝗮𝗱𝗺𝗶𝗻 𝗹𝗶𝘀𝘁 => 𝗩𝗶𝗲𝘄 𝗹𝗶𝘀𝘁 𝗼𝗳 𝗔𝗱𝗺𝗶𝗻 𝗮𝗻𝗱 𝗦𝘂𝗽𝗽𝗼𝗿𝘁\n𝗠𝗢𝗗𝗘 -𝗮𝗱𝗺𝗶𝗻 𝗮𝗱𝗱 => 𝗔𝗱𝗱 𝘂𝘀𝗲𝗿 𝗮𝘀 𝗔𝗱𝗺𝗶𝗻\n𝗠𝗢𝗗𝗘 -𝗮𝗱𝗺𝗶𝗻 𝗿𝗲𝗺𝗼𝘃𝗲=> 𝗥𝗲𝗺𝗼𝘃𝗲 𝗿𝗼𝗹𝗲 𝗔𝗱𝗺𝗶𝗻\n𝗠𝗢𝗗𝗘 -𝗮𝗱𝗺𝗶𝗻 𝗮𝗱𝗱𝗻𝗱𝗵 => 𝗔𝗱𝗱 𝘂𝘀𝗲𝗿 𝗮𝘀 𝗦𝘂𝗽𝗽𝗼𝗿𝘁\n𝗠𝗢𝗗𝗘 -𝗮𝗱𝗺𝗶𝗻 𝗿𝗲𝗺𝗼𝘃𝗲𝗻𝗱𝗵=> 𝗥𝗲𝗺𝗼𝘃𝗲 𝗿𝗼𝗹𝗲 𝗦𝘂𝗽𝗽𝗼𝗿𝘁\n𝗠𝗢𝗗𝗘 -𝗮𝗱𝗺𝗶𝗻 𝗾𝘁𝘃𝗼𝗻𝗹𝘆=> 𝘁𝗼𝗴𝗴𝗹𝗲  𝗺𝗼𝗱𝗲 𝗼𝗻𝗹𝘆 𝗮𝗱𝗺𝗶𝗻𝘀 𝘂𝘀𝗲 𝗯𝗼𝘁\n𝗠𝗢𝗗𝗘 - 𝗮𝗱𝗺𝗶𝗻 𝗻𝗱𝗵𝗼𝗻𝗹𝘆=> 𝘁𝗼𝗴𝗴𝗹𝗲 𝗺𝗼𝗱𝗲 𝗼𝗻𝗹𝘆 𝘀𝘂𝗽𝗽𝗼𝗿𝘁 𝗯𝗼𝘁 𝘂𝘀𝗶𝗻𝗴 𝗯𝗼𝘁\n𝗠𝗢𝗗𝗘 - 𝗮𝗱𝗺𝗶𝗻 𝗼𝗻𝗹𝘆 => 𝘁𝗼𝗴𝗴𝗹𝗲 𝗺𝗼𝗱𝗲 𝗼𝗻𝗹𝘆 𝗮𝗱𝗺𝗶𝗻𝘀 𝗰𝗮𝗻 𝘂𝘀𝗲 𝗯𝗼𝘁\n𝗠𝗢𝗗𝗘 - 𝗮𝗱𝗺𝗶𝗻 𝗶𝗯𝗼𝗻𝗹𝘆 => 𝘁𝗼𝗴𝗴𝗹𝗲 𝗺𝗼𝗱 𝗼𝗻𝗹𝘆 𝗮𝗱𝗺𝗶𝗻𝘀 𝗰𝗮𝗻 𝘂𝘀𝗲 𝗯𝗼𝘁𝘀 𝗶𝗻 𝗶𝗯 𝘀𝗲𝗽𝗮𝗿𝗮𝘁𝗲𝗹𝘆 𝗳𝗿𝗼𝗺 𝗯𝗼𝘁𝘀\n━━━━━━━━━━━━━━━\n𝗛𝗗𝗦𝗗 => ${global.config.PREFIX}𝗮𝗱𝗺𝗶𝗻 𝗰𝗼𝗺𝗺𝗮𝗻𝗱𝘀 𝘁𝗼 𝘂𝘀𝗲`}, event.threadID, event.messageID); 
-    const { threadID, messageID, mentions } = event;
+
     const { configPath } = global.client;
-    const { ADMINBOT } = global.config;
-    const { NDH } = global.config;
-    const { userName } = global.data;
-    const { writeFileSync } = global.nodemodule["fs-extra"];
-    const mention = Object.keys(mentions);
-
     delete require.cache[require.resolve(configPath)];
-    var config = require(configPath);
+    const config = require(configPath);
+
+    config.ADMINBOT = config.ADMINBOT || [];
+    config.NDH = config.NDH || [];
+    global.config.ADMINBOT = global.config.ADMINBOT || [];
+    global.config.NDH = global.config.NDH || [];
+
+    const save = () => writeFileSync(configPath, JSON.stringify(config, null, 4), "utf8");
+
+    const getName = async (id) => {
+        try { return (await Users.getData(id)).name || id; } catch (e) { return id; }
+    };
+
+    const getTargets = () => {
+        if (type == "message_reply" && messageReply) return [String(messageReply.senderID)];
+        const ids = Object.keys(mentions || {});
+        if (ids.length) return ids.map(String);
+        if (args[1] && !isNaN(args[1])) return [String(args[1])];
+        return [];
+    };
+
+    const modify = async (key, add) => {
+        const targets = getTargets();
+        if (!targets.length) return null;
+        const lines = [];
+        for (const id of targets) {
+            const name = await getName(id);
+            const cIdx = config[key].findIndex((x) => String(x) == id);
+            const gIdx = global.config[key].findIndex((x) => String(x) == id);
+            if (add) {
+                if (cIdx == -1) config[key].push(id);
+                if (gIdx == -1) global.config[key].push(id);
+            } else {
+                if (cIdx != -1) config[key].splice(cIdx, 1);
+                if (gIdx != -1) global.config[key].splice(gIdx, 1);
+            }
+            lines.push(`${id} - ${name}`);
+        }
+        save();
+        return lines;
+    };
+
+    const handle = async (key, add, textKey, permName) => {
+        if (permssion != 3) return send(getText("notHavePermssion", permName));
+        const lines = await modify(key, add);
+        if (!lines) return send(B("MODE - Please mention, reply or enter a valid user ID."));
+        return send(getText(textKey, lines.length, lines.join("\n").replace(/@/g, "")));
+    };
+
     switch (args[0]) {
         case "list":
         case "all":
-        case "-a": { 
-          listAdmin = ADMINBOT || config.ADMINBOT ||  [];
-            var msg = [];
-            for (const idAdmin of listAdmin) {
-                if (parseInt(idAdmin)) {
-                  const name = (await Users.getData(idAdmin)).name
-                    msg.push(`𝗧𝗲̂𝗻: ${name}\n» 𝗟𝗶𝗻𝗸 𝗙𝗕: https://www.facebook.com/${idAdmin} 💌`);
-                }
+        case "-a": {
+            const admins = [];
+            for (const id of global.config.ADMINBOT || config.ADMINBOT) {
+                if (parseInt(id)) admins.push(`${B("Name")}: ${await getName(id)}\n» ${B("FB Link")}: https://www.facebook.com/${id} 💌`);
             }
-          listNDH = NDH || config.NDH ||  [];
-            var msg1 = [];
-            for (const idNDH of listNDH) {
-                if (parseInt(idNDH)) {
-                  const name1 = (await Users.getData(idNDH)).name
-                    msg1.push(`𝗧𝗲̂𝗻: ${name1}\n» 𝗟𝗶𝗻𝗸 𝗙𝗕: https://www.facebook.com/${idNDH} 🤖`);
-                }
+            const supporters = [];
+            for (const id of global.config.NDH || config.NDH) {
+                if (parseInt(id)) supporters.push(`${B("Name")}: ${await getName(id)}\n» ${B("FB Link")}: https://www.facebook.com/${id} 🤖`);
             }
-
-            return api.sendMessage(getText("listAdmin", msg.join("\n\n"), msg1.join("\n\n")), threadID, messageID);
+            return send(getText("listAdmin", admins.join("\n\n"), supporters.join("\n\n")));
         }
 
-       
-        case "add": { 
-            if (permssion != 3) return api.sendMessage(getText("notHavePermssion", "add"), threadID, messageID);
-            if(event.type == "message_reply") { content[0] = event.messageReply.senderID }
-            if (mention.length != 0 && isNaN(content[0])) {
-                var listAdd = [];
+        case "add":
+            return handle("ADMINBOT", true, "addedNewAdmin", "add");
 
-                for (const id of mention) {
-                    ADMINBOT.push(id);
-                    config.ADMINBOT.push(id);
-                    listAdd.push(`${id} - ${event.mentions[id]}`);
-                };
+        case "addndh":
+            return handle("NDH", true, "addedNewNDH", "addndh");
 
-                writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
-                return api.sendMessage(getText("addedNewAdmin", mention.length, listAdd.join("\n").replace(/\@/g, "")), threadID, messageID);
-            }
-            else if (content.length != 0 && !isNaN(content[0])) {
-                ADMINBOT.push(content[0]);
-                config.ADMINBOT.push(content[0]);
-                const name = (await Users.getData(content[0])).name
-                writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
-                return api.sendMessage(getText("addedNewAdmin", 1, `𝗔𝗱𝗺𝗶𝗻 - ${name}`), threadID, messageID);
-            }
-            else return global.utils.throwError(this.config.name, threadID, messageID);
-        }
-        case "addndh": { 
-            if (permssion != 3) return api.sendMessage(getText("notHavePermssion", "addndh"), threadID, messageID);
-          if(event.type == "message_reply") { content[0] = event.messageReply.senderID }
-            if (mention.length != 0 && isNaN(content[0])) {
-                var listAdd = [];
-                for (const id of mention) {
-                    NDH.push(id);
-                    config.NDH.push(id);
-                    listAdd.push(`${id} - ${event.mentions[id]}`);
-                };
-
-                writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
-                return api.sendMessage(getText("addedNewNDH", mention.length, listAdd.join("\n").replace(/\@/g, "")), threadID, messageID);
-            }
-            else if (content.length != 0 && !isNaN(content[0])) {
-                NDH.push(content[0]);
-                config.NDH.push(content[0]);
-                const name = (await Users.getData(content[0])).name
-                writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
-                return api.sendMessage(getText("addedNewNDH", 1, `𝗦𝘂𝗽𝗽𝗼𝗿𝘁𝗲𝗿𝘀 - ${name}`), threadID, messageID);
-            }
-            else return global.utils.throwError(this.config.name, threadID, messageID);
-                  }
-                case "remove":
+        case "remove":
         case "rm":
-        case "delete": {
-            if (permssion != 3) return api.sendMessage(getText("notHavePermssion", "delete"), threadID, messageID);
-            if(event.type == "message_reply") { content[0] = event.messageReply.senderID }
-            if (mentions.length != 0 && isNaN(content[0])) {
-                const mention = Object.keys(mentions);
-                var listAdd = [];
+        case "delete":
+            return handle("ADMINBOT", false, "removedAdmin", "delete");
 
-                for (const id of mention) {
-                    const index = config.ADMINBOT.findIndex(item => item == id);
-                    ADMINBOT.splice(index, 1);
-                    config.ADMINBOT.splice(index, 1);
-                    listAdd.push(`${id} - ${event.mentions[id]}`);
-                };
+        case "removendh":
+            return handle("NDH", false, "removedNDH", "removendh");
 
-                writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
-                return api.sendMessage(getText("removedAdmin", mention.length, listAdd.join("\n").replace(/\@/g, "")), threadID, messageID);
-            }
-            else if (content.length != 0 && !isNaN(content[0])) {
-                const index = config.ADMINBOT.findIndex(item => item.toString() == content[0]);
-                ADMINBOT.splice(index, 1);
-                config.ADMINBOT.splice(index, 1);
-                const name = (await Users.getData(content[0])).name
-                writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
-                return api.sendMessage(getText("removedAdmin", 1, `${content[0]} - ${name}`), threadID, messageID);
-            }
-            else global.utils.throwError(this.config.name, threadID, messageID);
-            }
-
-        case "removendh":{
-            if (permssion != 3) return api.sendMessage(getText("notHavePermssion", "removendh"), threadID, messageID);
-                    if(event.type == "message_reply") { content[0] = event.messageReply.senderID }
-            if (mentions.length != 0 && isNaN(content[0])) {
-                const mention = Object.keys(mentions);
-                var listAdd = [];
-
-                for (const id of mention) {
-                    const index = config.NDH.findIndex(item => item == id);
-                    NDH.splice(index, 1);
-                    config.NDH.splice(index, 1);
-                    listAdd.push(`${id} -${event.mentions[id]}`);
-                };
-
-                writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
-                return api.sendMessage(getText("removedNDH", mention.length, listAdd.join("\n").replace(/\@/g, "")), threadID, messageID);
-            }
-            else if (content.length != 0 && !isNaN(content[0])) {
-                const index = config.NDH.findIndex(item => item.toString() == content[0]);
-                NDH.splice(index, 1);
-                config.NDH.splice(index, 1);
-                const name = (await Users.getData(content[0])).name
-                writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
-                return api.sendMessage(getText("removedNDH", 1, `${content[0]} - ${name}`), threadID, messageID);
-            }
-            else global.utils.throwError(this.config.name, threadID, messageID);
-  }
-        case 'qtvonly': {
-       const { resolve } = require("path");
-        const pathData = resolve(__dirname, 'cache', 'data.json');
-        const database = require(pathData);
-        const { adminbox } = database;   
-          if (permssion < 1) return api.sendMessage("𝗠𝗢𝗗𝗘 - 𝗕𝗼𝗿𝗱𝗲𝗿 𝗰𝗮𝗻𝗴𝗹𝗲 𝗿𝗶𝗴𝗵𝘁𝘀 🎀 ", threadID, messageID);
-        if (adminbox[threadID] == true) {
-            adminbox[threadID] = false;
-            api.sendMessage("𝗠𝗢𝗗𝗘 » 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗱𝗶𝘀𝗮𝗯𝗹𝗲 𝗤𝗧𝗩 𝗺𝗼𝗱𝗲 𝗼𝗻𝗹𝘆 𝗲𝘃𝗲𝗿𝘆𝗼𝗻𝗲 𝗰𝗮𝗻 𝘂𝘀𝗲 𝘁𝗵𝗲 𝗯𝗼𝘁 👀", threadID, messageID);
-        } else {
-            adminbox[threadID] = true;
-            api.sendMessage("𝗠𝗢𝗗𝗘 » 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗲𝗻𝗮𝗯𝗹𝗲 𝗤𝗧𝗩 𝗼𝗻𝗹𝘆 𝗺𝗼𝗱𝗲, 𝗼𝗻𝗹𝘆 𝗮𝗱𝗺𝗶𝗻𝗶𝘀𝘁𝗿𝗮𝘁𝗼𝗿𝘀 𝗰𝗮𝗻 𝘂𝘀𝗲 𝗯𝗼𝘁𝘀 👀", threadID, messageID);
-    }
-        writeFileSync(pathData, JSON.stringify(database, null, 4));
-        break;
-    }
-   case 'ndhonly':
-        case '-ndh': {
-            //---> CODE ADMIN ONLY<---//
-   if (permssion < 2) return api.sendMessage("𝗠𝗢𝗗𝗘 - 𝗕𝗼𝗿𝗱𝗲𝗿 𝗰𝗮𝗻𝗴𝗹𝗲 𝗿𝗶𝗴𝗵𝘁𝘀 🎀 ", threadID, messageID);       
-            if (config.ndhOnly == false) {
-                config.ndhOnly = true;
-                api.sendMessage(`𝗠𝗢𝗗𝗘 » 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗲𝗻𝗮𝗯𝗹𝗲 𝗡𝗗𝗛 𝗢𝗻𝗹𝘆 𝗺𝗼𝗱𝗲, 𝗼𝗻𝗹𝘆 𝗯𝗼𝘁 𝘀𝘂𝗽𝗽𝗼𝗿𝘁 𝗰𝗮𝗻 𝘂𝘀𝗲 𝗯𝗼𝘁 👾`, threadID, messageID);
+        case "qtvonly": {
+            if (permssion < 1) return send(B("MODE - Border cangle rights 🎀"));
+            const pathData = resolve(__dirname, "cache", "data.json");
+            let database = { adminbox: {} };
+            try { database = JSON.parse(readFileSync(pathData, "utf8")); } catch (e) {}
+            if (!database.adminbox) database.adminbox = {};
+            if (database.adminbox[threadID] == true) {
+                database.adminbox[threadID] = false;
+                send(B("MODE » Successfully disabled QTV only mode, everyone can use the bot 👀"));
             } else {
-                config.ndhOnly = false;
-                api.sendMessage(`𝗠𝗢𝗗𝗘 » 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗱𝗶𝘀𝗮𝗯𝗹𝗲 𝗡𝗗𝗛 𝗢𝗻𝗹𝘆 𝗺𝗼𝗱𝗲, 𝗲𝘃𝗲𝗿𝘆𝗼𝗻𝗲 𝗰𝗮𝗻 𝘂𝘀𝗲 𝘁𝗵𝗲 𝗯𝗼𝘁 👾`, threadID, messageID);
+                database.adminbox[threadID] = true;
+                send(B("MODE » Successfully enabled QTV only mode, only administrators can use the bot 👀"));
             }
-                writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
-                break;
-            }
-            case 'ibonly': {
-            if (permssion != 3) return api.sendMessage("𝗠𝗢𝗗𝗘 - 𝗕𝗼𝗿𝗱𝗲𝗿 𝗰𝗮𝗻𝗴𝗹𝗲 𝗿𝗶𝗴𝗵𝘁𝘀 🎀", threadID, messageID);
-                   if (config.adminPaOnly == false) {
-                    config.adminPaOnly = true;
-                    api.sendMessage("𝗠𝗢𝗗𝗘 » 𝗜𝗯 𝗢𝗻𝗹𝘆 𝗺𝗼𝗱𝗲 𝗶𝘀 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗲𝗻𝗮𝗯𝗹𝗲𝗱, 𝗼𝗻𝗹𝘆 𝗮𝗱𝗺𝗶𝗻𝘀 𝗰𝗮𝗻 𝘂𝘀𝗲 𝗯𝗼𝘁𝘀 𝗶𝗻 𝘁𝗵𝗲𝗶𝗿 𝗼𝘄𝗻 𝗶𝗻𝗯𝗼𝘅 💬", threadID, messageID);
-                } else {
-                    config.adminPaOnly = false;
-                    api.sendMessage("[ 𝐌𝐎𝐃𝐄 ] » 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗱𝗶𝘀𝗮𝗯𝗹𝗲 𝗜𝗯 𝗢𝗻𝗹𝘆 𝗺𝗼𝗱𝗲, 𝗲𝘃𝗲𝗿𝘆𝗼𝗻𝗲 𝗰𝗮𝗻 𝘂𝘀𝗲 𝘁𝗵𝗲 𝗯𝗼𝘁 𝗶𝗻 𝘁𝗵𝗲𝗶𝗿 𝗼𝘄𝗻 𝗶𝗻𝗯𝗼𝘅 💬", threadID, messageID);
-                }
-                    writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
+            writeFileSync(pathData, JSON.stringify(database, null, 4));
             break;
         }
-        case 'only':
-        case '-o': {
-            //---> CODE ADMIN ONLY<---//
-          if (permssion != 3) return api.sendMessage("𝗠𝗢𝗗𝗘 - 𝗕𝗼𝗿𝗱𝗲𝗿 𝗰𝗮𝗻𝗴𝗹𝗲 𝗿𝗶𝗴𝗵𝘁𝘀 🎀 ", threadID, messageID);
-            if (config.adminOnly == false) {
-                config.adminOnly = true;
-                api.sendMessage(`𝗠𝗢𝗗𝗘 - 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗲𝗻𝗮𝗯𝗹𝗲 𝗔𝗱𝗺𝗶𝗻 𝗢𝗻𝗹𝘆 𝗺𝗼𝗱𝗲, 𝗼𝗻𝗹𝘆 𝗮𝗱𝗺𝗶𝗻𝘀 𝗰𝗮𝗻 𝘂𝘀𝗲 𝗯𝗼𝘁𝘀 👑`, threadID, messageID);
-            } else {
-                config.adminOnly = false;
-                api.sendMessage(`𝗠𝗢𝗗𝗘 - 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗱𝗶𝘀𝗮𝗯𝗹𝗲 𝗔𝗱𝗺𝗶𝗻 𝗢𝗻𝗹𝘆 𝗺𝗼𝗱𝗲, 𝗲𝘃𝗲𝗿𝘆𝗼𝗻𝗲 𝗰𝗮𝗻 𝘂𝘀𝗲 𝘁𝗵𝗲 𝗯𝗼𝘁 👑`, threadID, messageID);
-            }
-                writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
-                break;
-              }
-        default: {
-            return global.utils.throwError(this.config.name, threadID, messageID);
+
+        case "ndhonly":
+        case "-ndh": {
+            if (permssion < 2) return send(B("MODE - Border cangle rights 🎀"));
+            config.ndhOnly = !config.ndhOnly;
+            global.config.ndhOnly = config.ndhOnly;
+            send(config.ndhOnly
+                ? B("MODE » Successfully enabled NDH Only mode, only bot supporters can use the bot 👾")
+                : B("MODE » Successfully disabled NDH Only mode, everyone can use the bot 👾"));
+            save();
+            break;
         }
-    };
-      }
-      
+
+        case "ibonly": {
+            if (permssion != 3) return send(B("MODE - Border cangle rights 🎀"));
+            config.adminPaOnly = !config.adminPaOnly;
+            global.config.adminPaOnly = config.adminPaOnly;
+            send(config.adminPaOnly
+                ? B("MODE » Ib Only mode is successfully enabled, only admins can use the bot in their own inbox 💬")
+                : B("MODE » Successfully disabled Ib Only mode, everyone can use the bot in their own inbox 💬"));
+            save();
+            break;
+        }
+
+        case "only":
+        case "-o": {
+            if (permssion != 3) return send(B("MODE - Border cangle rights 🎀"));
+            config.adminOnly = !config.adminOnly;
+            global.config.adminOnly = config.adminOnly;
+            send(config.adminOnly
+                ? B("MODE - Successfully enabled Admin Only mode, only admins can use the bot 👑")
+                : B("MODE - Successfully disabled Admin Only mode, everyone can use the bot 👑"));
+            save();
+            break;
+        }
+
+        default:
+            return global.utils.throwError(this.config.name, threadID, messageID);
+    }
+};
