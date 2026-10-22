@@ -399,7 +399,7 @@ Render / Railway / Heroku-তে সারাক্ষণ অনলাইন।
 | `autoSent` | `true` | অটো মেসেজ সেন্ড |
 | `autoCreateDB` | `true` | নতুন গ্রুপ/ইউজারের ডাটাবেস অটো তৈরি |
 | `autoClean` | `true` | অটো ক্লিন |
-| `reactUnsend` | 😡 🤧 😤 😠 | এই রিয়েক্টে বটের মেসেজ আনসেন্ড |
+| `reactUnsend` | ❌ | এই রিয়েক্টে বটের মেসেজ আনসেন্ড |
 | `Login.autoRetryLogin` | `true` (max 100) | লগইন ফেইল হলে অটো রিট্রাই |
 | `FCAOption.autoReconnect` | `true` | কানেকশন ড্রপ হলে অটো রিকানেক্ট |
 | `DATABASE` | SQLite | `data.sqlite` — কোনো আলাদা DB সার্ভার লাগে না |
