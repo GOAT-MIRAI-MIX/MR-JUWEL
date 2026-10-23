@@ -12,6 +12,7 @@ console.log(`version: ${packageInfo.version}`);
 
 let bot = null;
 let shuttingDown = false;
+let consecutiveFails = 0;
 
 /* ============================================================
    ===== নতুন যোগ করা অংশ (ADDED FEATURES) - শুরু ==============
@@ -350,7 +351,9 @@ function startBot() {
     console.error("Main.js Error:", error.message);
   });
 
-  bot.on("close", (code) => {
+  const spawnedAt = Date.now();
+
+  bot.on("close", (code, signal) => {
     bot = null;
 
     if (shuttingDown) {
@@ -359,8 +362,25 @@ function startBot() {
     }
 
     console.log("Main.js stopped.");
-    console.log("Exit Code:", code);
-    console.log("Automatic restart is disabled.");
+    console.log("Exit Code:", code, "Signal:", signal || "none");
+
+    // কোড 0 = ইচ্ছাকৃত বন্ধ (যেমন Offbot কমান্ড), তাই রিস্টার্ট হবে না
+    if (code === 0) {
+      console.log("Normal exit (code 0). Not restarting.");
+      process.exit(0);
+      return;
+    }
+
+    // ১ মিনিটের বেশি চলে থাকলে ব্যর্থতার গণনা শূন্য, না হলে বাড়বে
+    if (Date.now() - spawnedAt > 60000) consecutiveFails = 0;
+    else consecutiveFails++;
+
+    // 5s, 10s, 20s, 40s, সর্বোচ্চ 60s অপেক্ষা
+    const delay = Math.min(5000 * Math.pow(2, Math.max(0, consecutiveFails - 1)), 60000);
+    console.log(`Auto-restart in ${Math.round(delay / 1000)}s (consecutive fails: ${consecutiveFails})`);
+    setTimeout(() => {
+      if (!shuttingDown) startBot();
+    }, delay);
   });
 }
 
