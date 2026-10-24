@@ -38,24 +38,24 @@ Main.missingToken=Token is missing, please check your config!
 Main.loginFailed=Login failed, error: %1
 
 # ==================== Juwel specific texts ====================
-shahadat.foundPathAppstate=Found appstate.json path successfully
-shahadat.notFoundPathAppstate=Appstate.json not found or invalid!
-shahadat.errorFormat=Invalid module format detected!
-shahadat.nameExist=Module name already exists in the system!
-shahadat.notFoundLanguage=No language support found for module: %1
-shahadat.notFoundPackage=Required package %1 not found for module %2, installing now...
-shahadat.cantInstallPackage=Failed to install package %1 for module %2. Error: %3
-shahadat.loadedPackage=All dependencies loaded successfully for module %1
-shahadat.loadedConfig=Configuration loaded successfully for module %1
-shahadat.cantOnload=Failed to initialize module %1. Error: %2
-shahadat.successLoadModule=Module %1 loaded successfully
-shahadat.failLoadModule=Failed to load module %1. Error: %2
-shahadat.finishLoadModule=Successfully loaded %1 commands and %2 events
-shahadat.handleListenError=Listener encountered an error: %1
-shahadat.warningSourceCode=WARNING: Source code structure modified unexpectedly!
-shahadat.successConnectDatabase=Database connection established successfully
-shahadat.cantLoadConfig=Failed to load config for module %1. Error: %2
-shahadat.restartRequired=Restart required to apply new changes
+Juwel.foundPathAppstate=Found appstate.json path successfully
+Juwel.notFoundPathAppstate=Appstate.json not found or invalid!
+Juwel.errorFormat=Invalid module format detected!
+Juwel.nameExist=Module name already exists in the system!
+Juwel.notFoundLanguage=No language support found for module: %1
+Juwel.notFoundPackage=Required package %1 not found for module %2, installing now...
+Juwel.cantInstallPackage=Failed to install package %1 for module %2. Error: %3
+Juwel.loadedPackage=All dependencies loaded successfully for module %1
+Juwel.loadedConfig=Configuration loaded successfully for module %1
+Juwel.cantOnload=Failed to initialize module %1. Error: %2
+Juwel.successLoadModule=Module %1 loaded successfully
+Juwel.failLoadModule=Failed to load module %1. Error: %2
+Juwel.finishLoadModule=Successfully loaded %1 commands and %2 events
+Juwel.handleListenError=Listener encountered an error: %1
+Juwel.warningSourceCode=WARNING: Source code structure modified unexpectedly!
+Juwel.successConnectDatabase=Database connection established successfully
+Juwel.cantLoadConfig=Failed to load config for module %1. Error: %2
+Juwel.restartRequired=Restart required to apply new changes
 
 # ==================== includes/listen.js ====================
 listen.startLoadEnvironment=Proceed to load the environment variable ...
