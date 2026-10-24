@@ -9,11 +9,11 @@
 </p>
 
 <h1 align="center">𝙼𝚁 𝙹𝚄𝚆𝙴𝙻</h1>
-<h3 align="center">⚡Ultra Premium Messenger Automation System</h3>
+<h3 align="center">⚡ Ultra Premium Messenger Automation System</h3>
 
 <!-- HERO ANIMATION -->
 <p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=700&size=26&duration=2500&pause=900&color=00E5FF&center=true&vCenter=true&width=820&lines=🤖+Welcome+To+JUWEL+CHAT+BOT;🐐+Mirai+%2B+GoatBot+%E2%80%94+Both+Work+Together;⚡+270%2B+Commands+%7C+No+Prefix+%7C+Inbox+Ready;🛡️+Fast+%7C+Smart+%7C+Secure+%7C+Stable" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=700&size=26&duration=2500&pause=900&color=00E5FF&center=true&vCenter=true&width=820&lines=%F0%9F%A4%96+Welcome+To+JUWEL+CHAT+BOT;%F0%9F%90%90+Mirai+%2B+GoatBot+%E2%80%94+Both+Work+Together;%E2%9A%A1+270%2B+Commands+%7C+No+Prefix+%7C+Inbox+Ready;%F0%9F%9B%A1%EF%B8%8F+Fast+%7C+Smart+%7C+Secure+%7C+Stable" />
 </p>
 
 <p align="center">
@@ -38,7 +38,7 @@
   <img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6,11,20&height=6&section=header" width="60%"/>
 </p>
 <p align="center">
-  <img src="https://i.imgur.com/ua0ZVBQ.jpeg" width="85%" />
+  <img src="assets/juwel-photo-float.svg" width="100%" />
 </p>
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20,11,6&height=6&section=header" width="60%"/>
@@ -48,6 +48,68 @@
 <p align="center">
   <img src="https://komarev.com/ghpvc/?username=MR-JUWEL-CHAT-BOT2026&label=VISITORS&color=ff00cc&style=for-the-badge" />
 </p>
+
+---
+
+<!-- ═══════════════ AUTO COOKIE + AUTO LOGIN ═══════════════ -->
+<p align="center">
+  <img src="assets/auto-cookie-banner.svg" alt="JUWEL CHAT BOT — Auto Cookie — Auto Facebook Login" width="85%"/>
+</p>
+
+<h1 align="center">🍪 AUTO COOKIE &amp; AUTO LOGIN</h1>
+
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=700&size=20&duration=2600&pause=800&color=FFD200&center=true&vCenter=true&width=820&lines=%F0%9F%8D%AA+Auto+Cookie+%E2%80%94+Session+Always+Fresh;%F0%9F%94%90+Auto+Facebook+Login+When+Logged+Out;%F0%9F%9B%A1%EF%B8%8F+Cookie+Guardian+%E2%80%94+Zero+Downtime" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/🍪_AUTO_COOKIE-ENABLED-ffb300?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/🔐_AUTO_LOGIN-READY-00e676?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/🛡️_COOKIE-GUARDIAN-7c4dff?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/♻️_AUTO-REFRESH-00b2ff?style=for-the-badge"/>
+</p>
+
+<table align="center">
+<tr>
+<td align="center" width="25%">
+
+### 🍪 Auto Cookie
+ব্রাউজার থেকে ফেসবুক কুকি নিজে নিয়ে `appstate.json` সবসময় নতুন রাখে।
+
+</td>
+<td align="center" width="25%">
+
+### 🔐 Auto Login
+আইডি লগআউট হলে ইমেইল/নম্বর ও পাসওয়ার্ড দিয়ে নিজে লগইন করে নতুন কুকি নেয়।
+
+</td>
+<td align="center" width="25%">
+
+### 🔑 2FA Ready
+Authenticator সিক্রেট কী দিলে 2FA কোডও নিজে বসিয়ে দেয়।
+
+</td>
+<td align="center" width="25%">
+
+### ♻️ Self Recovery
+বটের লগে সেশন মরলে সাথে সাথে কুকি রিফ্রেশ, দরকারে বট রিস্টার্ট।
+
+</td>
+</tr>
+</table>
+
+### ⚙️ কীভাবে চালু করবেন
+
+| ধাপ | কাজ |
+|:---|:---|
+| 1️⃣ | `guardian/` ফোল্ডারের ৫টা ফাইল রিপোতে থাকতে হবে |
+| 2️⃣ | হোস্টের **Environment Variables**-এ দিন: `FB_EMAIL`, `FB_PASSWORD`, `FB_TOTP_SECRET` *(2FA থাকলে)* |
+| 3️⃣ | হোস্টে একবার চালান: `npm i --no-save playwright && npx playwright install chromium` |
+| 4️⃣ | Start Command দিন: `node guardian/start.js` |
+
+> ⚠️ **নিরাপত্তা:** পাসওয়ার্ড কখনো `guardian/AUTO_COOKIE.js`-এ লিখে GitHub-এ কমিট করবেন না। হোস্টের Variables-এ দিন।
+>
+> 🧠 ফেসবুক ক্যাপচা বা পরিচয় যাচাই চাইলে অটো-লগইন থেমে যায়, তখন নিজে যাচাই শেষ করতে হবে।
 
 ---
 
@@ -382,11 +444,13 @@ Render / Railway / Heroku-তে সারাক্ষণ অনলাইন।
 
 </details>
 
-[![License](https://img.shields.io/github/license/MR-JUWEL-CHAT-BOT2026/MR-JUWEL-CHAT-BOT-2026?style=for-the-badge&color=ffd200)](https://github.com/MR-JUWEL-CHAT-BOT2026/MR-JUWEL-CHAT-BOT-2026/blob/main/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/MR-JUWEL-CHAT-BOT2026/MR-JUWEL-CHAT-BOT-2026?style=for-the-badge&color=ff4d4d)](https://github.com/MR-JUWEL-CHAT-BOT2026/MR-JUWEL-CHAT-BOT-2026/issues)
-[![GitHub forks](https://img.shields.io/github/forks/MR-JUWEL-CHAT-BOT2026/MR-JUWEL-CHAT-BOT-2026?style=for-the-badge&color=00c6ff)](https://github.com/MR-JUWEL-CHAT-BOT2026/MR-JUWEL-CHAT-BOT-2026/network)
-[![GitHub stars](https://img.shields.io/github/stars/MR-JUWEL-CHAT-BOT2026/MR-JUWEL-CHAT-BOT-2026?style=for-the-badge&color=ffd200)](https://github.com/MR-JUWEL-CHAT-BOT2026/MR-JUWEL-CHAT-BOT-2026/stargazers)
-[![Last commit](https://img.shields.io/github/last-commit/MR-JUWEL-CHAT-BOT2026/MR-JUWEL-CHAT-BOT-2026?style=for-the-badge&color=00e676)](https://github.com/MR-JUWEL-CHAT-BOT2026/MR-JUWEL-CHAT-BOT-2026/commits)
+<p align="center">
+  <a href="https://github.com/GOAT-MIRAI-MIX/MR-JUWEL/blob/main/LICENSE"><img src="https://img.shields.io/github/license/GOAT-MIRAI-MIX/MR-JUWEL?style=for-the-badge" alt="License"/></a>
+  <a href="https://github.com/GOAT-MIRAI-MIX/MR-JUWEL/issues"><img src="https://img.shields.io/github/issues/GOAT-MIRAI-MIX/MR-JUWEL?style=for-the-badge" alt="GitHub issues"/></a>
+  <a href="https://github.com/GOAT-MIRAI-MIX/MR-JUWEL/network/members"><img src="https://img.shields.io/github/forks/GOAT-MIRAI-MIX/MR-JUWEL?style=for-the-badge" alt="GitHub forks"/></a>
+  <a href="https://github.com/GOAT-MIRAI-MIX/MR-JUWEL/stargazers"><img src="https://img.shields.io/github/stars/GOAT-MIRAI-MIX/MR-JUWEL?style=for-the-badge" alt="GitHub stars"/></a>
+  <a href="https://github.com/GOAT-MIRAI-MIX/MR-JUWEL/commits/main"><img src="https://img.shields.io/github/last-commit/GOAT-MIRAI-MIX/MR-JUWEL?style=for-the-badge" alt="Last commit"/></a>
+</p>
 
 ---
 
@@ -412,7 +476,9 @@ Render / Railway / Heroku-তে সারাক্ষণ অনলাইন।
 <h1 align="center">📊 GITHUB STATS</h1>
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=MR-JUWEL-CHAT-BOT2026&show_icons=true&theme=tokyonight&hide_border=true"/>
+  <a href="https://github.com/GOAT-MIRAI-MIX/MR-JUWEL">
+    <img src="https://github-readme-stats.vercel.app/api/pin/?username=GOAT-MIRAI-MIX&repo=MR-JUWEL&theme=tokyonight&hide_border=true"/>
+  </a>
 </p>
 
 ---
@@ -420,9 +486,9 @@ Render / Railway / Heroku-তে সারাক্ষণ অনলাইন।
 <h1 align="center">⚡ LIVE DEPLOY</h1>
 
 <p align="center">
-  <a href="https://heroku.com/deploy"><img src="https://www.herokucdn.com/deploy/button.svg" /></a>
-  <a href="https://render.com"><img src="https://img.shields.io/badge/Deploy%20On-Render-4353ff?style=for-the-badge&logo=render&logoColor=white" /></a>
-  <a href="https://railway.app"><img src="https://img.shields.io/badge/Deploy%20On-Railway-a855f7?style=for-the-badge&logo=railway&logoColor=white" /></a>
+  <a href="https://heroku.com/deploy?template=https://github.com/GOAT-MIRAI-MIX/MR-JUWEL"><img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku"/></a>
+  <a href="https://render.com"><img src="https://img.shields.io/badge/Deploy%20On-Render-4353ff?style=for-the-badge&logo=render&logoColor=white" alt="Render"/></a>
+  <a href="https://railway.app"><img src="https://img.shields.io/badge/Deploy%20On-Railway-a855f7?style=for-the-badge&logo=railway&logoColor=white" alt="Railway"/></a>
 </p>
 
 <details>
@@ -447,24 +513,22 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    # Step to check out the repository code
-    - uses: actions/checkout@v2
+      # Step to check out the repository code
+      - uses: actions/checkout@v4
 
-    # Step to set up the specified Node.js version
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
+      # Step to set up the specified Node.js version
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    # Step to install dependencies
-    - name: Install dependencies
-      run: npm install
+      # Step to install dependencies
+      - name: Install dependencies
+        run: npm install
 
-    # Step to run the bot with the correct port
-    - name: Start the bot
-      env:
-        PORT: 8080
-      run: npm start
+      # Syntax check (npm start বট চালু করে, যা কখনো শেষ হয় না — তাই CI-তে ব্যবহার করা হয়নি)
+      - name: Syntax check
+        run: node --check Juwel.js
 ```
 
 </details>
@@ -551,7 +615,7 @@ node Juwel.js        # অথবা: npm start
 </p>
 
 <p align="center">
-  <a href="https://github.com/MR-JUWEL-CHAT-BOT2026/MR-JUWEL-CHAT-BOT-2026.git"><img src="https://img.icons8.com/fluency/48/000000/github.png" alt="GitHub"></a>
+  <a href="https://github.com/GOAT-MIRAI-MIX/MR-JUWEL"><img src="https://img.icons8.com/fluency/48/000000/github.png" alt="GitHub"></a>
   <a href="https://wa.me/8801943488192"><img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="WhatsApp"></a>
   <a href="https://facebook.com/61592716197470"><img src="https://img.icons8.com/fluency/48/000000/facebook.png" alt="Facebook"></a>
   <a href="https://t.me/+7RqN73zA6aBiY2U1"><img src="https://img.icons8.com/color/48/000000/telegram-app.png" alt="Telegram"></a>
@@ -561,5 +625,5 @@ node Juwel.js        # অথবা: npm start
 <p align="center"><b>I hope you enjoy my fork! Thank you for supporting the cyber chat bot community! 🫶</b></p>
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,14,18,24&height=120&section=footer"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,14,18,24&height=120&section=footer" width="100%"/>
 </p>
