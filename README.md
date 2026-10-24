@@ -9,7 +9,7 @@
 </p>
 
 <h1 align="center">𝙼𝚁 𝙹𝚄𝚆𝙴𝙻</h1>
-<h3 align="center"> ⚡ Ultra Premium Messenger Automation System</h3>
+<h3 align="center">⚡ Ultra Premium Messenger Automation System</h3>
 
 <!-- HERO ANIMATION -->
 <p align="center">
