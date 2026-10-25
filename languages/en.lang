@@ -3,156 +3,208 @@
 # Put the # character at the beginning of each sentence if you don't want the code to run those lines.
 # Thanks to https://www.facebook.com/duong.than.net for translate to English!
 
-# ==================== Main.js ====================
-Main.newVersionDetected=𝐘𝐨𝐮 𝐚𝐫𝐞 𝐮𝐬𝐢𝐧𝐠 𝐯𝐞𝐫𝐬𝐢𝐨𝐧 %1, 𝐭𝐡𝐞 𝐥𝐚𝐭𝐞𝐬𝐭 𝐯𝐞𝐫𝐬𝐢𝐨𝐧 𝐢𝐬 %2.
-Main.errorFormat=Malformed module!
-Main.nameExist=Module's name is similar to another module!
-Main.notFoundLanguage=Module %1 don't support your language
-Main.notFoundPackage=Can't find package %1 support for module %2, installing...
-Main.cantInstallPackage=Can't install package %1 for module %2, error: %3
-Main.loadedPackage=Installed whole package successfully for module %1
-Main.loadedConfig=Installed config successfully for module %1
-Main.cantLoadConfig=Can't install config of module %1, error: %2
-Main.cantOnload=Can't launch setup of module %1, error: %1
-Main.successLoadModule=Successfully installed module %1
-Main.failLoadModule=Can't install module %1, error: %2
-Main.finishLoadModule=Installed %1 module commands and %2 module events successfully
-Main.foundPathAppstate=Sahuhstate successfully
-Main.notFoundPathAppstate=Error can't find appstate file maybe file is malformed!
-Main.checkListGban=Checking global ban list...
-Main.banDevice=Your device have been banned from JUWEL, please contact to facebook m.me/61594400795920 to know more information or asking for unban key, if you already have unban key, please fill it below.
-Main.keyNotSameFormat=Wrong format, code must contain 6 number.
-Main.codeInputExpired=Your code is wrong or out of date.
-Main.unbanDeviceSuccess=Your device are unban now, please restart to use.
-Main.userBanned=You had been banned from Juwel when %1 with reason: %2. Please contact to facebook m.me/61575698041722 to have more information!
-Main.finishCheckListGban=Checked global ban list
-Main.handleListenError=handleListene has occurred some unexpected errorr, error : %1
-Main.warningSourceCode=DETECTED THAT SOURCE CODE'S STRUCTURE HAD BEEN CHANGED , STOP NOW!
-Main.refreshListen=Refreshed handleListener...
-Main.successConnectDatabase=Connected to database successfully!
-Main.failConnectDatabase=Failed to connect to database, error: %1
-Main.cantReadConfig=Can't read config file, error: %1
-Main.invalidConfig=Invalid config format!
-Main.restartRequired=Please restart the bot to apply changes
-Main.missingToken=Token is missing, please check your config!
-Main.loginFailed=Login failed, error: %1
+# ╔══════════════════════════════════════════════╗
+# ║  ✦ Main.js
+# ╚══════════════════════════════════════════════╝
+Main.newVersionDetected=🔹 『 𝗜𝗡𝗙𝗢 』 ➤ 𝗬𝗼𝘂 𝗮𝗿𝗲 𝘂𝘀𝗶𝗻𝗴 𝘃𝗲𝗿𝘀𝗶𝗼𝗻 %1, 𝘁𝗵𝗲 𝗹𝗮𝘁𝗲𝘀𝘁 𝘃𝗲𝗿𝘀𝗶𝗼𝗻 𝗶𝘀 %2.
+Main.errorFormat=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗠𝗮𝗹𝗳𝗼𝗿𝗺𝗲𝗱 𝗺𝗼𝗱𝘂𝗹𝗲!
+Main.nameExist=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗠𝗼𝗱𝘂𝗹𝗲'𝘀 𝗻𝗮𝗺𝗲 𝗶𝘀 𝘀𝗶𝗺𝗶𝗹𝗮𝗿 𝘁𝗼 𝗮𝗻𝗼𝘁𝗵𝗲𝗿 𝗺𝗼𝗱𝘂𝗹𝗲!
+Main.notFoundLanguage=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗠𝗼𝗱𝘂𝗹𝗲 %1 𝗱𝗼𝗻'𝘁 𝘀𝘂𝗽𝗽𝗼𝗿𝘁 𝘆𝗼𝘂𝗿 𝗹𝗮𝗻𝗴𝘂𝗮𝗴𝗲
+Main.notFoundPackage=⏳ 『 𝗪𝗔𝗜𝗧 』 ➤ 𝗖𝗮𝗻'𝘁 𝗳𝗶𝗻𝗱 𝗽𝗮𝗰𝗸𝗮𝗴𝗲 %1 𝘀𝘂𝗽𝗽𝗼𝗿𝘁 𝗳𝗼𝗿 𝗺𝗼𝗱𝘂𝗹𝗲 %2, 𝗶𝗻𝘀𝘁𝗮𝗹𝗹𝗶𝗻𝗴...
+Main.cantInstallPackage=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗖𝗮𝗻'𝘁 𝗶𝗻𝘀𝘁𝗮𝗹𝗹 𝗽𝗮𝗰𝗸𝗮𝗴𝗲 %1 𝗳𝗼𝗿 𝗺𝗼𝗱𝘂𝗹𝗲 %2, 𝗲𝗿𝗿𝗼𝗿: %3
+Main.loadedPackage=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗜𝗻𝘀𝘁𝗮𝗹𝗹𝗲𝗱 𝘄𝗵𝗼𝗹𝗲 𝗽𝗮𝗰𝗸𝗮𝗴𝗲 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗳𝗼𝗿 𝗺𝗼𝗱𝘂𝗹𝗲 %1
+Main.loadedConfig=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗜𝗻𝘀𝘁𝗮𝗹𝗹𝗲𝗱 𝗰𝗼𝗻𝗳𝗶𝗴 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗳𝗼𝗿 𝗺𝗼𝗱𝘂𝗹𝗲 %1
+Main.cantLoadConfig=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗖𝗮𝗻'𝘁 𝗶𝗻𝘀𝘁𝗮𝗹𝗹 𝗰𝗼𝗻𝗳𝗶𝗴 𝗼𝗳 𝗺𝗼𝗱𝘂𝗹𝗲 %1, 𝗲𝗿𝗿𝗼𝗿: %2
+Main.cantOnload=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗖𝗮𝗻'𝘁 𝗹𝗮𝘂𝗻𝗰𝗵 𝘀𝗲𝘁𝘂𝗽 𝗼𝗳 𝗺𝗼𝗱𝘂𝗹𝗲 %1, 𝗲𝗿𝗿𝗼𝗿: %1
+Main.successLoadModule=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗶𝗻𝘀𝘁𝗮𝗹𝗹𝗲𝗱 𝗺𝗼𝗱𝘂𝗹𝗲 %1
+Main.failLoadModule=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗖𝗮𝗻'𝘁 𝗶𝗻𝘀𝘁𝗮𝗹𝗹 𝗺𝗼𝗱𝘂𝗹𝗲 %1, 𝗲𝗿𝗿𝗼𝗿: %2
+Main.finishLoadModule=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗜𝗻𝘀𝘁𝗮𝗹𝗹𝗲𝗱 %1 𝗺𝗼𝗱𝘂𝗹𝗲 𝗰𝗼𝗺𝗺𝗮𝗻𝗱𝘀 𝗮𝗻𝗱 %2 𝗺𝗼𝗱𝘂𝗹𝗲 𝗲𝘃𝗲𝗻𝘁𝘀 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆
+Main.foundPathAppstate=🔹 『 𝗜𝗡𝗙𝗢 』 ➤ 𝗦𝗮𝗵𝘂𝗵𝘀𝘁𝗮𝘁𝗲 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆
+Main.notFoundPathAppstate=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗘𝗿𝗿𝗼𝗿 𝗰𝗮𝗻'𝘁 𝗳𝗶𝗻𝗱 𝗮𝗽𝗽𝘀𝘁𝗮𝘁𝗲 𝗳𝗶𝗹𝗲 𝗺𝗮𝘆𝗯𝗲 𝗳𝗶𝗹𝗲 𝗶𝘀 𝗺𝗮𝗹𝗳𝗼𝗿𝗺𝗲𝗱!
+Main.checkListGban=𝗖𝗵𝗲𝗰𝗸𝗶𝗻𝗴 𝗴𝗹𝗼𝗯𝗮𝗹 𝗯𝗮𝗻 𝗹𝗶𝘀𝘁...
+Main.banDevice=𝗬𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲 𝗵𝗮𝘃𝗲 𝗯𝗲𝗲𝗻 𝗯𝗮𝗻𝗻𝗲𝗱 𝗳𝗿𝗼𝗺 𝗝𝗨𝗪𝗘𝗟, 𝗽𝗹𝗲𝗮𝘀𝗲 𝗰𝗼𝗻𝘁𝗮𝗰𝘁 𝘁𝗼 𝗳𝗮𝗰𝗲𝗯𝗼𝗼𝗸 m.me/61594400795920 𝘁𝗼 𝗸𝗻𝗼𝘄 𝗺𝗼𝗿𝗲 𝗶𝗻𝗳𝗼𝗿𝗺𝗮𝘁𝗶𝗼𝗻 𝗼𝗿 𝗮𝘀𝗸𝗶𝗻𝗴 𝗳𝗼𝗿 𝘂𝗻𝗯𝗮𝗻 𝗸𝗲𝘆, 𝗶𝗳 𝘆𝗼𝘂 𝗮𝗹𝗿𝗲𝗮𝗱𝘆 𝗵𝗮𝘃𝗲 𝘂𝗻𝗯𝗮𝗻 𝗸𝗲𝘆, 𝗽𝗹𝗲𝗮𝘀𝗲 𝗳𝗶𝗹𝗹 𝗶𝘁 𝗯𝗲𝗹𝗼𝘄.
+Main.keyNotSameFormat=𝗪𝗿𝗼𝗻𝗴 𝗳𝗼𝗿𝗺𝗮𝘁, 𝗰𝗼𝗱𝗲 𝗺𝘂𝘀𝘁 𝗰𝗼𝗻𝘁𝗮𝗶𝗻 𝟲 𝗻𝘂𝗺𝗯𝗲𝗿.
+Main.codeInputExpired=𝗬𝗼𝘂𝗿 𝗰𝗼𝗱𝗲 𝗶𝘀 𝘄𝗿𝗼𝗻𝗴 𝗼𝗿 𝗼𝘂𝘁 𝗼𝗳 𝗱𝗮𝘁𝗲.
+Main.unbanDeviceSuccess=𝗬𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲 𝗮𝗿𝗲 𝘂𝗻𝗯𝗮𝗻 𝗻𝗼𝘄, 𝗽𝗹𝗲𝗮𝘀𝗲 𝗿𝗲𝘀𝘁𝗮𝗿𝘁 𝘁𝗼 𝘂𝘀𝗲.
+Main.userBanned=𝗬𝗼𝘂 𝗵𝗮𝗱 𝗯𝗲𝗲𝗻 𝗯𝗮𝗻𝗻𝗲𝗱 𝗳𝗿𝗼𝗺 𝗝𝘂𝘄𝗲𝗹 𝘄𝗵𝗲𝗻 %1 𝘄𝗶𝘁𝗵 𝗿𝗲𝗮𝘀𝗼𝗻: %2. 𝗣𝗹𝗲𝗮𝘀𝗲 𝗰𝗼𝗻𝘁𝗮𝗰𝘁 𝘁𝗼 𝗳𝗮𝗰𝗲𝗯𝗼𝗼𝗸 m.me/61575698041722 𝘁𝗼 𝗵𝗮𝘃𝗲 𝗺𝗼𝗿𝗲 𝗶𝗻𝗳𝗼𝗿𝗺𝗮𝘁𝗶𝗼𝗻!
+Main.finishCheckListGban=𝗖𝗵𝗲𝗰𝗸𝗲𝗱 𝗴𝗹𝗼𝗯𝗮𝗹 𝗯𝗮𝗻 𝗹𝗶𝘀𝘁
+Main.handleListenError=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ handleListene 𝗵𝗮𝘀 𝗼𝗰𝗰𝘂𝗿𝗿𝗲𝗱 𝘀𝗼𝗺𝗲 𝘂𝗻𝗲𝘅𝗽𝗲𝗰𝘁𝗲𝗱 𝗲𝗿𝗿𝗼𝗿𝗿, 𝗲𝗿𝗿𝗼𝗿 : %1
+Main.warningSourceCode=⚠️ 『 𝗪𝗔𝗥𝗡𝗜𝗡𝗚 』 ➤ 𝗗𝗘𝗧𝗘𝗖𝗧𝗘𝗗 𝗧𝗛𝗔𝗧 𝗦𝗢𝗨𝗥𝗖𝗘 𝗖𝗢𝗗𝗘'𝗦 𝗦𝗧𝗥𝗨𝗖𝗧𝗨𝗥𝗘 𝗛𝗔𝗗 𝗕𝗘𝗘𝗡 𝗖𝗛𝗔𝗡𝗚𝗘𝗗 , 𝗦𝗧𝗢𝗣 𝗡𝗢𝗪!
+Main.refreshListen=⏳ 『 𝗪𝗔𝗜𝗧 』 ➤ 𝗥𝗲𝗳𝗿𝗲𝘀𝗵𝗲𝗱 handleListener...
+Main.successConnectDatabase=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱 𝘁𝗼 𝗱𝗮𝘁𝗮𝗯𝗮𝘀𝗲 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆!
+Main.failConnectDatabase=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗙𝗮𝗶𝗹𝗲𝗱 𝘁𝗼 𝗰𝗼𝗻𝗻𝗲𝗰𝘁 𝘁𝗼 𝗱𝗮𝘁𝗮𝗯𝗮𝘀𝗲, 𝗲𝗿𝗿𝗼𝗿: %1
+Main.cantReadConfig=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗖𝗮𝗻'𝘁 𝗿𝗲𝗮𝗱 𝗰𝗼𝗻𝗳𝗶𝗴 𝗳𝗶𝗹𝗲, 𝗲𝗿𝗿𝗼𝗿: %1
+Main.invalidConfig=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗜𝗻𝘃𝗮𝗹𝗶𝗱 𝗰𝗼𝗻𝗳𝗶𝗴 𝗳𝗼𝗿𝗺𝗮𝘁!
+Main.restartRequired=🔹 『 𝗜𝗡𝗙𝗢 』 ➤ 𝗣𝗹𝗲𝗮𝘀𝗲 𝗿𝗲𝘀𝘁𝗮𝗿𝘁 𝘁𝗵𝗲 𝗯𝗼𝘁 𝘁𝗼 𝗮𝗽𝗽𝗹𝘆 𝗰𝗵𝗮𝗻𝗴𝗲𝘀
+Main.missingToken=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗧𝗼𝗸𝗲𝗻 𝗶𝘀 𝗺𝗶𝘀𝘀𝗶𝗻𝗴, 𝗽𝗹𝗲𝗮𝘀𝗲 𝗰𝗵𝗲𝗰𝗸 𝘆𝗼𝘂𝗿 𝗰𝗼𝗻𝗳𝗶𝗴!
+Main.loginFailed=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗟𝗼𝗴𝗶𝗻 𝗳𝗮𝗶𝗹𝗲𝗱, 𝗲𝗿𝗿𝗼𝗿: %1
 
-# ==================== Juwel specific texts ====================
-shahadat.foundPathAppstate=Found appstate.json path successfully
-shahadat.notFoundPathAppstate=Appstate.json not found or invalid!
-shahadat.errorFormat=Invalid module format detected!
-shahadat.nameExist=Module name already exists in the system!
-shahadat.notFoundLanguage=No language support found for module: %1
-shahadat.notFoundPackage=Required package %1 not found for module %2, installing now...
-shahadat.cantInstallPackage=Failed to install package %1 for module %2. Error: %3
-shahadat.loadedPackage=All dependencies loaded successfully for module %1
-shahadat.loadedConfig=Configuration loaded successfully for module %1
-shahadat.cantOnload=Failed to initialize module %1. Error: %2
-shahadat.successLoadModule=Module %1 loaded successfully
-shahadat.failLoadModule=Failed to load module %1. Error: %2
-shahadat.finishLoadModule=Successfully loaded %1 commands and %2 events
-shahadat.handleListenError=Listener encountered an error: %1
-shahadat.warningSourceCode=WARNING: Source code structure modified unexpectedly!
-shahadat.successConnectDatabase=Database connection established successfully
-shahadat.cantLoadConfig=Failed to load config for module %1. Error: %2
-shahadat.restartRequired=Restart required to apply new changes
+# ╔══════════════════════════════════════════════╗
+# ║  ✦ Juwel specific texts
+# ╚══════════════════════════════════════════════╝
+shahadat.foundPathAppstate=🔹 『 𝗜𝗡𝗙𝗢 』 ➤ 𝗙𝗼𝘂𝗻𝗱 appstate.json 𝗽𝗮𝘁𝗵 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆
+shahadat.notFoundPathAppstate=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ Appstate.json 𝗻𝗼𝘁 𝗳𝗼𝘂𝗻𝗱 𝗼𝗿 𝗶𝗻𝘃𝗮𝗹𝗶𝗱!
+shahadat.errorFormat=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗜𝗻𝘃𝗮𝗹𝗶𝗱 𝗺𝗼𝗱𝘂𝗹𝗲 𝗳𝗼𝗿𝗺𝗮𝘁 𝗱𝗲𝘁𝗲𝗰𝘁𝗲𝗱!
+shahadat.nameExist=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗠𝗼𝗱𝘂𝗹𝗲 𝗻𝗮𝗺𝗲 𝗮𝗹𝗿𝗲𝗮𝗱𝘆 𝗲𝘅𝗶𝘀𝘁𝘀 𝗶𝗻 𝘁𝗵𝗲 𝘀𝘆𝘀𝘁𝗲𝗺!
+shahadat.notFoundLanguage=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗡𝗼 𝗹𝗮𝗻𝗴𝘂𝗮𝗴𝗲 𝘀𝘂𝗽𝗽𝗼𝗿𝘁 𝗳𝗼𝘂𝗻𝗱 𝗳𝗼𝗿 𝗺𝗼𝗱𝘂𝗹𝗲: %1
+shahadat.notFoundPackage=⏳ 『 𝗪𝗔𝗜𝗧 』 ➤ 𝗥𝗲𝗾𝘂𝗶𝗿𝗲𝗱 𝗽𝗮𝗰𝗸𝗮𝗴𝗲 %1 𝗻𝗼𝘁 𝗳𝗼𝘂𝗻𝗱 𝗳𝗼𝗿 𝗺𝗼𝗱𝘂𝗹𝗲 %2, 𝗶𝗻𝘀𝘁𝗮𝗹𝗹𝗶𝗻𝗴 𝗻𝗼𝘄...
+shahadat.cantInstallPackage=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗙𝗮𝗶𝗹𝗲𝗱 𝘁𝗼 𝗶𝗻𝘀𝘁𝗮𝗹𝗹 𝗽𝗮𝗰𝗸𝗮𝗴𝗲 %1 𝗳𝗼𝗿 𝗺𝗼𝗱𝘂𝗹𝗲 %2. 𝗘𝗿𝗿𝗼𝗿: %3
+shahadat.loadedPackage=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗔𝗹𝗹 𝗱𝗲𝗽𝗲𝗻𝗱𝗲𝗻𝗰𝗶𝗲𝘀 𝗹𝗼𝗮𝗱𝗲𝗱 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗳𝗼𝗿 𝗺𝗼𝗱𝘂𝗹𝗲 %1
+shahadat.loadedConfig=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗖𝗼𝗻𝗳𝗶𝗴𝘂𝗿𝗮𝘁𝗶𝗼𝗻 𝗹𝗼𝗮𝗱𝗲𝗱 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗳𝗼𝗿 𝗺𝗼𝗱𝘂𝗹𝗲 %1
+shahadat.cantOnload=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗙𝗮𝗶𝗹𝗲𝗱 𝘁𝗼 𝗶𝗻𝗶𝘁𝗶𝗮𝗹𝗶𝘇𝗲 𝗺𝗼𝗱𝘂𝗹𝗲 %1. 𝗘𝗿𝗿𝗼𝗿: %2
+shahadat.successLoadModule=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗠𝗼𝗱𝘂𝗹𝗲 %1 𝗹𝗼𝗮𝗱𝗲𝗱 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆
+shahadat.failLoadModule=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗙𝗮𝗶𝗹𝗲𝗱 𝘁𝗼 𝗹𝗼𝗮𝗱 𝗺𝗼𝗱𝘂𝗹𝗲 %1. 𝗘𝗿𝗿𝗼𝗿: %2
+shahadat.finishLoadModule=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗹𝗼𝗮𝗱𝗲𝗱 %1 𝗰𝗼𝗺𝗺𝗮𝗻𝗱𝘀 𝗮𝗻𝗱 %2 𝗲𝘃𝗲𝗻𝘁𝘀
+shahadat.handleListenError=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗟𝗶𝘀𝘁𝗲𝗻𝗲𝗿 𝗲𝗻𝗰𝗼𝘂𝗻𝘁𝗲𝗿𝗲𝗱 𝗮𝗻 𝗲𝗿𝗿𝗼𝗿: %1
+shahadat.warningSourceCode=⚠️ 『 𝗪𝗔𝗥𝗡𝗜𝗡𝗚 』 ➤ 𝗦𝗼𝘂𝗿𝗰𝗲 𝗰𝗼𝗱𝗲 𝘀𝘁𝗿𝘂𝗰𝘁𝘂𝗿𝗲 𝗺𝗼𝗱𝗶𝗳𝗶𝗲𝗱 𝘂𝗻𝗲𝘅𝗽𝗲𝗰𝘁𝗲𝗱𝗹𝘆!
+shahadat.successConnectDatabase=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗗𝗮𝘁𝗮𝗯𝗮𝘀𝗲 𝗰𝗼𝗻𝗻𝗲𝗰𝘁𝗶𝗼𝗻 𝗲𝘀𝘁𝗮𝗯𝗹𝗶𝘀𝗵𝗲𝗱 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆
+shahadat.cantLoadConfig=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗙𝗮𝗶𝗹𝗲𝗱 𝘁𝗼 𝗹𝗼𝗮𝗱 𝗰𝗼𝗻𝗳𝗶𝗴 𝗳𝗼𝗿 𝗺𝗼𝗱𝘂𝗹𝗲 %1. 𝗘𝗿𝗿𝗼𝗿: %2
+shahadat.restartRequired=🔹 『 𝗜𝗡𝗙𝗢 』 ➤ 𝗥𝗲𝘀𝘁𝗮𝗿𝘁 𝗿𝗲𝗾𝘂𝗶𝗿𝗲𝗱 𝘁𝗼 𝗮𝗽𝗽𝗹𝘆 𝗻𝗲𝘄 𝗰𝗵𝗮𝗻𝗴𝗲𝘀
 
-# ==================== includes/listen.js ====================
-listen.startLoadEnvironment=Proceed to load the environment variable ...
-listen.loadedEnvironmentThread=Loaded thread environment variable successfully
-listen.loadedEnvironmentUser=Loaded user environment variable successfully
-listen.successLoadEnvironment=Loaded environment variable successfully
-listen.failLoadEnvironment=Can't load environment variable, error: %1
+# ╔══════════════════════════════════════════════╗
+# ║  ✦ Juwel keys (same texts, new prefix)
+# ╚══════════════════════════════════════════════╝
+juwel.foundPathAppstate=🔹 『 𝗜𝗡𝗙𝗢 』 ➤ 𝗙𝗼𝘂𝗻𝗱 appstate.json 𝗽𝗮𝘁𝗵 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆
+juwel.notFoundPathAppstate=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ Appstate.json 𝗻𝗼𝘁 𝗳𝗼𝘂𝗻𝗱 𝗼𝗿 𝗶𝗻𝘃𝗮𝗹𝗶𝗱!
+juwel.errorFormat=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗜𝗻𝘃𝗮𝗹𝗶𝗱 𝗺𝗼𝗱𝘂𝗹𝗲 𝗳𝗼𝗿𝗺𝗮𝘁 𝗱𝗲𝘁𝗲𝗰𝘁𝗲𝗱!
+juwel.nameExist=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗠𝗼𝗱𝘂𝗹𝗲 𝗻𝗮𝗺𝗲 𝗮𝗹𝗿𝗲𝗮𝗱𝘆 𝗲𝘅𝗶𝘀𝘁𝘀 𝗶𝗻 𝘁𝗵𝗲 𝘀𝘆𝘀𝘁𝗲𝗺!
+juwel.notFoundLanguage=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗡𝗼 𝗹𝗮𝗻𝗴𝘂𝗮𝗴𝗲 𝘀𝘂𝗽𝗽𝗼𝗿𝘁 𝗳𝗼𝘂𝗻𝗱 𝗳𝗼𝗿 𝗺𝗼𝗱𝘂𝗹𝗲: %1
+juwel.notFoundPackage=⏳ 『 𝗪𝗔𝗜𝗧 』 ➤ 𝗥𝗲𝗾𝘂𝗶𝗿𝗲𝗱 𝗽𝗮𝗰𝗸𝗮𝗴𝗲 %1 𝗻𝗼𝘁 𝗳𝗼𝘂𝗻𝗱 𝗳𝗼𝗿 𝗺𝗼𝗱𝘂𝗹𝗲 %2, 𝗶𝗻𝘀𝘁𝗮𝗹𝗹𝗶𝗻𝗴 𝗻𝗼𝘄...
+juwel.cantInstallPackage=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗙𝗮𝗶𝗹𝗲𝗱 𝘁𝗼 𝗶𝗻𝘀𝘁𝗮𝗹𝗹 𝗽𝗮𝗰𝗸𝗮𝗴𝗲 %1 𝗳𝗼𝗿 𝗺𝗼𝗱𝘂𝗹𝗲 %2. 𝗘𝗿𝗿𝗼𝗿: %3
+juwel.loadedPackage=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗔𝗹𝗹 𝗱𝗲𝗽𝗲𝗻𝗱𝗲𝗻𝗰𝗶𝗲𝘀 𝗹𝗼𝗮𝗱𝗲𝗱 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗳𝗼𝗿 𝗺𝗼𝗱𝘂𝗹𝗲 %1
+juwel.loadedConfig=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗖𝗼𝗻𝗳𝗶𝗴𝘂𝗿𝗮𝘁𝗶𝗼𝗻 𝗹𝗼𝗮𝗱𝗲𝗱 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗳𝗼𝗿 𝗺𝗼𝗱𝘂𝗹𝗲 %1
+juwel.cantOnload=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗙𝗮𝗶𝗹𝗲𝗱 𝘁𝗼 𝗶𝗻𝗶𝘁𝗶𝗮𝗹𝗶𝘇𝗲 𝗺𝗼𝗱𝘂𝗹𝗲 %1. 𝗘𝗿𝗿𝗼𝗿: %2
+juwel.successLoadModule=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗠𝗼𝗱𝘂𝗹𝗲 %1 𝗹𝗼𝗮𝗱𝗲𝗱 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆
+juwel.failLoadModule=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗙𝗮𝗶𝗹𝗲𝗱 𝘁𝗼 𝗹𝗼𝗮𝗱 𝗺𝗼𝗱𝘂𝗹𝗲 %1. 𝗘𝗿𝗿𝗼𝗿: %2
+juwel.finishLoadModule=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗹𝗼𝗮𝗱𝗲𝗱 %1 𝗰𝗼𝗺𝗺𝗮𝗻𝗱𝘀 𝗮𝗻𝗱 %2 𝗲𝘃𝗲𝗻𝘁𝘀
+juwel.handleListenError=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗟𝗶𝘀𝘁𝗲𝗻𝗲𝗿 𝗲𝗻𝗰𝗼𝘂𝗻𝘁𝗲𝗿𝗲𝗱 𝗮𝗻 𝗲𝗿𝗿𝗼𝗿: %1
+juwel.warningSourceCode=⚠️ 『 𝗪𝗔𝗥𝗡𝗜𝗡𝗚 』 ➤ 𝗦𝗼𝘂𝗿𝗰𝗲 𝗰𝗼𝗱𝗲 𝘀𝘁𝗿𝘂𝗰𝘁𝘂𝗿𝗲 𝗺𝗼𝗱𝗶𝗳𝗶𝗲𝗱 𝘂𝗻𝗲𝘅𝗽𝗲𝗰𝘁𝗲𝗱𝗹𝘆!
+juwel.successConnectDatabase=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗗𝗮𝘁𝗮𝗯𝗮𝘀𝗲 𝗰𝗼𝗻𝗻𝗲𝗰𝘁𝗶𝗼𝗻 𝗲𝘀𝘁𝗮𝗯𝗹𝗶𝘀𝗵𝗲𝗱 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆
+juwel.cantLoadConfig=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗙𝗮𝗶𝗹𝗲𝗱 𝘁𝗼 𝗹𝗼𝗮𝗱 𝗰𝗼𝗻𝗳𝗶𝗴 𝗳𝗼𝗿 𝗺𝗼𝗱𝘂𝗹𝗲 %1. 𝗘𝗿𝗿𝗼𝗿: %2
+juwel.restartRequired=🔹 『 𝗜𝗡𝗙𝗢 』 ➤ 𝗥𝗲𝘀𝘁𝗮𝗿𝘁 𝗿𝗲𝗾𝘂𝗶𝗿𝗲𝗱 𝘁𝗼 𝗮𝗽𝗽𝗹𝘆 𝗻𝗲𝘄 𝗰𝗵𝗮𝗻𝗴𝗲𝘀
+
+# ╔══════════════════════════════════════════════╗
+# ║  ✦ includes/listen.js
+# ╚══════════════════════════════════════════════╝
+listen.startLoadEnvironment=⏳ 『 𝗪𝗔𝗜𝗧 』 ➤ 𝗣𝗿𝗼𝗰𝗲𝗲𝗱 𝘁𝗼 𝗹𝗼𝗮𝗱 𝘁𝗵𝗲 𝗲𝗻𝘃𝗶𝗿𝗼𝗻𝗺𝗲𝗻𝘁 𝘃𝗮𝗿𝗶𝗮𝗯𝗹𝗲 ...
+listen.loadedEnvironmentThread=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗟𝗼𝗮𝗱𝗲𝗱 𝘁𝗵𝗿𝗲𝗮𝗱 𝗲𝗻𝘃𝗶𝗿𝗼𝗻𝗺𝗲𝗻𝘁 𝘃𝗮𝗿𝗶𝗮𝗯𝗹𝗲 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆
+listen.loadedEnvironmentUser=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗟𝗼𝗮𝗱𝗲𝗱 𝘂𝘀𝗲𝗿 𝗲𝗻𝘃𝗶𝗿𝗼𝗻𝗺𝗲𝗻𝘁 𝘃𝗮𝗿𝗶𝗮𝗯𝗹𝗲 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆
+listen.successLoadEnvironment=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗟𝗼𝗮𝗱𝗲𝗱 𝗲𝗻𝘃𝗶𝗿𝗼𝗻𝗺𝗲𝗻𝘁 𝘃𝗮𝗿𝗶𝗮𝗯𝗹𝗲 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆
+listen.failLoadEnvironment=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗖𝗮𝗻'𝘁 𝗹𝗼𝗮𝗱 𝗲𝗻𝘃𝗶𝗿𝗼𝗻𝗺𝗲𝗻𝘁 𝘃𝗮𝗿𝗶𝗮𝗯𝗹𝗲, 𝗲𝗿𝗿𝗼𝗿: %1
 listen.threadBanned=╭───────────────╮\n│ 🚫 𝗕𝗢𝗫 𝗕𝗔𝗡𝗡𝗘𝗗 \n╰───────────────╯
 listen.userBanned=You have been banned from using the bot!
 
-# ==================== includes/controller/currencies.js ====================
-currencies.needObjectOrArray=Have to be an Array or an Object or maybe both
-currencies.needObject=Have to be an Object
-currencies.needNumber=Have to be an number
-currencies.invalidValue=Invalid currency value provided!
-currencies.notEnough=Not enough balance to perform this action!
+# ╔══════════════════════════════════════════════╗
+# ║  ✦ includes/controller/currencies.js
+# ╚══════════════════════════════════════════════╝
+currencies.needObjectOrArray=🔹 『 𝗜𝗡𝗙𝗢 』 ➤ 𝗛𝗮𝘃𝗲 𝘁𝗼 𝗯𝗲 𝗮𝗻 𝗔𝗿𝗿𝗮𝘆 𝗼𝗿 𝗮𝗻 𝗢𝗯𝗷𝗲𝗰𝘁 𝗼𝗿 𝗺𝗮𝘆𝗯𝗲 𝗯𝗼𝘁𝗵
+currencies.needObject=🔹 『 𝗜𝗡𝗙𝗢 』 ➤ 𝗛𝗮𝘃𝗲 𝘁𝗼 𝗯𝗲 𝗮𝗻 𝗢𝗯𝗷𝗲𝗰𝘁
+currencies.needNumber=🔹 『 𝗜𝗡𝗙𝗢 』 ➤ 𝗛𝗮𝘃𝗲 𝘁𝗼 𝗯𝗲 𝗮𝗻 𝗻𝘂𝗺𝗯𝗲𝗿
+currencies.invalidValue=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗜𝗻𝘃𝗮𝗹𝗶𝗱 𝗰𝘂𝗿𝗿𝗲𝗻𝗰𝘆 𝘃𝗮𝗹𝘂𝗲 𝗽𝗿𝗼𝘃𝗶𝗱𝗲𝗱!
+currencies.notEnough=╭─ ❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ─╮\n│ 𝗡𝗼𝘁 𝗲𝗻𝗼𝘂𝗴𝗵 𝗯𝗮𝗹𝗮𝗻𝗰𝗲 𝘁𝗼 𝗽𝗲𝗿𝗳𝗼𝗿𝗺 𝘁𝗵𝗶𝘀 𝗮𝗰𝘁𝗶𝗼𝗻!\n╰────────────────╯
 
-# ==================== includes/controller/threads.js ====================
-threads.needObjectOrArray=Have to be an Array or an Object or maybe both
-threads.needObject=Have to be an Object
-threads.notFound=Thread not found in database!
-threads.alreadyExists=Thread already exists!
+# ╔══════════════════════════════════════════════╗
+# ║  ✦ includes/controller/threads.js
+# ╚══════════════════════════════════════════════╝
+threads.needObjectOrArray=🔹 『 𝗜𝗡𝗙𝗢 』 ➤ 𝗛𝗮𝘃𝗲 𝘁𝗼 𝗯𝗲 𝗮𝗻 𝗔𝗿𝗿𝗮𝘆 𝗼𝗿 𝗮𝗻 𝗢𝗯𝗷𝗲𝗰𝘁 𝗼𝗿 𝗺𝗮𝘆𝗯𝗲 𝗯𝗼𝘁𝗵
+threads.needObject=🔹 『 𝗜𝗡𝗙𝗢 』 ➤ 𝗛𝗮𝘃𝗲 𝘁𝗼 𝗯𝗲 𝗮𝗻 𝗢𝗯𝗷𝗲𝗰𝘁
+threads.notFound=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗧𝗵𝗿𝗲𝗮𝗱 𝗻𝗼𝘁 𝗳𝗼𝘂𝗻𝗱 𝗶𝗻 𝗱𝗮𝘁𝗮𝗯𝗮𝘀𝗲!
+threads.alreadyExists=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗧𝗵𝗿𝗲𝗮𝗱 𝗮𝗹𝗿𝗲𝗮𝗱𝘆 𝗲𝘅𝗶𝘀𝘁𝘀!
 
-# ==================== includes/controller/users.js ====================
-users.needObjectOrArray=Have to be an Array or an Object or maybe both
-users.needObject=Have to be an Object
-users.notFound=User not found in database!
-users.alreadyExists=User already exists!
+# ╔══════════════════════════════════════════════╗
+# ║  ✦ includes/controller/users.js
+# ╚══════════════════════════════════════════════╝
+users.needObjectOrArray=🔹 『 𝗜𝗡𝗙𝗢 』 ➤ 𝗛𝗮𝘃𝗲 𝘁𝗼 𝗯𝗲 𝗮𝗻 𝗔𝗿𝗿𝗮𝘆 𝗼𝗿 𝗮𝗻 𝗢𝗯𝗷𝗲𝗰𝘁 𝗼𝗿 𝗺𝗮𝘆𝗯𝗲 𝗯𝗼𝘁𝗵
+users.needObject=🔹 『 𝗜𝗡𝗙𝗢 』 ➤ 𝗛𝗮𝘃𝗲 𝘁𝗼 𝗯𝗲 𝗮𝗻 𝗢𝗯𝗷𝗲𝗰𝘁
+users.notFound=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗨𝘀𝗲𝗿 𝗻𝗼𝘁 𝗳𝗼𝘂𝗻𝗱 𝗶𝗻 𝗱𝗮𝘁𝗮𝗯𝗮𝘀𝗲!
+users.alreadyExists=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗨𝘀𝗲𝗿 𝗮𝗹𝗿𝗲𝗮𝗱𝘆 𝗲𝘅𝗶𝘀𝘁𝘀!
 
-# ==================== includes/handle/handleCommand.js ====================
+# ╔══════════════════════════════════════════════╗
+# ║  ✦ includes/handle/handleCommand.js
+# ╚══════════════════════════════════════════════╝
 handleCommand.userBanned=╭─────────────╮\n│ 🚫𝗬𝗢𝗨  𝗕𝗔𝗡𝗡𝗘𝗗 \n╰─────────────╯
 handleCommand.threadBanned=╭────────────────╮\n  🚫 𝗚𝗥𝗢𝗨𝗣 𝗕𝗔𝗡𝗡𝗘𝗗 \n╰────────────────╯
 handleCommand.commandNotExist=╭──────────────╮\n│ ⚠️ 𝗪𝗥𝗢𝗡𝗚 𝗖𝗠𝗗 \n╰──────────────╯\nএই কমান্ড আমার সিস্টেমে নেই 🤦‍♂️\n✅ সঠিক কমান্ড দাও, বেবি 🎀
 handleCommand.commandThreadBanned=╭───────────────╮\n│ ✅ 𝗖𝗢𝗥𝗥𝗘𝗖𝗧 𝗖𝗠𝗗 \n╰───────────────╯\n✅ সঠিক কমান্ড: "%1"
-handleCommand.commandUserBanned=You are unable to use command "%1"
-handleCommand.threadNotAllowNSFW=This Commnd Only use Boss MR JUWEL 
-handleCommand.cantGetInfoThread=Can't get your thread's info, error: %1
-handleCommand.cantGetUserInfo=Can't get user's info, error: %1
+handleCommand.commandUserBanned=𝗬𝗼𝘂 𝗮𝗿𝗲 𝘂𝗻𝗮𝗯𝗹𝗲 𝘁𝗼 𝘂𝘀𝗲 𝗰𝗼𝗺𝗺𝗮𝗻𝗱 "%1"
+handleCommand.threadNotAllowNSFW=╭─ 🔒 『 𝗗𝗘𝗡𝗜𝗘𝗗 』 ─╮\n│ 𝗧𝗵𝗶𝘀 𝗖𝗼𝗺𝗺𝗻𝗱 𝗢𝗻𝗹𝘆 𝘂𝘀𝗲 𝗕𝗼𝘀𝘀 𝗠𝗥 𝗝𝗨𝗪𝗘𝗟\n╰────────────────╯
+handleCommand.cantGetInfoThread=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗖𝗮𝗻'𝘁 𝗴𝗲𝘁 𝘆𝗼𝘂𝗿 𝘁𝗵𝗿𝗲𝗮𝗱'𝘀 𝗶𝗻𝗳𝗼, 𝗲𝗿𝗿𝗼𝗿: %1
+handleCommand.cantGetUserInfo=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗖𝗮𝗻'𝘁 𝗴𝗲𝘁 𝘂𝘀𝗲𝗿'𝘀 𝗶𝗻𝗳𝗼, 𝗲𝗿𝗿𝗼𝗿: %1
 handleCommand.permssionNotEnough=╭──────────────╮\n  🚫 𝗔𝗖𝗖𝗘𝗦𝗦 𝗗𝗘𝗡𝗜𝗘𝗗 \n╰──────────────╯\n👤 %1, এটা কমান্ড শুধু আমার বস  🐸\n👑 乛 M𝆠፝֟R ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐ ব্যাবহার করতে পারবে🎀🙌
-handleCommand.cantSetMessageReaction=Having some unexpected error at setMessageReaction, error: %1
-handleCommand.executeCommand=[ %1 ] Command used: %2 by user: %3 at thread: %4 | Args included: %5 | Processing time: %6ms
-handleCommand.commandError=Having some unexpected error when using command %1, error: %2
-handleCommand.wrongSyntax=Wrong syntax! Please use: %1
-handleCommand.missingArgument=Missing required argument!
-handleCommand.cooldown=Please wait %1 seconds before using this command again
-handleCommand.adminOnly=This command is only for group admins!
-handleCommand.botAdminOnly=This command is only for MR JUWEL!
+handleCommand.cantSetMessageReaction=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗛𝗮𝘃𝗶𝗻𝗴 𝘀𝗼𝗺𝗲 𝘂𝗻𝗲𝘅𝗽𝗲𝗰𝘁𝗲𝗱 𝗲𝗿𝗿𝗼𝗿 𝗮𝘁 setMessageReaction, 𝗲𝗿𝗿𝗼𝗿: %1
+handleCommand.executeCommand=📌 『 𝗟𝗢𝗚 』 ➤ [ %1 ] 𝗖𝗼𝗺𝗺𝗮𝗻𝗱 𝘂𝘀𝗲𝗱: %2 𝗯𝘆 𝘂𝘀𝗲𝗿: %3 𝗮𝘁 𝘁𝗵𝗿𝗲𝗮𝗱: %4 | 𝗔𝗿𝗴𝘀 𝗶𝗻𝗰𝗹𝘂𝗱𝗲𝗱: %5 | 𝗣𝗿𝗼𝗰𝗲𝘀𝘀𝗶𝗻𝗴 𝘁𝗶𝗺𝗲: %6𝗺𝘀
+handleCommand.commandError=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗛𝗮𝘃𝗶𝗻𝗴 𝘀𝗼𝗺𝗲 𝘂𝗻𝗲𝘅𝗽𝗲𝗰𝘁𝗲𝗱 𝗲𝗿𝗿𝗼𝗿 𝘄𝗵𝗲𝗻 𝘂𝘀𝗶𝗻𝗴 𝗰𝗼𝗺𝗺𝗮𝗻𝗱 %1, 𝗲𝗿𝗿𝗼𝗿: %2
+handleCommand.wrongSyntax=╭─ 💡 『 𝗨𝗦𝗔𝗚𝗘 』 ─╮\n│ 𝗪𝗿𝗼𝗻𝗴 𝘀𝘆𝗻𝘁𝗮𝘅! 𝗣𝗹𝗲𝗮𝘀𝗲 𝘂𝘀𝗲: %1\n╰────────────────╯
+handleCommand.missingArgument=╭─ 💡 『 𝗨𝗦𝗔𝗚𝗘 』 ─╮\n│ 𝗠𝗶𝘀𝘀𝗶𝗻𝗴 𝗿𝗲𝗾𝘂𝗶𝗿𝗲𝗱 𝗮𝗿𝗴𝘂𝗺𝗲𝗻𝘁!\n╰────────────────╯
+handleCommand.cooldown=╭─ ⏳ 『 𝗖𝗢𝗢𝗟𝗗𝗢𝗪𝗡 』 ─╮\n│ 𝗣𝗹𝗲𝗮𝘀𝗲 𝘄𝗮𝗶𝘁 %1 𝘀𝗲𝗰𝗼𝗻𝗱𝘀 𝗯𝗲𝗳𝗼𝗿𝗲 𝘂𝘀𝗶𝗻𝗴 𝘁𝗵𝗶𝘀 𝗰𝗼𝗺𝗺𝗮𝗻𝗱 𝗮𝗴𝗮𝗶𝗻\n╰────────────────╯
+handleCommand.adminOnly=╭─ 🔒 『 𝗗𝗘𝗡𝗜𝗘𝗗 』 ─╮\n│ 𝗧𝗵𝗶𝘀 𝗰𝗼𝗺𝗺𝗮𝗻𝗱 𝗶𝘀 𝗼𝗻𝗹𝘆 𝗳𝗼𝗿 𝗴𝗿𝗼𝘂𝗽 𝗮𝗱𝗺𝗶𝗻𝘀!\n╰────────────────╯
+handleCommand.botAdminOnly=╭─ 🔒 『 𝗗𝗘𝗡𝗜𝗘𝗗 』 ─╮\n│ 𝗧𝗵𝗶𝘀 𝗰𝗼𝗺𝗺𝗮𝗻𝗱 𝗶𝘀 𝗼𝗻𝗹𝘆 𝗳𝗼𝗿 𝗠𝗥 𝗝𝗨𝗪𝗘𝗟!\n╰────────────────╯
 
-# ==================== includes/handle/handleCommandEvent.js ====================
-handleCommandEvent.moduleError=Having some unexpected error when using command %1, error: %2
-handleCommandEvent.notFound=Command event %1 not found!
+# ╔══════════════════════════════════════════════╗
+# ║  ✦ includes/handle/handleCommandEvent.js
+# ╚══════════════════════════════════════════════╝
+handleCommandEvent.moduleError=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗛𝗮𝘃𝗶𝗻𝗴 𝘀𝗼𝗺𝗲 𝘂𝗻𝗲𝘅𝗽𝗲𝗰𝘁𝗲𝗱 𝗲𝗿𝗿𝗼𝗿 𝘄𝗵𝗲𝗻 𝘂𝘀𝗶𝗻𝗴 𝗰𝗼𝗺𝗺𝗮𝗻𝗱 %1, 𝗲𝗿𝗿𝗼𝗿: %2
+handleCommandEvent.notFound=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗖𝗼𝗺𝗺𝗮𝗻𝗱 𝗲𝘃𝗲𝗻𝘁 %1 𝗻𝗼𝘁 𝗳𝗼𝘂𝗻𝗱!
 
-# ==================== includes/handle/handleCreateDatabase.js ====================
-handleCreateDatabase.newThread=new thread: %1
-handleCreateDatabase.newUser=new user %1
-handleCreateDatabase.threadDataError=Failed to create thread data, error: %1
-handleCreateDatabase.userDataError=Failed to create user data, error: %1
+# ╔══════════════════════════════════════════════╗
+# ║  ✦ includes/handle/handleCreateDatabase.js
+# ╚══════════════════════════════════════════════╝
+handleCreateDatabase.newThread=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗻𝗲𝘄 𝘁𝗵𝗿𝗲𝗮𝗱: %1
+handleCreateDatabase.newUser=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗻𝗲𝘄 𝘂𝘀𝗲𝗿 %1
+handleCreateDatabase.threadDataError=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗙𝗮𝗶𝗹𝗲𝗱 𝘁𝗼 𝗰𝗿𝗲𝗮𝘁𝗲 𝘁𝗵𝗿𝗲𝗮𝗱 𝗱𝗮𝘁𝗮, 𝗲𝗿𝗿𝗼𝗿: %1
+handleCreateDatabase.userDataError=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗙𝗮𝗶𝗹𝗲𝗱 𝘁𝗼 𝗰𝗿𝗲𝗮𝘁𝗲 𝘂𝘀𝗲𝗿 𝗱𝗮𝘁𝗮, 𝗲𝗿𝗿𝗼𝗿: %1
 
-# ==================== includes/handle/handleEvent.js ====================
-handleEvent.executeEvent=[ %1 ] Event was executed: %2 at thread: %3 | Processing time: %4ms
-handleEvent.eventError=Having some error when executing event %1, error: %2
-handleEvent.notFound=Event %1 not found!
+# ╔══════════════════════════════════════════════╗
+# ║  ✦ includes/handle/handleEvent.js
+# ╚══════════════════════════════════════════════╝
+handleEvent.executeEvent=📌 『 𝗟𝗢𝗚 』 ➤ [ %1 ] 𝗘𝘃𝗲𝗻𝘁 𝘄𝗮𝘀 𝗲𝘅𝗲𝗰𝘂𝘁𝗲𝗱: %2 𝗮𝘁 𝘁𝗵𝗿𝗲𝗮𝗱: %3 | 𝗣𝗿𝗼𝗰𝗲𝘀𝘀𝗶𝗻𝗴 𝘁𝗶𝗺𝗲: %4𝗺𝘀
+handleEvent.eventError=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗛𝗮𝘃𝗶𝗻𝗴 𝘀𝗼𝗺𝗲 𝗲𝗿𝗿𝗼𝗿 𝘄𝗵𝗲𝗻 𝗲𝘅𝗲𝗰𝘂𝘁𝗶𝗻𝗴 𝗲𝘃𝗲𝗻𝘁 %1, 𝗲𝗿𝗿𝗼𝗿: %2
+handleEvent.notFound=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗘𝘃𝗲𝗻𝘁 %1 𝗻𝗼𝘁 𝗳𝗼𝘂𝗻𝗱!
 
-# ==================== includes/handle/handleReaction.js ====================
-handleReaction.missingValue=Missing value to respond your problem
-handleReaction.executeError=Having some error when responding to your problem, error: %1
-handleReaction.noPermission=You don't have permission to react to this message!
+# ╔══════════════════════════════════════════════╗
+# ║  ✦ includes/handle/handleReaction.js
+# ╚══════════════════════════════════════════════╝
+handleReaction.missingValue=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗠𝗶𝘀𝘀𝗶𝗻𝗴 𝘃𝗮𝗹𝘂𝗲 𝘁𝗼 𝗿𝗲𝘀𝗽𝗼𝗻𝗱 𝘆𝗼𝘂𝗿 𝗽𝗿𝗼𝗯𝗹𝗲𝗺
+handleReaction.executeError=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗛𝗮𝘃𝗶𝗻𝗴 𝘀𝗼𝗺𝗲 𝗲𝗿𝗿𝗼𝗿 𝘄𝗵𝗲𝗻 𝗿𝗲𝘀𝗽𝗼𝗻𝗱𝗶𝗻𝗴 𝘁𝗼 𝘆𝗼𝘂𝗿 𝗽𝗿𝗼𝗯𝗹𝗲𝗺, 𝗲𝗿𝗿𝗼𝗿: %1
+handleReaction.noPermission=╭─ 🔒 『 𝗗𝗘𝗡𝗜𝗘𝗗 』 ─╮\n│ 𝗬𝗼𝘂 𝗱𝗼𝗻'𝘁 𝗵𝗮𝘃𝗲 𝗽𝗲𝗿𝗺𝗶𝘀𝘀𝗶𝗼𝗻 𝘁𝗼 𝗿𝗲𝗮𝗰𝘁 𝘁𝗼 𝘁𝗵𝗶𝘀 𝗺𝗲𝘀𝘀𝗮𝗴𝗲!\n╰────────────────╯
 
-# ==================== includes/handle/handleReply.js ====================
-handleReply.missingValue=Missing value to respond your problem
-handleReply.executeError=Having some error when responding your problem, error: %1
-handleReply.noPermission=You don't have permission to reply to this message!
+# ╔══════════════════════════════════════════════╗
+# ║  ✦ includes/handle/handleReply.js
+# ╚══════════════════════════════════════════════╝
+handleReply.missingValue=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗠𝗶𝘀𝘀𝗶𝗻𝗴 𝘃𝗮𝗹𝘂𝗲 𝘁𝗼 𝗿𝗲𝘀𝗽𝗼𝗻𝗱 𝘆𝗼𝘂𝗿 𝗽𝗿𝗼𝗯𝗹𝗲𝗺
+handleReply.executeError=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗛𝗮𝘃𝗶𝗻𝗴 𝘀𝗼𝗺𝗲 𝗲𝗿𝗿𝗼𝗿 𝘄𝗵𝗲𝗻 𝗿𝗲𝘀𝗽𝗼𝗻𝗱𝗶𝗻𝗴 𝘆𝗼𝘂𝗿 𝗽𝗿𝗼𝗯𝗹𝗲𝗺, 𝗲𝗿𝗿𝗼𝗿: %1
+handleReply.noPermission=╭─ 🔒 『 𝗗𝗘𝗡𝗜𝗘𝗗 』 ─╮\n│ 𝗬𝗼𝘂 𝗱𝗼𝗻'𝘁 𝗵𝗮𝘃𝗲 𝗽𝗲𝗿𝗺𝗶𝘀𝘀𝗶𝗼𝗻 𝘁𝗼 𝗿𝗲𝗽𝗹𝘆 𝘁𝗼 𝘁𝗵𝗶𝘀 𝗺𝗲𝘀𝘀𝗮𝗴𝗲!\n╰────────────────╯
 
-# ==================== includes/handle/handleSchedule.js ====================
-handleSchedule.exectuteError=Having some error when schedule at module %1, error: %2
-handleSchedule.timeInvalid=Invalid schedule time provided!
-handleSchedule.alreadyExists=Schedule already exists for module %1
+# ╔══════════════════════════════════════════════╗
+# ║  ✦ includes/handle/handleSchedule.js
+# ╚══════════════════════════════════════════════╝
+handleSchedule.exectuteError=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗛𝗮𝘃𝗶𝗻𝗴 𝘀𝗼𝗺𝗲 𝗲𝗿𝗿𝗼𝗿 𝘄𝗵𝗲𝗻 𝘀𝗰𝗵𝗲𝗱𝘂𝗹𝗲 𝗮𝘁 𝗺𝗼𝗱𝘂𝗹𝗲 %1, 𝗲𝗿𝗿𝗼𝗿: %2
+handleSchedule.timeInvalid=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗜𝗻𝘃𝗮𝗹𝗶𝗱 𝘀𝗰𝗵𝗲𝗱𝘂𝗹𝗲 𝘁𝗶𝗺𝗲 𝗽𝗿𝗼𝘃𝗶𝗱𝗲𝗱!
+handleSchedule.alreadyExists=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗦𝗰𝗵𝗲𝗱𝘂𝗹𝗲 𝗮𝗹𝗿𝗲𝗮𝗱𝘆 𝗲𝘅𝗶𝘀𝘁𝘀 𝗳𝗼𝗿 𝗺𝗼𝗱𝘂𝗹𝗲 %1
 
-# ==================== utils/index.js ====================
+# ╔══════════════════════════════════════════════╗
+# ║  ✦ utils/index.js
+# ╚══════════════════════════════════════════════╝
 utils.throwError=⚠️ কমান্ড কাজ না করলে অন্য কমান্ড ট্রাই করো\n💙 %1help %2 দিয়ে বিস্তারিত দেখো
-utils.invalidCommand=Invalid command provided!
-utils.missingParameter=Missing required parameter: %1
-utils.parseError=Failed to parse data, error: %1
+utils.invalidCommand=╭─ 💡 『 𝗨𝗦𝗔𝗚𝗘 』 ─╮\n│ 𝗜𝗻𝘃𝗮𝗹𝗶𝗱 𝗰𝗼𝗺𝗺𝗮𝗻𝗱 𝗽𝗿𝗼𝘃𝗶𝗱𝗲𝗱!\n╰────────────────╯
+utils.missingParameter=╭─ 💡 『 𝗨𝗦𝗔𝗚𝗘 』 ─╮\n│ 𝗠𝗶𝘀𝘀𝗶𝗻𝗴 𝗿𝗲𝗾𝘂𝗶𝗿𝗲𝗱 𝗽𝗮𝗿𝗮𝗺𝗲𝘁𝗲𝗿: %1\n╰────────────────╯
+utils.parseError=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗙𝗮𝗶𝗹𝗲𝗱 𝘁𝗼 𝗽𝗮𝗿𝘀𝗲 𝗱𝗮𝘁𝗮, 𝗲𝗿𝗿𝗼𝗿: %1
 
-# ==================== updater.js ====================
-updater.latestVersion=You are using the latest version
-updater.cantFindVersion=You are using an undefined version (%1), please check your package.json file again
-updater.newVersions=There are %1 new versions to update, starting to update...
-updater.updateSuccess=Update successfully%1
-updater.configChanged=The %1 has been changed, please check your config.json file again
-updater.installingPackages=Installing dependencies for bot...
-updater.installSuccess=Installed dependencies successfully, restart the bot to use the new version
-updater.backupSuccess=Successfully backed up changed files, see in the %1 folder
-updater.restartToApply=. Restart the bot to apply the new version
-updater.skipFile=There is a new version of the %1 file, but you have skipped this file during the update process with the comment %2 in this file
-updater.cantDownload=Can't download update file %1, error: %2
-updater.cantBackup=Can't backup file %1, error: %2
-updater.noUpdate=No update available at this moment
-updater.checkingUpdate=Checking for updates...
-updater.updateFailed=Update failed, error: %1
+# ╔══════════════════════════════════════════════╗
+# ║  ✦ updater.js
+# ╚══════════════════════════════════════════════╝
+updater.latestVersion=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗬𝗼𝘂 𝗮𝗿𝗲 𝘂𝘀𝗶𝗻𝗴 𝘁𝗵𝗲 𝗹𝗮𝘁𝗲𝘀𝘁 𝘃𝗲𝗿𝘀𝗶𝗼𝗻
+updater.cantFindVersion=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗬𝗼𝘂 𝗮𝗿𝗲 𝘂𝘀𝗶𝗻𝗴 𝗮𝗻 𝘂𝗻𝗱𝗲𝗳𝗶𝗻𝗲𝗱 𝘃𝗲𝗿𝘀𝗶𝗼𝗻 (%1), 𝗽𝗹𝗲𝗮𝘀𝗲 𝗰𝗵𝗲𝗰𝗸 𝘆𝗼𝘂𝗿 package.json 𝗳𝗶𝗹𝗲 𝗮𝗴𝗮𝗶𝗻
+updater.newVersions=⏳ 『 𝗪𝗔𝗜𝗧 』 ➤ 𝗧𝗵𝗲𝗿𝗲 𝗮𝗿𝗲 %1 𝗻𝗲𝘄 𝘃𝗲𝗿𝘀𝗶𝗼𝗻𝘀 𝘁𝗼 𝘂𝗽𝗱𝗮𝘁𝗲, 𝘀𝘁𝗮𝗿𝘁𝗶𝗻𝗴 𝘁𝗼 𝘂𝗽𝗱𝗮𝘁𝗲...
+updater.updateSuccess=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗨𝗽𝗱𝗮𝘁𝗲 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆%1
+updater.configChanged=🔹 『 𝗜𝗡𝗙𝗢 』 ➤ 𝗧𝗵𝗲 %1 𝗵𝗮𝘀 𝗯𝗲𝗲𝗻 𝗰𝗵𝗮𝗻𝗴𝗲𝗱, 𝗽𝗹𝗲𝗮𝘀𝗲 𝗰𝗵𝗲𝗰𝗸 𝘆𝗼𝘂𝗿 config.json 𝗳𝗶𝗹𝗲 𝗮𝗴𝗮𝗶𝗻
+updater.installingPackages=⏳ 『 𝗪𝗔𝗜𝗧 』 ➤ 𝗜𝗻𝘀𝘁𝗮𝗹𝗹𝗶𝗻𝗴 𝗱𝗲𝗽𝗲𝗻𝗱𝗲𝗻𝗰𝗶𝗲𝘀 𝗳𝗼𝗿 𝗯𝗼𝘁...
+updater.installSuccess=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗜𝗻𝘀𝘁𝗮𝗹𝗹𝗲𝗱 𝗱𝗲𝗽𝗲𝗻𝗱𝗲𝗻𝗰𝗶𝗲𝘀 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆, 𝗿𝗲𝘀𝘁𝗮𝗿𝘁 𝘁𝗵𝗲 𝗯𝗼𝘁 𝘁𝗼 𝘂𝘀𝗲 𝘁𝗵𝗲 𝗻𝗲𝘄 𝘃𝗲𝗿𝘀𝗶𝗼𝗻
+updater.backupSuccess=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗯𝗮𝗰𝗸𝗲𝗱 𝘂𝗽 𝗰𝗵𝗮𝗻𝗴𝗲𝗱 𝗳𝗶𝗹𝗲𝘀, 𝘀𝗲𝗲 𝗶𝗻 𝘁𝗵𝗲 %1 𝗳𝗼𝗹𝗱𝗲𝗿
+updater.restartToApply=. 𝗥𝗲𝘀𝘁𝗮𝗿𝘁 𝘁𝗵𝗲 𝗯𝗼𝘁 𝘁𝗼 𝗮𝗽𝗽𝗹𝘆 𝘁𝗵𝗲 𝗻𝗲𝘄 𝘃𝗲𝗿𝘀𝗶𝗼𝗻
+updater.skipFile=🔹 『 𝗜𝗡𝗙𝗢 』 ➤ 𝗧𝗵𝗲𝗿𝗲 𝗶𝘀 𝗮 𝗻𝗲𝘄 𝘃𝗲𝗿𝘀𝗶𝗼𝗻 𝗼𝗳 𝘁𝗵𝗲 %1 𝗳𝗶𝗹𝗲, 𝗯𝘂𝘁 𝘆𝗼𝘂 𝗵𝗮𝘃𝗲 𝘀𝗸𝗶𝗽𝗽𝗲𝗱 𝘁𝗵𝗶𝘀 𝗳𝗶𝗹𝗲 𝗱𝘂𝗿𝗶𝗻𝗴 𝘁𝗵𝗲 𝘂𝗽𝗱𝗮𝘁𝗲 𝗽𝗿𝗼𝗰𝗲𝘀𝘀 𝘄𝗶𝘁𝗵 𝘁𝗵𝗲 𝗰𝗼𝗺𝗺𝗲𝗻𝘁 %2 𝗶𝗻 𝘁𝗵𝗶𝘀 𝗳𝗶𝗹𝗲
+updater.cantDownload=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗖𝗮𝗻'𝘁 𝗱𝗼𝘄𝗻𝗹𝗼𝗮𝗱 𝘂𝗽𝗱𝗮𝘁𝗲 𝗳𝗶𝗹𝗲 %1, 𝗲𝗿𝗿𝗼𝗿: %2
+updater.cantBackup=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗖𝗮𝗻'𝘁 𝗯𝗮𝗰𝗸𝘂𝗽 𝗳𝗶𝗹𝗲 %1, 𝗲𝗿𝗿𝗼𝗿: %2
+updater.noUpdate=✅ 『 𝗗𝗢𝗡𝗘 』 ➤ 𝗡𝗼 𝘂𝗽𝗱𝗮𝘁𝗲 𝗮𝘃𝗮𝗶𝗹𝗮𝗯𝗹𝗲 𝗮𝘁 𝘁𝗵𝗶𝘀 𝗺𝗼𝗺𝗲𝗻𝘁
+updater.checkingUpdate=⏳ 『 𝗪𝗔𝗜𝗧 』 ➤ 𝗖𝗵𝗲𝗰𝗸𝗶𝗻𝗴 𝗳𝗼𝗿 𝘂𝗽𝗱𝗮𝘁𝗲𝘀...
+updater.updateFailed=❌ 『 𝗘𝗥𝗥𝗢𝗥 』 ➤ 𝗨𝗽𝗱𝗮𝘁𝗲 𝗳𝗮𝗶𝗹𝗲𝗱, 𝗲𝗿𝗿𝗼𝗿: %1
