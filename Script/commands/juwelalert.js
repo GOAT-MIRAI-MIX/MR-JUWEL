@@ -4,14 +4,10 @@
  *  Credit : 乛 M𝆠፝֟R ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐
  * ╚══════════════════════════════════════════════════════════╝
  *
- *  v2.2.0 — • বট অনলাইন হলে "কত সেকেন্ডে অনলাইন হলো" দেখায়।
- *           • সব আপটাইম এখন দিন-ঘণ্টা-মিনিট-সেকেন্ড ফরম্যাটে (চালু/টেস্ট/স্ট্যাটাস/বন্ধ/রিকভারি)।
- *           • সব বার্তা সুন্দর ফ্রেম (UI কার্ড) ডিজাইনে।
- *           • নিচে কোড-ক্রেডিট থাকে; ক্রেডিট বদলালে/মুছলে কোড কাজ করবে না।
- *  v2.1.0 — ক্রেডিট-লক (JUWEL + বনি মাস) সহ; সব ফিচার একসাথে: config.json থেকে টোকেন,
- *           প্রতিটি নোটিশে বটের নাম/অ্যাডমিনের নাম/প্রথম UID, ওয়াচডগ, লক-ডিটেক্ট।
- *  v1.6.0 — প্রতিটি নোটিশে বটের নাম, অ্যাডমিনের নাম ও প্রথম অ্যাডমিন UID (config.json থেকে)।
- *  v1.5.0 — ফেসবুক আইডি লক/লগআউট হয়ে বট বন্ধ হলেও নোটিশ যাবে।
+ *  v2.3.0 — • বট বন্ধ হওয়ার সাথে সাথে (১-২ সেকেন্ডের মধ্যে) STOPPED নোটিশ।
+ *           • আপটাইম এখন ইংরেজিতে সাজানো ব্লক: Days / Hours / Minutes / Seconds আলাদা লাইনে।
+ *  v2.2.0 — বট অনলাইন হতে কত সেকেন্ড লাগলো দেখায়; সব বার্তা UI কার্ড ডিজাইনে।
+ *  v2.1.0 — ক্রেডিট-লক (JUWEL + বনি মাস); config.json থেকে টোকেন; ওয়াচডগ; লক-ডিটেক্ট।
  *
  *  ⚠️ সবচেয়ে জরুরি (একবারের কাজ):
  *  আপনার বটের যে মূল ফাইলে login চলে (যেমন Priyansh.js / main.js / index.js),
@@ -19,30 +15,25 @@
  *
  *      require("./modules/commands/juwelalert.js");
  *
- *  কেন? কমান্ড ফাইল লোড হয় লগইন সফল হওয়ার পরে। আইডি লক হলে লগইনেই বট
- *  মরে যায়, তখন এই ফাইল লোডই হয় না — তাই কোনো নোটিশ যেত না।
- *  উপরের লাইন দিলে ফাইল লগইনের আগেই চালু হয়, ওয়াচডগও আগেই চালু হয়।
- *
  *  (বিকল্প: `node -r ./modules/commands/juwelalert.js Priyansh.js` দিয়ে চালান।)
  *
  *  কী করে:
- *   ১) বট চালু (এবং লগইন সফল) হলে Telegram/Discord + মেসেঞ্জার অ্যাডমিনদের "চালু" নোটিশ
- *      — সাথে কত সেকেন্ডে অনলাইন হলো সেটাও।
- *   ২) সেশন মরলে / লক হলে / লগইন ব্যর্থ হলে সাথে সাথে সতর্কতা (লগ দেখে তাৎক্ষণিক)।
+ *   ১) বট চালু (এবং লগইন সফল) হলে Telegram/Discord + মেসেঞ্জার অ্যাডমিনদের "চালু" নোটিশ।
+ *   ২) সেশন মরলে / লক হলে / লগইন ব্যর্থ হলে সাথে সাথে সতর্কতা।
  *   ৩) লগইন ৩ মিনিটের মধ্যে সম্পন্ন না হলে সতর্কতা।
  *   ৪) সেশন ফিরলে "আবার অনলাইন" নোটিশ।
- *   ৫) বট যেকোনো কারণে বন্ধ হলে "STOPPED" নোটিশ — কত সময় চালু ছিল (দিন/ঘণ্টা/মিনিট/সেকেন্ড) সহ:
+ *   ৫) বট যেকোনো কারণে বন্ধ হলে "STOPPED" নোটিশ — কত সময় চালু ছিল সহ:
  *        • স্তর ১: বট নিজে (process.exit, Ctrl+C, SIGTERM, SIGHUP, ইভেন্ট লুপ খালি হওয়া)
- *        • স্তর ২: আলাদা WATCHDOG প্রসেস — ক্র্যাশ / kill -9 / OOM হলেও ~১-২ সেকেন্ডে নোটিশ।
+ *        • স্তর ২: আলাদা WATCHDOG প্রসেস — ক্র্যাশ / kill -9 / OOM হলেও ১ সেকেন্ডের কমে নোটিশ।
  *        • স্তর ৩ (ঐচ্ছিক): বাইরের হার্টবিট (healthchecks.io) — পুরো কন্টেইনার মরলেও।
  *            env: JUWEL_HEARTBEAT_URL=https://hc-ping.com/xxxx-xxxx
  *   ওয়াচডগ বন্ধ রাখতে env: JUWEL_WATCHDOG=off
  *
  *  সেটিংস: config.json-এর "JUWEL_ALERT" অংশ (TG_TOKEN, TG_CHAT, DISCORD_WEBHOOK, HEARTBEAT_URL)
- *  অথবা env: JUWEL_TG_TOKEN, JUWEL_TG_CHAT (Telegram) | JUWEL_DISCORD_WEBHOOK (Discord) — env আগে
+ *  অথবা env: JUWEL_TG_TOKEN, JUWEL_TG_CHAT | JUWEL_DISCORD_WEBHOOK — env আগে
  *
- *  কমান্ড:  <prefix>juwelalert        (অবস্থা দেখায়, শুধু বট-অ্যাডমিন; prefix = config.json-এর PREFIX)
- *           <prefix>juwelalert test   (টেস্ট নোটিশ পাঠায় + বট কতক্ষণ চলছে দেখায়)
+ *  কমান্ড:  <prefix>juwelalert        (অবস্থা দেখায়, শুধু বট-অ্যাডমিন)
+ *           <prefix>juwelalert test   (টেস্ট নোটিশ পাঠায়)
  */
 
 // এই ফাইলকে `node juwelalert.js --juwel-watch` দিয়ে চালালে এটা ওয়াচডগ হিসেবে চলে
@@ -51,13 +42,11 @@ const IS_WATCHER = require.main === module && process.argv.includes("--juwel-wat
 if (!IS_WATCHER) { try { console.log("[JuwelAlert] ফাইল লোড হয়েছে (juwelalert.js)"); } catch (_) {} }
 
 const axios = require("axios");
+const https = require("https");
+// Telegram-এর কানেকশন খোলা (keep-alive) রাখা হয়, যাতে বন্ধ হওয়ার মুহূর্তে নোটিশ দ্রুত যায়
+const tgAgent = new https.Agent({ keepAlive: true, keepAliveMsecs: 20000 });
 
-/* ───────────── config.json থেকে সেটিংস ─────────────
- * config.json-এ এভাবে বসান (env দেওয়া থাকলে env-ই আগে কাজ করবে):
- *   "JUWEL_ALERT": { "TG_TOKEN": "...", "TG_CHAT": "...", "DISCORD_WEBHOOK": "", "HEARTBEAT_URL": "" }
- * ফাইলটা লগইনের আগে এবং ওয়াচডগ প্রসেসেও চলে, তাই global.config-এর ওপর নির্ভর না করে
- * সরাসরি config.json পড়া হয়; ওয়াচডগ spawn-এর সময় process.env কপি হয়ে যায়।
- */
+/* ───────────── config.json থেকে সেটিংস ───────────── */
 function findConfigFile() {
   const fs = require("fs"), path = require("path");
   const cands = [
@@ -87,8 +76,8 @@ const PROBE_EVERY_MS = Number(process.env.JUWEL_PROBE_MS) || 2 * 60 * 1000;
 const ALERT_COOLDOWN_MS = 30 * 60 * 1000;
 const PROBE_FAILS_BEFORE_ALERT = 2;
 const BOOT_NOTICE_DELAY_MS = Number(process.env.JUWEL_BOOT_MS) || 2 * 1000;
-const LOGIN_GRACE_MS = Number(process.env.JUWEL_LOGIN_GRACE_MS) || 3 * 60 * 1000; // এর মধ্যে লগইন না হলে সতর্কতা
-const STOP_NOTICE_WAIT_MS = 6000; // বন্ধ হওয়ার আগে নোটিশ পাঠাতে সর্বোচ্চ এত সময় অপেক্ষা
+const LOGIN_GRACE_MS = Number(process.env.JUWEL_LOGIN_GRACE_MS) || 3 * 60 * 1000;
+const STOP_NOTICE_WAIT_MS = 4000; // বন্ধ হওয়ার আগে নোটিশ পাঠাতে সর্বোচ্চ এত সময় অপেক্ষা
 
 const state = global.__juwelAlert || (global.__juwelAlert = {
   started: false,
@@ -104,7 +93,7 @@ const state = global.__juwelAlert || (global.__juwelAlert = {
   down: false,
   downSince: 0,
   bootNoticeSent: false,
-  onlineAfterSec: null // প্রসেস চালু হওয়ার কত সেকেন্ড পরে লগইন সফল হলো
+  onlineAfterSec: null
 });
 
 /* ───────────── helpers ───────────── */
@@ -113,15 +102,24 @@ const dhakaTime = () => {
   catch (_) { return new Date().toISOString(); }
 };
 const pad2 = (n) => String(n).padStart(2, "0");
-// সেকেন্ড থেকে দিন/ঘণ্টা/মিনিট/সেকেন্ড
 const uptimeParts = (sec) => {
   const s = Math.max(0, Math.floor(sec));
   return { d: Math.floor(s / 86400), h: Math.floor((s % 86400) / 3600), m: Math.floor((s % 3600) / 60), s: s % 60 };
 };
-// সব জায়গায় একই ফরম্যাট: X দিন 00 ঘণ্টা 00 মিনিট 00 সেকেন্ড
+// এক লাইনের ফরম্যাট (অফলাইন ছিল / লগইন সময় ইত্যাদির জন্য)
 const upStr = (sec) => { const u = uptimeParts(sec); return u.d + " দিন " + pad2(u.h) + " ঘণ্টা " + pad2(u.m) + " মিনিট " + pad2(u.s) + " সেকেন্ড"; };
 const fmtDur = (ms) => upStr(ms / 1000);
 const fmtTime = (ms) => { try { return new Date(ms).toLocaleString("en-GB", { timeZone: "Asia/Dhaka", hour12: true }); } catch (_) { return new Date(ms).toISOString(); } };
+
+// আপটাইম ব্লক (ইংরেজি): Days / Hours / Minutes / Seconds আলাদা লাইনে, সিরিয়ালি
+const upBlock = (sec, title) => {
+  const u = uptimeParts(sec);
+  return "⏱ " + (title || "UPTIME") + "\n" +
+    "   ┌ 📅 Days    ➤ " + pad2(u.d) + "\n" +
+    "   ├ 🕐 Hours   ➤ " + pad2(u.h) + "\n" +
+    "   ├ ⏰ Minutes ➤ " + pad2(u.m) + "\n" +
+    "   └ ⏳ Seconds ➤ " + pad2(u.s);
+};
 
 // ইংরেজি অক্ষর ও সংখ্যা → 𝗔𝗕𝗖𝗗 𝟭𝟮𝟯 (Sans-Serif Bold). বাংলা/ইমোজি অপরিবর্তিত থাকে।
 const fx = (str) => String(str).replace(/[A-Za-z0-9]/g, (c) => {
@@ -130,13 +128,14 @@ const fx = (str) => String(str).replace(/[A-Za-z0-9]/g, (c) => {
   if (n >= 97 && n <= 122) return String.fromCodePoint(0x1D5EE + n - 97);
   return String.fromCodePoint(0x1D7EC + n - 48);
 });
+
 /* ───────────── ক্রেডিট লক ───────────── */
 // ⚠️ মূল ক্রেডিট (CREDIT_JUWEL) বদলালে বা মুছলে কোড কাজ করবে না।
 const crypto = require("crypto");
 const CREDIT_JUWEL = "乛 M𝆠፝֟R ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐";
 const CREDIT_BONI = "বনি মাস";
 const HASH_JUWEL = "8f74924e81a157abaf089d90717e48a4949617a7379d20a2df567cb0ab0dad81";
-const CREDIT = CREDIT_JUWEL; // ফন্ট-রূপান্তর হয় না, যেমন আছে তেমন
+const CREDIT = CREDIT_JUWEL;
 
 const sha = (s) => crypto.createHash("sha256").update(String(s), "utf8").digest("hex");
 
@@ -172,7 +171,6 @@ function adminIDs() {
   return [...new Set([...(c.ADMINBOT || []), ...(c.DEVELOPER || [])].map(String))];
 }
 
-// সাম্প্রতিক লক/লগইন সমস্যা ধরা পড়ে থাকলে কারণের আগে বসানো হয়
 function withLock(reason) {
   if (state.lockAt && Date.now() - state.lockAt < 15 * 60 * 1000) {
     return "🔒 ফেসবুক আইডি লক/লগইন সমস্যা (" + state.lockReason + ") — " + reason;
@@ -182,17 +180,16 @@ function withLock(reason) {
 
 async function sendExternal(text) {
   if (!creditOk()) return false;
-  text = withCredit(text); // ফন্ট + ফ্রেম + ক্রেডিট সব বার্তায়
+  text = withCredit(text);
   const tgToken = process.env.JUWEL_TG_TOKEN, tgChat = process.env.JUWEL_TG_CHAT;
   const dc = process.env.JUWEL_DISCORD_WEBHOOK;
   let sent = false;
-  // প্রতিটি মাধ্যমের ফলাফল: null = সেট করা নেই, true = গেছে, false = ব্যর্থ
   const res = (state.lastSend = { tg: null, dc: null, tgErr: "", dcErr: "" });
   const jobs = [];
   if (tgToken && tgChat) {
     jobs.push((async () => {
       try {
-        await axios.post("https://api.telegram.org/bot" + tgToken + "/sendMessage", { chat_id: tgChat, text }, { timeout: 15000 });
+        await axios.post("https://api.telegram.org/bot" + tgToken + "/sendMessage", { chat_id: tgChat, text }, { timeout: 8000, httpsAgent: tgAgent });
         sent = true; res.tg = true;
       } catch (e) {
         res.tg = false;
@@ -203,7 +200,7 @@ async function sendExternal(text) {
   }
   if (dc) {
     jobs.push((async () => {
-      try { await axios.post(dc, { content: text.slice(0, 1900) }, { timeout: 15000 }); sent = true; res.dc = true; }
+      try { await axios.post(dc, { content: text.slice(0, 1900) }, { timeout: 8000 }); sent = true; res.dc = true; }
       catch (e) {
         res.dc = false;
         res.dcErr = String(e.message || e).slice(0, 80);
@@ -211,7 +208,6 @@ async function sendExternal(text) {
       }
     })());
   }
-  // Telegram ও Discord একসাথে (parallel) যায় — দ্রুত পৌঁছানোর জন্য
   await Promise.all(jobs);
   if (!tgToken && !tgChat && !dc) log("JUWEL_TG_TOKEN/JUWEL_TG_CHAT বা JUWEL_DISCORD_WEBHOOK সেট করা নেই — শুধু লগে লেখা হলো।", "warn");
   return sent;
@@ -219,7 +215,7 @@ async function sendExternal(text) {
 
 async function sendMessengerToAdmins(text) {
   if (!creditOk()) return;
-  text = withCredit(text); // ফন্ট + ফ্রেম + ক্রেডিট সব বার্তায়
+  text = withCredit(text);
   const api = global.client && global.client.api;
   if (!api) return;
   for (const id of adminIDs()) {
@@ -239,7 +235,7 @@ async function raiseAlert(reason) {
   const text =
     "🚨 JUWEL BOT সেশন সমস্যা\n" +
     "📛 কারণ ➤ " + reason + "\n" +
-    "⏱ আপটাইম ➤ " + upStr(process.uptime()) + "\n" +
+    upBlock(process.uptime(), "UPTIME") + "\n" +
     "🕒 সময় ➤ " + dhakaTime() + "\n" +
     "🛠 নতুন appstate.json বসিয়ে বট রিস্টার্ট দিন।";
   log("সতর্কতা: " + reason, "error");
@@ -254,7 +250,7 @@ async function raiseRecovery() {
   const text =
     "✅ JUWEL BOT আবার অনলাইন\n" +
     "⏳ অফলাইন ছিল ➤ " + fmtDur(downFor) + "\n" +
-    "⏱ আপটাইম ➤ " + upStr(process.uptime()) + "\n" +
+    upBlock(process.uptime(), "UPTIME") + "\n" +
     "🕒 সময় ➤ " + dhakaTime();
   log("সেশন ফিরে এসেছে।", "success");
   await sendExternal(text);
@@ -264,22 +260,18 @@ async function raiseRecovery() {
 /* ───────────── stop notice (বট বন্ধ হলে) ───────────── */
 let stopPromise = null;
 
-// startMs/endMs দিলে সেটা দিয়ে uptime হিসাব হয় (watchdog ব্যবহার করে)
-// চালু ছিল = দিন ঘণ্টা মিনিট সেকেন্ড
 function stopText(reason, startMs, endMs) {
   const end = endMs || Date.now();
   const start = startMs || (end - process.uptime() * 1000);
   return (
     "🔴 JUWEL BOT বন্ধ হয়েছে\n" +
     "📛 কারণ ➤ " + reason + "\n" +
-    "⏱ চালু ছিল ➤ " + upStr((end - start) / 1000) + "\n" +
+    upBlock((end - start) / 1000, "TOTAL UPTIME") + "\n" +
     "🕒 সময় ➤ " + fmtTime(end)
   );
 }
 
 // ওয়াচডগকে লাইন পাঠায় (SENT / REASON:... / CRASH:... / EXIT:...)
-//   REASON = বট নিজে নোটিশ পাঠাচ্ছে (ব্যর্থ হলে ওয়াচডগ এই কারণসহ আবার পাঠাবে)
-//   CRASH  = শুধু সম্ভাব্য কারণ জানিয়ে রাখা (বট হঠাৎ মরলে ওয়াচডগ এটা ব্যবহার করবে)
 function watchSend(line) {
   try {
     const w = global.__juwelAlertWatcher;
@@ -287,14 +279,12 @@ function watchSend(line) {
   } catch (_) {}
 }
 
-// বাইরের হার্টবিট সার্ভিসকে সাথে সাথে "ফেল" জানায়
 function heartbeatFail() {
   const HB = process.env.JUWEL_HEARTBEAT_URL;
   if (!HB) return;
   try { axios.get(HB.replace(/\/$/, "") + "/fail", { timeout: 5000 }).catch(() => {}); } catch (_) {}
 }
 
-// একবারই পাঠায়; একই promise ফেরত দেয় যাতে exit তার জন্য অপেক্ষা করতে পারে
 function sendStopNotice(reason) {
   if (stopPromise) return stopPromise;
   reason = withLock(reason);
@@ -314,7 +304,6 @@ function installShutdownHook() {
 
   const origExit = process.exit.bind(process);
 
-  // কমান্ড/কোড/লগইন-এরর হ্যান্ডলার থেকে process.exit() ডাকলে — আগে নোটিশ, তারপর বন্ধ
   process.exit = function (code) {
     const c = code === undefined ? 0 : code;
     sendStopNotice("process.exit(" + c + ") — কোড দিয়ে বন্ধ করা হয়েছে").then(
@@ -323,7 +312,6 @@ function installShutdownHook() {
     );
   };
 
-  // Ctrl+C, systemd/pm2/docker stop, টার্মিনাল বন্ধ
   const names = {
     SIGINT: "Ctrl+C (SIGINT)",
     SIGTERM: "stop সিগন্যাল (SIGTERM)",
@@ -339,15 +327,12 @@ function installShutdownHook() {
     } catch (_) {}
   });
 
-  // লগইন ব্যর্থ হওয়ার পর কিছু চালু না থাকলে Node নিজে থেকেই থামে (process.exit ছাড়াই)।
-  // তখন এই ইভেন্টে নোটিশ পাঠানো হয়; পাঠানোর কাজ থাকায় প্রসেস নোটিশ শেষ হওয়া পর্যন্ত বাঁচে।
   try {
     process.on("beforeExit", () => {
       sendStopNotice("বট নিজে থেকেই থেমে গেছে (কোনো কাজ বাকি নেই — লগইন ব্যর্থ/আইডি লক হতে পারে)");
     });
   } catch (_) {}
 
-  // ক্র্যাশ হলে কারণটা ওয়াচডগকে জানিয়ে রাখে (আচরণ বদলায় না, শুধু নজর রাখে)
   try {
     process.on("uncaughtExceptionMonitor", (err) => {
       const r = "ক্র্যাশ — " + String((err && (err.stack || err.message)) || err).split("\n")[0].slice(0, 200);
@@ -356,7 +341,6 @@ function installShutdownHook() {
     });
   } catch (_) {}
 
-  // যেকোনো উপায়ে প্রসেস শেষ হলে exit code জানিয়ে রাখে (শুধু sync লেখা চলে)
   process.on("exit", (code) => { watchSend("EXIT:" + code); });
 }
 
@@ -386,8 +370,6 @@ function startWatchdog() {
 
 // ওয়াচডগ প্রসেসের ভেতরের কাজ
 function runWatcher() {
-  // pm2/systemd/Docker stop-এ পুরো প্রসেস-ট্রি-তে সিগন্যাল যায়।
-  // ওয়াচডগ সেগুলো উপেক্ষা করে বেঁচে থাকে, যাতে বট মরার পর নোটিশ পাঠাতে পারে।
   ["SIGINT", "SIGTERM", "SIGHUP", "SIGQUIT", "SIGBREAK"].forEach((s) => { try { process.on(s, () => {}); } catch (_) {} });
   try { process.on("uncaughtException", () => {}); } catch (_) {}
   try { process.on("unhandledRejection", () => {}); } catch (_) {}
@@ -395,6 +377,25 @@ function runWatcher() {
   const parentPid = Number(process.env.JW_PID) || 0;
   const startMs = Number(process.env.JW_START) || Date.now();
   let reason = "", crash = "", exitCode = null, handled = false, finishing = false, buf = "";
+  let fastTimer = null, fastJob = null;
+
+  // কানেকশন আগে থেকেই গরম রাখা হয়, যাতে পাঠানো দ্রুত হয়
+  const warm = () => {
+    const tk = process.env.JUWEL_TG_TOKEN;
+    if (tk) axios.get("https://api.telegram.org/bot" + tk + "/getMe", { timeout: 8000, httpsAgent: tgAgent }).catch(() => {});
+  };
+  warm();
+  setInterval(warm, 20000);
+
+  const sendNow = async (why) => {
+    const msg = stopText(why + " [watchdog]", startMs, Date.now());
+    for (let i = 0; i < 3; i++) {
+      let ok = false;
+      try { ok = await sendExternal(msg); } catch (_) {}
+      if (ok) break;
+      await new Promise((r) => setTimeout(r, 700));
+    }
+  };
 
   process.stdin.setEncoding("utf8");
   process.stdin.on("data", (d) => {
@@ -403,8 +404,16 @@ function runWatcher() {
     while ((i = buf.indexOf("\n")) >= 0) {
       const line = buf.slice(0, i).trim();
       buf = buf.slice(i + 1);
-      if (line === "SENT") handled = true;
-      else if (line.indexOf("REASON:") === 0) reason = line.slice(7);
+      if (line === "SENT") { handled = true; if (fastTimer) clearTimeout(fastTimer); }
+      else if (line.indexOf("REASON:") === 0) {
+        reason = line.slice(7);
+        // বট ১.২ সেকেন্ডের মধ্যে নিজে পাঠাতে না পারলে ওয়াচডগ নিজেই পাঠাবে
+        if (!fastTimer && !handled) {
+          fastTimer = setTimeout(() => {
+            if (!handled) { handled = true; fastJob = sendNow(reason); }
+          }, 1200);
+        }
+      }
       else if (line.indexOf("CRASH:") === 0) crash = line.slice(6);
       else if (line.indexOf("EXIT:") === 0) exitCode = line.slice(5);
     }
@@ -413,21 +422,15 @@ function runWatcher() {
   const finish = async () => {
     if (finishing) return;
     finishing = true;
-    // বট মরে গেছে, তাই আর কোনো SENT আসবে না; পাইপের বাকি ডাটা পড়ার জন্য অল্প অপেক্ষা
-    await new Promise((r) => setTimeout(r, 300));
-    if (!handled) {
+    await new Promise((r) => setTimeout(r, 100));
+    if (fastJob) await fastJob;
+    else if (!handled) {
+      handled = true;
       const why = reason || crash ||
         (exitCode !== null && exitCode !== "undefined"
           ? "বট বন্ধ হয়েছে (exit code " + exitCode + ")"
           : "হঠাৎ বন্ধ — kill -9 / মেমরি শেষ / হোস্ট জোর করে বন্ধ করেছে");
-      const msg = stopText(why + " [watchdog]", startMs, Date.now());
-      // একবার ব্যর্থ হলে আরও ২ বার চেষ্টা
-      for (let i = 0; i < 3; i++) {
-        let ok = false;
-        try { ok = await sendExternal(msg); } catch (_) {}
-        if (ok) break;
-        await new Promise((r) => setTimeout(r, 1500));
-      }
+      await sendNow(why);
     }
     process.exit(0);
   };
@@ -436,12 +439,12 @@ function runWatcher() {
   process.stdin.on("close", finish);
   process.stdin.on("error", finish);
 
-  // stdin বন্ধ না হলেও PID দিয়ে বট মরেছে কি না দেখে (প্রতি ১ সেকেন্ডে)
+  // প্রতি ০.২৫ সেকেন্ডে দেখে বট মরেছে কি না
   setInterval(() => {
     if (!parentPid) return;
     try { process.kill(parentPid, 0); }
     catch (e) { if (e.code !== "EPERM") finish(); }
-  }, 1000);
+  }, 250);
 
   process.stdin.resume();
 }
@@ -453,7 +456,6 @@ const BAD_PATTERNS = [
 ];
 const GOOD_PATTERNS = [/recovered after \d+ attempt/i, /traffic resumed/i, /session established/i];
 
-// এগুলো লগে দেখলেই সাথে সাথে সতর্কতা + ওয়াচডগকে কারণ জানানো হয় (বট মরার অপেক্ষা না করে)
 const LOCK_PATTERNS = [
   /Error retrieving userID/i,
   /login[_ ]?blocked/i,
@@ -481,9 +483,7 @@ function installLogWatcher() {
             const short = line.trim().slice(0, 160);
             state.lockAt = Date.now();
             state.lockReason = short;
-            // বট এরপর মরলে ওয়াচডগ এই কারণটাই জানাবে
             watchSend("CRASH:🔒 ফেসবুক আইডি লক/লগইন সমস্যা — " + short);
-            // বট মরুক বা না মরুক, এখনই সতর্কতা
             raiseAlert("🔒 লক/লগইন সমস্যা ধরা পড়েছে | লগ: " + short);
           }
           if (BAD_PATTERNS.some((r) => r.test(line))) {
@@ -516,7 +516,6 @@ function probe() {
   state.lastProbeAt = Date.now();
   if (!api || typeof api.getCurrentUserID !== "function") {
     state.lastProbeOk = false;
-    // লগইন চলছে — কিছুক্ষণ অপেক্ষা
     if (Date.now() - state.bootAt < LOGIN_GRACE_MS) return;
     state.probeFails++;
     return raiseAlert(withLock("লগইন সম্পন্ন হয়নি (" + fmtDur(Date.now() - state.bootAt) + " ধরে api নেই) — আইডি লক/কুকি নষ্ট হতে পারে"));
@@ -570,20 +569,26 @@ function start() {
   installShutdownHook();
   startWatchdog();
   startHeartbeat();
+
+  // Telegram কানেকশন গরম রাখা — বন্ধ হওয়ার মুহূর্তে নোটিশ যেন সাথে সাথে যায়
+  const warm = () => {
+    const tk = process.env.JUWEL_TG_TOKEN;
+    if (tk) axios.get("https://api.telegram.org/bot" + tk + "/getMe", { timeout: 8000, httpsAgent: tgAgent }).catch(() => {});
+  };
+  warm();
+  const wm = setInterval(warm, 20000);
+  if (wm.unref) wm.unref();
+
   const t = setInterval(probe, PROBE_EVERY_MS);
   if (t.unref) t.unref();
 
-  // চালু-নোটিশ: লগইন সফল হওয়ার পর (api পাওয়া গেলে) পাঠায়।
-  // লগইন না হলে "চালু" নোটিশ যাবে না; সেক্ষেত্রে probe() সতর্কতা দেবে।
-  // অনলাইন হতে কত সেকেন্ড লাগলো (প্রসেস চালু → লগইন সফল) সেটাও দেখানো হয়।
   const sendBoot = async () => {
     const secs = state.onlineAfterSec === null ? process.uptime() : state.onlineAfterSec;
     const text =
       "🟢 JUWEL BOT চালু হয়েছে\n" +
       "⚡ অনলাইন হতে লেগেছে ➤ " + secs.toFixed(1) + " সেকেন্ড\n" +
-      "⏱ আপটাইম ➤ " + upStr(process.uptime()) + "\n" +
+      upBlock(process.uptime(), "UPTIME") + "\n" +
       "🕒 সময় ➤ " + dhakaTime();
-    // Telegram/Discord-এও যায় (বন্ধ করতে env: JUWEL_TG_BOOT=off)
     if (String(process.env.JUWEL_TG_BOOT || "").toLowerCase() !== "off") await sendExternal(text);
     await sendMessengerToAdmins(text);
   };
@@ -598,7 +603,7 @@ function start() {
       return;
     }
     state.bootNoticeSent = true;
-    state.onlineAfterSec = process.uptime(); // লগইন সফল হওয়ার মুহূর্তের সেকেন্ড
+    state.onlineAfterSec = process.uptime();
     sendBoot();
   };
   const b = setTimeout(waitLogin, BOOT_NOTICE_DELAY_MS);
@@ -612,14 +617,14 @@ function healthText() {
   const wd = global.__juwelAlertWatcher ? "✅" : "❌";
   return (
     (state.down ? "🔴 JUWEL BOT সমস্যায়" : "🟢 JUWEL BOT ঠিক আছে") + "\n" +
-    "⏱ চলছে ➤ " + upStr(process.uptime()) + "\n" +
+    upBlock(process.uptime(), "UPTIME") + "\n" +
     "🩺 সেশন পরীক্ষা ➤ " + probeTxt + "\n" +
     "✈️ Telegram " + tg + "  🐕 Watchdog " + wd + "\n" +
     "🕒 সময় ➤ " + dhakaTime()
   );
 }
 
-/* ───────────── test notice (সাজানো) ───────────── */
+/* ───────────── test notice ───────────── */
 function testText() {
   const tg = process.env.JUWEL_TG_TOKEN && process.env.JUWEL_TG_CHAT ? "✅" : "❌";
   const dc = process.env.JUWEL_DISCORD_WEBHOOK ? "✅" : "❌";
@@ -627,7 +632,7 @@ function testText() {
   return (
     "🧪 JUWEL ALERT টেস্ট — এই বার্তা এলে সব ঠিক আছে\n" +
     "✈️ Telegram " + tg + "  💬 Discord " + dc + "  🐕 Watchdog " + wd + "\n" +
-    "⏱ বট চলছে ➤ " + upStr(process.uptime()) + "\n" +
+    upBlock(process.uptime(), "UPTIME") + "\n" +
     "🕒 সময় ➤ " + dhakaTime()
   );
 }
@@ -639,13 +644,12 @@ function testResultText(ok) {
     (ok ? "✅ টেস্ট নোটিশ পাঠানো হয়েছে" : "❌ টেস্ট নোটিশ পাঠানো যায়নি") + "\n" +
     "✈️ Telegram " + st(r.tg, r.tgErr) + "  💬 Discord " + st(r.dc, r.dcErr) + "\n" +
     (ok ? "" : "🛠 টোকেন/চ্যাট আইডি দেখুন, আর টেলিগ্রামে বটকে /start দিন।\n") +
-    "⏱ বট চলছে ➤ " + upStr(process.uptime()) + "\n" +
+    upBlock(process.uptime(), "UPTIME") + "\n" +
     "🕒 সময় ➤ " + dhakaTime()
   );
 }
 
-// বটের নাম / অ্যাডমিনের নাম / প্রথম অ্যাডমিন UID — config.json থেকে (লগইনের আগে ও ওয়াচডগেও কাজ করে)
-//   BOTNAME, BOTADMINNAME, ADMINBOT[0]
+// বটের নাম / অ্যাডমিনের নাম / প্রথম অ্যাডমিন UID — config.json থেকে
 let _botInfo = null;
 function botInfo() {
   if (_botInfo) return _botInfo;
@@ -659,7 +663,6 @@ function botInfo() {
   const pick = (k) => String(c[k] !== undefined && c[k] !== "" ? c[k] : (g[k] !== undefined ? g[k] : "")).trim();
   const admins = (Array.isArray(c.ADMINBOT) && c.ADMINBOT.length ? c.ADMINBOT : g.ADMINBOT) || [];
   const info = { name: pick("BOTNAME") || "—", admin: pick("BOTADMINNAME") || "—", uid: admins.length ? String(admins[0]) : "—" };
-  // config সম্পূর্ণ পাওয়া গেলে মনে রাখি; না পেলে পরের বার আবার চেষ্টা
   if (c.BOTNAME || g.BOTNAME) _botInfo = info;
   return info;
 }
@@ -674,7 +677,6 @@ const frame = (t) =>
   String(t).split("\n").map((l) => (l.charAt(0) === "┣" ? l : "┃ " + l)).join("\n") +
   "\n╰━━━━━━━━━━━━━━━━━━━━╯";
 
-// কার্ড = ফ্রেম( ফন্ট-রূপান্তরিত টেক্সট + বট/অ্যাডমিন/UID + (রূপান্তরহীন) ক্রেডিট লাইন )
 const withCredit = (t) => frame(
   fx(t) + "\n" + LINE + "\n" + infoBlock() + "\n" + LINE +
   "\n© Code Credit: " + CREDIT_JUWEL
@@ -684,7 +686,7 @@ const withCredit = (t) => frame(
 module.exports.config = {
   name: "juwelalert",
   aliases: ["jalert"],
-  version: "2.2.0",
+  version: "2.3.0",
   hasPermssion: 2,
   credits: CREDIT_JUWEL,
   credits2: CREDIT_BONI,
@@ -698,7 +700,6 @@ module.exports.onLoad = function () {
   try { start(); } catch (e) { log("start ত্রুটি: " + e.message, "error"); }
 };
 
-// onLoad না চললেও (কিছু লোডারে) প্রথম ইভেন্টেই চালু হয়ে যাবে
 module.exports.handleEvent = function () {
   if (!creditOk()) return;
   if (!state.started) { try { start(); } catch (_) {} }
@@ -706,7 +707,6 @@ module.exports.handleEvent = function () {
 
 module.exports.run = async function ({ api, event, args }) {
   const { threadID, messageID } = event;
-  // ক্রেডিট শেষ হলে কিছুই চলবে না
   if (!creditOk()) return api.sendMessage(CREDIT_ENDED_MSG, threadID, messageID);
   if (!state.started) start();
   if ((args[0] || "").toLowerCase() === "test") {
@@ -720,6 +720,5 @@ module.exports.run = async function ({ api, event, args }) {
 if (IS_WATCHER) {
   try { runWatcher(); } catch (_) { process.exit(1); }
 } else {
-  // ফাইল লোড হওয়ার সাথে সাথেই চালু — onLoad/handleEvent না চললেও নজরদারি কাজ করবে
   try { start(); } catch (e) { log("start ত্রুটি: " + e.message, "error"); }
-                                    }
+      }
