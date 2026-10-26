@@ -1,0 +1,452 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 960 420" width="960" height="420" role="img" aria-label="MR JUWEL — Bot Online/Offline notice delivered to Telegram">
+  <title>MR JUWEL — Bot Start / Stop Notice → Telegram</title>
+  <defs>
+    <!-- ===== backgrounds ===== -->
+    <radialGradient id="bg" cx="50%" cy="38%" r="85%">
+      <stop offset="0%" stop-color="#14213d"/>
+      <stop offset="55%" stop-color="#090e1c"/>
+      <stop offset="100%" stop-color="#020307"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="75%">
+      <stop offset="60%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.7"/>
+    </radialGradient>
+    <radialGradient id="blueAura" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2aabee" stop-opacity="0.55"/><stop offset="100%" stop-color="#2aabee" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="greenAura" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2dff8f" stop-opacity="0.6"/><stop offset="100%" stop-color="#2dff8f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="redAura" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff3b4a" stop-opacity="0.6"/><stop offset="100%" stop-color="#ff3b4a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="warmAura" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffc24d" stop-opacity="0.28"/><stop offset="100%" stop-color="#ffc24d" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#7fa4ff" stroke-opacity="0.05"/>
+    </pattern>
+    <linearGradient id="silverEdge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8eefc" stop-opacity="0.8"/>
+      <stop offset="30%" stop-color="#5d6b88" stop-opacity="0.6"/>
+      <stop offset="70%" stop-color="#2b3550" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#cfd9f0" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="runLight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- ===== title: real metallic gold ===== -->
+    <linearGradient id="goldM" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff8dc"/>
+      <stop offset="18%" stop-color="#f4d46b"/>
+      <stop offset="42%" stop-color="#b8821a"/>
+      <stop offset="52%" stop-color="#7a4f08"/>
+      <stop offset="62%" stop-color="#e9bd4e"/>
+      <stop offset="82%" stop-color="#ffe9a0"/>
+      <stop offset="100%" stop-color="#a8730f"/>
+    </linearGradient>
+    <linearGradient id="sheen" gradientUnits="objectBoundingBox" x1="-1" y1="0" x2="0" y2="0.35">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#fff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      <animate attributeName="x1" values="-1;1.2" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="x2" values="0;2.2" dur="4s" repeatCount="indefinite"/>
+    </linearGradient>
+    <linearGradient id="streak" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffd98a" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#fff1c8" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ffd98a" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- ===== hardware metals ===== -->
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5a6477"/><stop offset="6%" stop-color="#3b4354"/>
+      <stop offset="50%" stop-color="#232937"/><stop offset="100%" stop-color="#12161f"/>
+    </linearGradient>
+    <linearGradient id="metalEdge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#aab6cc"/><stop offset="50%" stop-color="#3a4357"/><stop offset="100%" stop-color="#8793ab"/>
+    </linearGradient>
+    <linearGradient id="titanium" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d9dde6"/><stop offset="25%" stop-color="#8c93a3"/>
+      <stop offset="55%" stop-color="#4a5060"/><stop offset="80%" stop-color="#9aa1b1"/><stop offset="100%" stop-color="#5b6272"/>
+    </linearGradient>
+    <linearGradient id="screenBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#061423"/><stop offset="100%" stop-color="#020a12"/>
+    </linearGradient>
+    <linearGradient id="glare" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.16"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="glassFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.20"/><stop offset="100%" stop-color="#fff" stop-opacity="0.03"/>
+    </linearGradient>
+    <linearGradient id="txtMint" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff"/><stop offset="100%" stop-color="#b4ffd6"/></linearGradient>
+    <linearGradient id="txtRose" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff"/><stop offset="100%" stop-color="#ffc0c5"/></linearGradient>
+    <linearGradient id="avatar" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#37bbfe"/><stop offset="100%" stop-color="#007dbb"/></linearGradient>
+    <linearGradient id="cometG" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#2dff8f" stop-opacity="0"/><stop offset="100%" stop-color="#b9ffd9"/></linearGradient>
+    <linearGradient id="cometR" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ff3b4a" stop-opacity="0"/><stop offset="100%" stop-color="#ffc2c7"/></linearGradient>
+    <linearGradient id="chipGlass" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff" stop-opacity="0.13"/><stop offset="100%" stop-color="#fff" stop-opacity="0.02"/></linearGradient>
+
+    <!-- ===== filters ===== -->
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="glowSoft" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="7"/></filter>
+    <filter id="blur6" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+    <filter id="blur2"><feGaussianBlur stdDeviation="1.4"/></filter>
+    <filter id="bevel" x="-5%" y="-20%" width="110%" height="150%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.8" result="blur"/>
+      <feSpecularLighting in="blur" surfaceScale="6" specularConstant="1.2" specularExponent="22" lighting-color="#fff4c9" result="spec">
+        <fePointLight x="420" y="-30" z="140"/>
+      </feSpecularLighting>
+      <feComposite in="spec" in2="SourceAlpha" operator="in" result="specIn"/>
+      <feComposite in="SourceGraphic" in2="specIn" operator="arithmetic" k1="0" k2="1" k3="0.9" k4="0"/>
+    </filter>
+    <clipPath id="frame"><rect x="3" y="3" width="954" height="414" rx="28"/></clipPath>
+    <clipPath id="scr"><rect x="7" y="7" width="136" height="316" rx="22"/></clipPath>
+
+    <!-- ===== shared shapes ===== -->
+    <path id="plane" d="M-30 -1 L36 -30 C40 -31 43 -28 42 -24 L30 30 C29 34 25 35 22 33 L3 19 L-8 30 C-10 32 -15 31 -15 28 L-15 13 L28 -20 L-21 9 L-29 5 C-33 3 -34 -1 -30 -1 Z"/>
+    <path id="beamPath" d="M200 240 C 290 205, 380 275, 480 240 S 670 205, 760 240" fill="none"/>
+    <path id="comet" d="M-28 0 Q-10 -3.2 0 -3.6 A3.6 3.6 0 0 1 0 3.6 Q-10 3.2 -28 0 Z"/>
+    <text id="titleT" x="480" y="92" text-anchor="middle" class="t">MR JUWEL</text>
+    <text id="subT" x="480" y="131" text-anchor="middle" class="s" font-size="16" letter-spacing="4"><tspan fill="#3dff9a">BOT START</tspan><tspan fill="#8fa0bb"> • </tspan><tspan fill="#ff5a6a">STOP NOTICE</tspan><tspan fill="#8fa0bb"> → </tspan><tspan fill="#43b9ff">TELEGRAM</tspan></text>
+
+    <style>
+      .t { font-family: 'Segoe UI Black','Arial Black',Impact,Arial,sans-serif; font-size: 64px; font-weight: 900; letter-spacing: 8px; }
+      .s { font-family: 'Segoe UI','Helvetica Neue',Arial,sans-serif; font-weight: 700; }
+      .m { font-family: 'SF Mono','Consolas','Courier New',monospace; font-weight: 700; }
+    </style>
+  </defs>
+
+  <!-- ================= BACKGROUND ================= -->
+  <rect width="960" height="420" rx="30" fill="url(#bg)"/>
+  <rect width="960" height="420" rx="30" fill="url(#grid)"/>
+  <g clip-path="url(#frame)">
+    <circle cx="480" cy="40" r="230" fill="url(#warmAura)"/>
+    <circle cx="90" cy="300" r="170" fill="#2a5bff" fill-opacity="0.10" filter="url(#blur6)"/>
+    <circle cx="870" cy="90" r="150" fill="#2aabee" fill-opacity="0.12" filter="url(#blur6)"/>
+    <!-- horizontal light streak behind title -->
+    <ellipse cx="480" cy="72" rx="330" ry="5" fill="url(#streak)" filter="url(#blur2)"/>
+    <!-- floating dust -->
+    <g fill="#bcd8ff" filter="url(#blur2)">
+      <circle cx="120" r="1.8"><animate attributeName="cy" values="430;-10" dur="14s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.6;0" dur="14s" repeatCount="indefinite"/></circle>
+      <circle cx="260" r="1.3"><animate attributeName="cy" values="430;-10" dur="11s" begin="-4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.5;0" dur="11s" begin="-4s" repeatCount="indefinite"/></circle>
+      <circle cx="400" r="2"><animate attributeName="cy" values="430;-10" dur="16s" begin="-8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.5;0" dur="16s" begin="-8s" repeatCount="indefinite"/></circle>
+      <circle cx="560" r="1.5"><animate attributeName="cy" values="430;-10" dur="13s" begin="-2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.6;0" dur="13s" begin="-2s" repeatCount="indefinite"/></circle>
+      <circle cx="690" r="1.2"><animate attributeName="cy" values="430;-10" dur="12s" begin="-6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.5;0" dur="12s" begin="-6s" repeatCount="indefinite"/></circle>
+      <circle cx="930" r="1.7"><animate attributeName="cy" values="430;-10" dur="15s" begin="-9s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.5;0" dur="15s" begin="-9s" repeatCount="indefinite"/></circle>
+    </g>
+  </g>
+  <rect width="960" height="420" rx="30" fill="url(#vignette)"/>
+
+  <!-- frame + travelling light -->
+  <rect x="3" y="3" width="954" height="414" rx="28" fill="none" stroke="url(#silverEdge)" stroke-width="2"/>
+  <rect x="11" y="11" width="938" height="398" rx="22" fill="none" stroke="#fff" stroke-opacity="0.05"/>
+  <rect x="3" y="3" width="954" height="414" rx="28" fill="none" stroke="#9fd0ff" stroke-width="3" pathLength="1000" stroke-dasharray="90 910" stroke-linecap="round" filter="url(#glow)" opacity="0.9">
+    <animate attributeName="stroke-dashoffset" from="0" to="-1000" dur="7s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- LIVE badge -->
+  <g class="m" font-size="9" letter-spacing="3" fill="#8fa0bb">
+    <circle cx="36" cy="36" r="3.5" fill="#ff3b4a" filter="url(#glow)"><animate attributeName="opacity" values="1;0.2;1" dur="1.2s" repeatCount="indefinite"/></circle>
+    <text x="46" y="39.5">LIVE MONITOR</text>
+  </g>
+
+  <!-- ================= TITLE ================= -->
+  <use href="#titleT" fill="#000" opacity="0.7" filter="url(#glowSoft)" transform="translate(0 12)"/>
+  <use href="#titleT" y="5" fill="#1a1202"/>
+  <use href="#titleT" y="4" fill="#2e1f04"/>
+  <use href="#titleT" y="3" fill="#463007"/>
+  <use href="#titleT" y="2" fill="#5e3d0a"/>
+  <use href="#titleT" y="1" fill="#7a5210"/>
+  <use href="#titleT" fill="url(#goldM)" stroke="#ffeeb0" stroke-width="0.7" stroke-opacity="0.8" filter="url(#bevel)"/>
+  <use href="#titleT" fill="url(#sheen)"/>
+
+  <!-- ================= SUBTITLE ================= -->
+  <use href="#subT" filter="url(#glowSoft)" opacity="0.55"/>
+  <text x="480" y="133.5" text-anchor="middle" class="s" font-size="16" letter-spacing="4" fill="#000" opacity="0.8">BOT START • STOP NOTICE → TELEGRAM</text>
+  <use href="#subT"/>
+
+  <!-- ================= LEFT : BOT SERVER ================= -->
+  <ellipse cx="120" cy="312" rx="86" ry="10" fill="#000" opacity="0.7" filter="url(#blur6)"/>
+  <ellipse cx="120" cy="312" rx="92" ry="12" fill="url(#greenAura)" opacity="0"><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.03;0.47;0.5;1" dur="12s" repeatCount="indefinite"/></ellipse>
+  <ellipse cx="120" cy="312" rx="92" ry="12" fill="url(#redAura)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5;0.53;0.97;1" dur="12s" repeatCount="indefinite"/></ellipse>
+
+  <g transform="translate(120 235)">
+    <!-- antennas -->
+    <rect x="-48" y="-96" width="5" height="18" rx="2" fill="url(#titanium)"/>
+    <rect x="43" y="-96" width="5" height="18" rx="2" fill="url(#titanium)"/>
+    <circle cx="-45.5" cy="-98" r="3" fill="#2dff8f" filter="url(#glow)" opacity="0"><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.03;0.47;0.5;1" dur="12s" repeatCount="indefinite"/></circle>
+    <circle cx="45.5" cy="-98" r="3" fill="#ff3b4a" filter="url(#glow)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5;0.53;0.97;1" dur="12s" repeatCount="indefinite"/></circle>
+
+    <!-- body -->
+    <rect x="-75" y="-80" width="150" height="150" rx="16" fill="url(#metal)" stroke="url(#metalEdge)" stroke-width="1.6"/>
+    <rect x="-73" y="-78" width="146" height="3" rx="1.5" fill="#fff" opacity="0.25"/>
+    <!-- bezel + screen -->
+    <rect x="-64" y="-68" width="128" height="84" rx="10" fill="#04070d" stroke="#2c3647"/>
+    <rect x="-58" y="-62" width="116" height="72" rx="7" fill="url(#screenBg)"/>
+    <text x="-50" y="-49" class="m" font-size="7.5" letter-spacing="2" fill="#5f7390">BOT STATUS</text>
+    <!-- ONLINE -->
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.03;0.47;0.5;1" dur="12s" repeatCount="indefinite"/>
+      <text x="-50" y="-27" class="s" font-size="21" letter-spacing="2" fill="#3dff9a" filter="url(#glow)">ONLINE</text>
+      <g fill="#2dff8f" filter="url(#glow)">
+        <rect x="-50" width="7" rx="1.5" height="5" y="3"><animate attributeName="height" values="5;16;8;22;5" dur="0.9s" repeatCount="indefinite"/><animate attributeName="y" values="3;-8;0;-14;3" dur="0.9s" repeatCount="indefinite"/></rect>
+        <rect x="-38" width="7" rx="1.5" height="5" y="3"><animate attributeName="height" values="8;22;6;16;8" dur="1.1s" repeatCount="indefinite"/><animate attributeName="y" values="0;-14;2;-8;0" dur="1.1s" repeatCount="indefinite"/></rect>
+        <rect x="-26" width="7" rx="1.5" height="5" y="3"><animate attributeName="height" values="14;5;20;9;14" dur="0.8s" repeatCount="indefinite"/><animate attributeName="y" values="-6;3;-12;-1;-6" dur="0.8s" repeatCount="indefinite"/></rect>
+        <rect x="-14" width="7" rx="1.5" height="5" y="3"><animate attributeName="height" values="6;20;12;5;6" dur="1.2s" repeatCount="indefinite"/><animate attributeName="y" values="2;-12;-4;3;2" dur="1.2s" repeatCount="indefinite"/></rect>
+        <rect x="-2" width="7" rx="1.5" height="5" y="3"><animate attributeName="height" values="18;8;22;6;18" dur="1s" repeatCount="indefinite"/><animate attributeName="y" values="-10;0;-14;2;-10" dur="1s" repeatCount="indefinite"/></rect>
+        <rect x="10" width="7" rx="1.5" height="5" y="3"><animate attributeName="height" values="7;15;5;19;7" dur="0.7s" repeatCount="indefinite"/><animate attributeName="y" values="1;-7;3;-11;1" dur="0.7s" repeatCount="indefinite"/></rect>
+        <rect x="22" width="7" rx="1.5" height="5" y="3"><animate attributeName="height" values="12;6;18;8;12" dur="1.05s" repeatCount="indefinite"/><animate attributeName="y" values="-4;2;-10;0;-4" dur="1.05s" repeatCount="indefinite"/></rect>
+        <rect x="34" width="7" rx="1.5" height="5" y="3"><animate attributeName="height" values="5;12;7;16;5" dur="0.95s" repeatCount="indefinite"/><animate attributeName="y" values="3;-4;1;-8;3" dur="0.95s" repeatCount="indefinite"/></rect>
+      </g>
+    </g>
+    <!-- OFFLINE -->
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5;0.53;0.97;1" dur="12s" repeatCount="indefinite"/>
+      <text x="-50" y="-27" class="s" font-size="21" letter-spacing="2" fill="#ff4b57" filter="url(#glow)">OFFLINE</text>
+      <line x1="-50" y1="-2" x2="48" y2="-2" stroke="#ff4b57" stroke-width="2" stroke-dasharray="5 4" stroke-linecap="round">
+        <animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite"/>
+      </line>
+      <text x="-50" y="8" class="m" font-size="7" letter-spacing="2" fill="#a14a53">NO SIGNAL</text>
+    </g>
+    <!-- screen glare -->
+    <path d="M-58 -62 H10 L-58 -8 Z" fill="url(#glare)" opacity="0.8"/>
+
+    <!-- LED + vents + plate -->
+    <circle cx="-52" cy="38" r="9" fill="#05080d" stroke="#2c3647"/>
+    <circle cx="-52" cy="38" r="5.5" fill="#2dff8f" filter="url(#glow)" opacity="0"><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.03;0.47;0.5;1" dur="12s" repeatCount="indefinite"/></circle>
+    <circle cx="-52" cy="38" r="5.5" fill="#ff3b4a" filter="url(#glow)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5;0.53;0.97;1" dur="12s" repeatCount="indefinite"/></circle>
+    <g fill="#0a0d14" stroke="#2c3647" stroke-width="0.6">
+      <rect x="-30" y="30" width="86" height="3.5" rx="1.75"/>
+      <rect x="-30" y="38" width="86" height="3.5" rx="1.75"/>
+      <rect x="-30" y="46" width="86" height="3.5" rx="1.75"/>
+    </g>
+    <text x="0" y="63" text-anchor="middle" class="m" font-size="7" letter-spacing="3" fill="#6f7d93">MJ-BOT 01</text>
+    <!-- output port -->
+    <rect x="73" y="-8" width="9" height="16" rx="3" fill="url(#titanium)" stroke="#2c3647"/>
+  </g>
+  <!-- label -->
+  <text x="120" y="341" text-anchor="middle" class="s" font-size="12" letter-spacing="5" fill="#b4c2da">BOT SERVER</text>
+  <g class="m" font-size="10" letter-spacing="3" text-anchor="middle">
+    <text x="120" y="359" fill="#3dff9a" filter="url(#glow)" opacity="0">● ONLINE<animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.03;0.47;0.5;1" dur="12s" repeatCount="indefinite"/></text>
+    <text x="120" y="359" fill="#ff4b57" filter="url(#glow)" opacity="0">● OFFLINE<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5;0.53;0.97;1" dur="12s" repeatCount="indefinite"/></text>
+  </g>
+
+  <!-- ================= SIGNAL BEAM ================= -->
+  <use href="#beamPath" stroke="#0a1426" stroke-width="9" stroke-linecap="round"/>
+  <use href="#beamPath" stroke="#2c3d5e" stroke-width="1.6" stroke-linecap="round"/>
+
+  <!-- port nodes -->
+  <circle cx="200" cy="240" r="6" fill="#0a1426" stroke="#3a4a6a"/>
+  <circle cx="200" cy="240" r="3.5" fill="#2dff8f" filter="url(#glow)" opacity="0"><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.03;0.47;0.5;1" dur="12s" repeatCount="indefinite"/></circle>
+  <circle cx="200" cy="240" r="3.5" fill="#ff3b4a" filter="url(#glow)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5;0.53;0.97;1" dur="12s" repeatCount="indefinite"/></circle>
+
+  <!-- ONLINE (green) stream -->
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.03;0.47;0.5;1" dur="12s" repeatCount="indefinite"/>
+    <use href="#beamPath" stroke="#2dff8f" stroke-width="8" stroke-opacity="0.35" filter="url(#glowSoft)"/>
+    <use href="#beamPath" stroke="#2dff8f" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="7 11">
+      <animate attributeName="stroke-dashoffset" from="36" to="0" dur="1s" repeatCount="indefinite"/>
+    </use>
+    <g>
+      <animateMotion dur="1.6s" begin="0s" repeatCount="indefinite" rotate="auto"><mpath href="#beamPath" xlink:href="#beamPath"/></animateMotion>
+      <use href="#comet" fill="url(#cometG)"/><circle r="3.2" fill="#eafff3" filter="url(#glow)"/>
+    </g>
+    <g>
+      <animateMotion dur="1.6s" begin="0.53s" repeatCount="indefinite" rotate="auto"><mpath href="#beamPath" xlink:href="#beamPath"/></animateMotion>
+      <use href="#comet" fill="url(#cometG)"/><circle r="3.2" fill="#eafff3" filter="url(#glow)"/>
+    </g>
+    <g>
+      <animateMotion dur="1.6s" begin="1.06s" repeatCount="indefinite" rotate="auto"><mpath href="#beamPath" xlink:href="#beamPath"/></animateMotion>
+      <use href="#comet" fill="url(#cometG)"/><circle r="3.2" fill="#eafff3" filter="url(#glow)"/>
+    </g>
+    <!-- arrival flares -->
+    <circle cx="758" cy="240" r="3" fill="none" stroke="#7dffb9" stroke-width="2" opacity="0">
+      <animate attributeName="r" values="3;22" dur="1.6s" begin="1.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.9;0" dur="1.6s" begin="1.6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="758" cy="240" r="3" fill="none" stroke="#7dffb9" stroke-width="2" opacity="0">
+      <animate attributeName="r" values="3;22" dur="1.6s" begin="2.13s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.9;0" dur="1.6s" begin="2.13s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="758" cy="240" r="3" fill="none" stroke="#7dffb9" stroke-width="2" opacity="0">
+      <animate attributeName="r" values="3;22" dur="1.6s" begin="2.66s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.9;0" dur="1.6s" begin="2.66s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- OFFLINE (red) stream -->
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;0.25;0.25;0" keyTimes="0;0.5;0.53;0.64;0.69;0.97;1" dur="12s" repeatCount="indefinite"/>
+    <use href="#beamPath" stroke="#ff3b4a" stroke-width="8" stroke-opacity="0.35" filter="url(#glowSoft)"/>
+    <use href="#beamPath" stroke="#ff4b57" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="7 11">
+      <animate attributeName="stroke-dashoffset" from="36" to="0" dur="0.8s" repeatCount="indefinite"/>
+    </use>
+  </g>
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.5;0.52;0.66;0.69;1" dur="12s" repeatCount="indefinite"/>
+    <g>
+      <animateMotion dur="1.3s" begin="0s" repeatCount="indefinite" rotate="auto"><mpath href="#beamPath" xlink:href="#beamPath"/></animateMotion>
+      <use href="#comet" fill="url(#cometR)"/><circle r="3.2" fill="#fff0f1" filter="url(#glow)"/>
+    </g>
+    <g>
+      <animateMotion dur="1.3s" begin="0.43s" repeatCount="indefinite" rotate="auto"><mpath href="#beamPath" xlink:href="#beamPath"/></animateMotion>
+      <use href="#comet" fill="url(#cometR)"/><circle r="3.2" fill="#fff0f1" filter="url(#glow)"/>
+    </g>
+    <g>
+      <animateMotion dur="1.3s" begin="0.86s" repeatCount="indefinite" rotate="auto"><mpath href="#beamPath" xlink:href="#beamPath"/></animateMotion>
+      <use href="#comet" fill="url(#cometR)"/><circle r="3.2" fill="#fff0f1" filter="url(#glow)"/>
+    </g>
+    <circle cx="758" cy="240" r="3" fill="none" stroke="#ff8a93" stroke-width="2" opacity="0">
+      <animate attributeName="r" values="3;22" dur="1.3s" begin="1.3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.9;0" dur="1.3s" begin="1.3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="758" cy="240" r="3" fill="none" stroke="#ff8a93" stroke-width="2" opacity="0">
+      <animate attributeName="r" values="3;22" dur="1.3s" begin="1.73s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.9;0" dur="1.3s" begin="1.73s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- ================= CENTER HUB PILL ================= -->
+  <g transform="translate(480 240)">
+    <ellipse cx="0" cy="30" rx="80" ry="8" fill="#000" opacity="0.55" filter="url(#blur6)"/>
+    <!-- STARTED -->
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.03;0.47;0.5;1" dur="12s" repeatCount="indefinite"/>
+      <rect x="-98" y="-26" width="196" height="52" rx="26" fill="#06121c" fill-opacity="0.92"/>
+      <rect x="-98" y="-26" width="196" height="52" rx="26" fill="url(#glassFill)" stroke="#3dff9a" stroke-width="1.6" stroke-opacity="0.9"/>
+      <rect x="-90" y="-24" width="180" height="18" rx="9" fill="#fff" opacity="0.10"/>
+      <circle cx="-72" cy="0" r="6" fill="#2dff8f" filter="url(#glow)"><animate attributeName="opacity" values="1;0.35;1" dur="1.2s" repeatCount="indefinite"/></circle>
+      <circle cx="-72" cy="0" r="6" fill="none" stroke="#2dff8f"><animate attributeName="r" values="6;16" dur="1.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0" dur="1.2s" repeatCount="indefinite"/></circle>
+      <text x="8" y="-2" text-anchor="middle" class="s" font-size="16" letter-spacing="3" fill="#021a0e" opacity="0.8" transform="translate(0 1.5)">BOT STARTED</text>
+      <text x="8" y="-2" text-anchor="middle" class="s" font-size="16" letter-spacing="3" fill="url(#txtMint)" filter="url(#glow)">BOT STARTED</text>
+      <text x="8" y="14" text-anchor="middle" class="m" font-size="8" letter-spacing="3" fill="#3dff9a">STATUS: ONLINE</text>
+    </g>
+    <!-- STOPPED -->
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5;0.53;0.97;1" dur="12s" repeatCount="indefinite"/>
+      <rect x="-98" y="-26" width="196" height="52" rx="26" fill="#1a0609" fill-opacity="0.92"/>
+      <rect x="-98" y="-26" width="196" height="52" rx="26" fill="url(#glassFill)" stroke="#ff4b57" stroke-width="1.6" stroke-opacity="0.9"/>
+      <rect x="-90" y="-24" width="180" height="18" rx="9" fill="#fff" opacity="0.10"/>
+      <circle cx="-72" cy="0" r="6" fill="#ff3b4a" filter="url(#glow)"><animate attributeName="opacity" values="1;0.3;1" dur="0.7s" repeatCount="indefinite"/></circle>
+      <text x="8" y="-2" text-anchor="middle" class="s" font-size="16" letter-spacing="3" fill="#2a0408" opacity="0.8" transform="translate(0 1.5)">BOT STOPPED</text>
+      <text x="8" y="-2" text-anchor="middle" class="s" font-size="16" letter-spacing="3" fill="url(#txtRose)" filter="url(#glow)">BOT STOPPED</text>
+      <text x="8" y="14" text-anchor="middle" class="m" font-size="8" letter-spacing="3" fill="#ff6b75">STATUS: OFFLINE</text>
+    </g>
+  </g>
+  <text x="480" y="296" text-anchor="middle" class="m" font-size="9" letter-spacing="4" fill="#6f84a6">BOT → TELEGRAM • REAL-TIME</text>
+
+  <!-- ================= RIGHT : SMARTPHONE ================= -->
+  <ellipse cx="835" cy="383" rx="72" ry="9" fill="#000" opacity="0.7" filter="url(#blur6)"/>
+  <ellipse cx="835" cy="213" rx="105" ry="195" fill="url(#blueAura)" opacity="0.2">
+    <animate attributeName="opacity" values="0.2;0.2;0.7;0.2;0.2;0.7;0.2;0.2" keyTimes="0;0.2;0.23;0.3;0.7;0.73;0.8;1" dur="12s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <g transform="translate(760 48)">
+    <!-- side buttons -->
+    <rect x="-2.5" y="70" width="3" height="22" rx="1.5" fill="#6b7384"/>
+    <rect x="-2.5" y="102" width="3" height="34" rx="1.5" fill="#6b7384"/>
+    <rect x="149.5" y="110" width="3" height="48" rx="1.5" fill="#6b7384"/>
+    <!-- frame -->
+    <rect x="0" y="0" width="150" height="330" rx="28" fill="url(#titanium)"/>
+    <rect x="2.5" y="2.5" width="145" height="325" rx="25.5" fill="#000"/>
+    <!-- screen -->
+    <rect x="7" y="7" width="136" height="316" rx="22" fill="#0e1621"/>
+    <g clip-path="url(#scr)">
+      <!-- chat wallpaper dots -->
+      <g fill="#fff" fill-opacity="0.035">
+        <circle cx="30" cy="120" r="9"/><circle cx="110" cy="150" r="7"/><circle cx="50" cy="210" r="8"/><circle cx="118" cy="240" r="9"/><circle cx="25" cy="265" r="6"/>
+      </g>
+      <!-- header -->
+      <rect x="7" y="34" width="136" height="40" fill="#17212b"/>
+      <path d="M22 48 L16 54 L22 60" fill="none" stroke="#5d9bd6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="40" cy="54" r="12" fill="url(#avatar)"/>
+      <use href="#plane" transform="translate(39 54) scale(0.2)" fill="#fff"/>
+      <text x="57" y="51" class="s" font-size="9.5" fill="#fff">MR JUWEL BOT</text>
+      <text x="57" y="63" class="s" font-size="8" fill="#3dff9a" opacity="0">bot • online<animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.03;0.47;0.5;1" dur="12s" repeatCount="indefinite"/></text>
+      <text x="57" y="63" class="s" font-size="8" fill="#ff6b75" opacity="0">bot • offline<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5;0.53;0.97;1" dur="12s" repeatCount="indefinite"/></text>
+
+      <!-- date pill -->
+      <rect x="53" y="84" width="44" height="12" rx="6" fill="#fff" fill-opacity="0.1"/>
+      <text x="75" y="92.5" text-anchor="middle" class="s" font-size="6.5" fill="#cfd8e3">TODAY</text>
+
+      <!-- bubble 1: started -->
+      <g opacity="0">
+        <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.24;0.27;0.96;1" dur="12s" repeatCount="indefinite"/>
+        <animateTransform attributeName="transform" type="translate" values="0 10;0 10;0 0;0 0;0 0" keyTimes="0;0.24;0.27;0.96;1" dur="12s" repeatCount="indefinite"/>
+        <rect x="15" y="104" width="114" height="54" rx="11" fill="#182533"/>
+        <circle cx="29" cy="119" r="4.5" fill="#2dff8f" filter="url(#glow)"/>
+        <text x="38" y="122" class="s" font-size="10" fill="#62e39a">BOT STARTED</text>
+        <text x="25" y="137" class="s" font-size="8.5" fill="#cfd8e3">Status: ONLINE</text>
+        <text x="121" y="151" text-anchor="end" class="s" font-size="6.5" fill="#6d7f94">just now</text>
+      </g>
+      <!-- bubble 2: stopped -->
+      <g opacity="0">
+        <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.74;0.77;0.96;1" dur="12s" repeatCount="indefinite"/>
+        <animateTransform attributeName="transform" type="translate" values="0 10;0 10;0 0;0 0;0 0" keyTimes="0;0.74;0.77;0.96;1" dur="12s" repeatCount="indefinite"/>
+        <rect x="15" y="168" width="114" height="54" rx="11" fill="#182533"/>
+        <circle cx="29" cy="183" r="4.5" fill="#ff3b4a" filter="url(#glow)"/>
+        <text x="38" y="186" class="s" font-size="10" fill="#ff7a84">BOT STOPPED</text>
+        <text x="25" y="201" class="s" font-size="8.5" fill="#cfd8e3">Status: OFFLINE</text>
+        <text x="121" y="215" text-anchor="end" class="s" font-size="6.5" fill="#6d7f94">just now</text>
+      </g>
+
+      <!-- input bar -->
+      <rect x="7" y="278" width="136" height="36" fill="#17212b"/>
+      <rect x="14" y="285" width="96" height="22" rx="11" fill="#0e1621"/>
+      <text x="24" y="299" class="s" font-size="8" fill="#6d7f94">Message</text>
+      <circle cx="124" cy="296" r="10" fill="#2aabee"/>
+      <use href="#plane" transform="translate(123 296) scale(0.17)" fill="#fff"/>
+
+      <!-- status bar -->
+      <text x="22" y="24" class="s" font-size="9" fill="#fff">10:30</text>
+      <rect x="51" y="12" width="48" height="14" rx="7" fill="#000"/>
+      <rect x="111" y="17" width="16" height="7" rx="2" fill="none" stroke="#fff" stroke-opacity="0.8" stroke-width="0.8"/>
+      <rect x="112.5" y="18.5" width="11" height="4" rx="1" fill="#fff" fill-opacity="0.85"/>
+
+      <!-- notification: started -->
+      <g opacity="0">
+        <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.20;0.23;0.32;0.35;1" dur="12s" repeatCount="indefinite"/>
+        <animateTransform attributeName="transform" type="translate" values="0 -60;0 -60;0 0;0 0;0 -60;0 -60" keyTimes="0;0.20;0.23;0.32;0.35;1" dur="12s" repeatCount="indefinite"/>
+        <rect x="11" y="14" width="128" height="36" rx="12" fill="#1c2430" fill-opacity="0.96" stroke="#fff" stroke-opacity="0.18"/>
+        <circle cx="27" cy="32" r="9" fill="url(#avatar)"/>
+        <use href="#plane" transform="translate(26 32) scale(0.15)" fill="#fff"/>
+        <text x="42" y="27" class="s" font-size="6.5" fill="#8f9db1">TELEGRAM • now</text>
+        <text x="42" y="40" class="s" font-size="8.5" fill="#62e39a">BOT STARTED · Online</text>
+      </g>
+      <!-- notification: stopped -->
+      <g opacity="0">
+        <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.70;0.73;0.82;0.85;1" dur="12s" repeatCount="indefinite"/>
+        <animateTransform attributeName="transform" type="translate" values="0 -60;0 -60;0 0;0 0;0 -60;0 -60" keyTimes="0;0.70;0.73;0.82;0.85;1" dur="12s" repeatCount="indefinite"/>
+        <rect x="11" y="14" width="128" height="36" rx="12" fill="#241a1e" fill-opacity="0.96" stroke="#fff" stroke-opacity="0.18"/>
+        <circle cx="27" cy="32" r="9" fill="url(#avatar)"/>
+        <use href="#plane" transform="translate(26 32) scale(0.15)" fill="#fff"/>
+        <text x="42" y="27" class="s" font-size="6.5" fill="#8f9db1">TELEGRAM • now</text>
+        <text x="42" y="40" class="s" font-size="8.5" fill="#ff7a84">BOT STOPPED · Offline</text>
+      </g>
+
+      <!-- glass reflection + home bar -->
+      <path d="M7 7 H88 L7 170 Z" fill="url(#glare)" opacity="0.55"/>
+      <rect x="50" y="316" width="50" height="3" rx="1.5" fill="#fff" fill-opacity="0.45"/>
+    </g>
+  </g>
+
+  <!-- ================= BOTTOM CHIPS ================= -->
+  <g class="s" font-size="11.5" letter-spacing="1.5">
+    <g>
+      <rect x="218" y="370" width="165" height="30" rx="15" fill="#05080f" fill-opacity="0.75"/>
+      <rect x="218" y="370" width="165" height="30" rx="15" fill="url(#chipGlass)" stroke="#43b9ff" stroke-opacity="0.8" stroke-width="1.2"/>
+      <circle cx="236" cy="385" r="4" fill="#43b9ff" filter="url(#glow)"><animate attributeName="opacity" values="1;0.35;1" dur="1.6s" repeatCount="indefinite"/></circle>
+      <text x="248" y="389.5" fill="#bfe6ff">INSTANT STOP ALERT</text>
+    </g>
+    <g>
+      <rect x="393" y="370" width="165" height="30" rx="15" fill="#05080f" fill-opacity="0.75"/>
+      <rect x="393" y="370" width="165" height="30" rx="15" fill="url(#chipGlass)" stroke="#a78bff" stroke-opacity="0.8" stroke-width="1.2"/>
+      <circle cx="411" cy="385" r="4" fill="#a78bff" filter="url(#glow)"><animate attributeName="opacity" values="1;0.35;1" dur="1.6s" begin="0.5s" repeatCount="indefinite"/></circle>
+      <text x="423" y="389.5" fill="#e0d6ff">ID LOCK ALERT</text>
+    </g>
+    <g>
+      <rect x="568" y="370" width="165" height="30" rx="15" fill="#05080f" fill-opacity="0.75"/>
+      <rect x="568" y="370" width="165" height="30" rx="15" fill="url(#chipGlass)" stroke="#ffc24d" stroke-opacity="0.8" stroke-width="1.2"/>
+      <circle cx="586" cy="385" r="4" fill="#ffc24d" filter="url(#glow)"><animate attributeName="opacity" values="1;0.35;1" dur="1.6s" begin="1s" repeatCount="indefinite"/></circle>
+      <text x="598" y="389.5" fill="#ffe9b8" font-size="10.5">WATCHDOG PROTECTED</text>
+    </g>
+  </g>
+</svg>
