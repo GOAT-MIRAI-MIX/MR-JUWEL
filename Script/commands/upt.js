@@ -5,7 +5,7 @@ const https = require("https");
 
 module.exports.config = {
   name: "upt",
-  version: "6.0.0",
+  version: "9.0.0",
   hasPermssion: 0,
   credits: "乛 M𝆠፝֟R ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐",
   description: "System Status Image (Uptime, RAM, Memory, Ping, Disk)",
@@ -14,7 +14,7 @@ module.exports.config = {
   cooldowns: 5
 };
 
-// ছবি তৈরির জন্য canvas দরকার: npm i canvas
+// npm i canvas
 let createCanvas, loadImage;
 try {
   ({ createCanvas, loadImage } = require("canvas"));
@@ -23,14 +23,25 @@ try {
   console.log("[upt] canvas লোড হয়নি:", e.message);
 }
 
-// ব্যাকগ্রাউন্ড টেমপ্লেট (upt_bg.png) এই দুই জায়গার যেকোনো একটায় রাখুন
+// আপনার PNG টা upt_bg.png নামে এই দুই জায়গার যেকোনো একটায় রাখুন
 const CACHE_DIR = path.join(__dirname, "cache");
-const BG_PATHS = [
-  path.join(CACHE_DIR, "upt_bg.png"),
-  path.join(__dirname, "upt_bg.png")
-];
+// ব্যাকগ্রাউন্ড ছবি খোঁজে: upt_bg.png, upt_bg-1.png, upt_bg (1).png, বড়/ছোট হাতের অক্ষর, সবই চলবে
+function findBg() {
+  const dirs = [CACHE_DIR, __dirname];
+  for (const d of dirs) {
+    try {
+      const f = fs.readdirSync(d).find(n => /^upt[_\- ]?bg.*\.png$/i.test(n));
+      if (f) return path.join(d, f);
+    } catch (e) {}
+  }
+  return null;
+}
 
-// কাউন্ট ফাইলে সেভ হবে, রিস্টার্টেও হারাবে না
+
+// ছবিতে আগে থেকে লেখা নমুনা সংখ্যা (0d 0h 16m, 70% ইত্যাদি) ঢাকার জন্য true।
+// পরে যদি সংখ্যা ছাড়া ফাঁকা টেমপ্লেট ব্যবহার করেন, তাহলে false করে দিন।
+const COVER_SAMPLE = false;
+
 const COUNT_FILE = path.join(CACHE_DIR, "totalCommands.json");
 
 function log(...a) {
@@ -64,7 +75,6 @@ function getMemory() {
   const total = os.totalmem();
   let free = os.freemem();
   try {
-    // Linux এ cache বাদ দিয়ে আসল available মেমোরি
     const m = fs.readFileSync("/proc/meminfo", "utf8").match(/MemAvailable:\s+(\d+)\s*kB/);
     if (m) free = Number(m[1]) * 1024;
   } catch (e) {}
@@ -118,129 +128,145 @@ function gb(bytes) {
 // ---------- ছবি আঁকা ----------
 const FONT = "Arial, Helvetica, sans-serif";
 
-// জায়গা না থাকলে ফন্ট নিজে ছোট হয়ে যাবে
-function fitFont(ctx, text, style, size, maxW) {
+function fitMetrics(ctx, text, style, size, maxW, minScale) {
   let s = size;
-  do {
+  let sx = 1;
+  while (s > 10) {
     ctx.font = `${style} ${s}px ${FONT}`;
-    if (ctx.measureText(text).width <= maxW) break;
+    const w = ctx.measureText(text).width;
+    sx = Math.min(1, maxW / w);
+    if (sx >= minScale) break;
     s -= 1;
-  } while (s > 14);
+  }
+  return { s, sx };
 }
 
-// তিন গজের ছক: রিং-এর কেন্দ্র আর নিচের লেবেল (DAY / HOURS / MINUTES) এর কেন্দ্র
-const GAUGES = [
-  { cx: 405, cy: 505, pillCx: 397, color: "#39ff14" },
-  { cx: 745, cy: 505, pillCx: 741, color: "#ff2bd6" },
-  { cx: 1070, cy: 505, pillCx: 1070, color: "#2bb7ff" }
-];
-
-function drawRing(ctx, g, fraction) {
-  const R = 144;
-  const lw = 24;
-  const start = -Math.PI / 2;
-  const f = Math.max(0, Math.min(1, fraction));
-
+// o: { align, style, size, maxW, minScale, top, bottom, glow }
+function drawText(ctx, text, x, y, o) {
+  const { s, sx } = fitMetrics(ctx, text, o.style, o.size, o.maxW, o.minScale || 0.75);
   ctx.save();
-  // নিচের প্যানেলের বর্ডারে যেন আর্ক না যায়
-  ctx.beginPath();
-  ctx.rect(g.cx - 200, g.cy - 200, 400, 612 - (g.cy - 200));
-  ctx.clip();
+  ctx.translate(x, y);
+  ctx.scale(sx, 1);
+  ctx.font = `${o.style} ${s}px ${FONT}`;
+  ctx.textAlign = o.align || "left";
+  ctx.textBaseline = "alphabetic";
+  const grad = ctx.createLinearGradient(0, -s * 0.78, 0, 0);
+  grad.addColorStop(0, o.top);
+  grad.addColorStop(1, o.bottom);
+  ctx.shadowColor = o.glow;
+  ctx.shadowBlur = 10;
+  ctx.fillStyle = grad;
+  ctx.fillText(text, 0, 0);
+  ctx.restore();
+}
 
-  // ট্র্যাক
-  ctx.lineWidth = lw;
-  ctx.lineCap = "round";
-  ctx.strokeStyle = g.color + "33";
+function roundRectPath(ctx, x, y, w, h, r) {
+  r = Math.min(r, w / 2, h / 2);
   ctx.beginPath();
-  ctx.arc(g.cx, g.cy, R, 0, Math.PI * 2);
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+
+// নমুনা লেখা ঢাকে: পাশের পিক্সেলের রং নিয়ে ওপর-নিচ গ্রেডিয়েন্ট দিয়ে ভরে
+function cover(ctx, x, y, w, h) {
+  if (!COVER_SAMPLE) return;
+  try {
+    const sx = Math.max(0, x - 4);
+    const a = ctx.getImageData(sx, y + 1, 1, 1).data;
+    const b = ctx.getImageData(sx, y + h - 2, 1, 1).data;
+    const g = ctx.createLinearGradient(0, y, 0, y + h);
+    g.addColorStop(0, `rgb(${a[0]},${a[1]},${a[2]})`);
+    g.addColorStop(1, `rgb(${b[0]},${b[1]},${b[2]})`);
+    ctx.fillStyle = g;
+    ctx.fillRect(x, y, w, h);
+  } catch (e) {}
+}
+
+// প্রগ্রেস বার: পুরোনো বার ঢেকে নতুন বার আঁকে
+function drawBar(ctx, x, y, w, h, pct, c1, c2) {
+  cover(ctx, x - 3, y - 3, w + 6, h + 6);
+  const p = pct === null ? 0 : Math.max(0, Math.min(100, pct)) / 100;
+  ctx.save();
+  roundRectPath(ctx, x, y, w, h, h / 2);
+  ctx.fillStyle = "rgba(5,10,30,0.85)";
+  ctx.fill();
+  ctx.lineWidth = 1.5;
+  ctx.strokeStyle = c1;
+  ctx.globalAlpha = 0.6;
   ctx.stroke();
-
-  // প্রগ্রেস
-  if (f > 0) {
-    ctx.strokeStyle = g.color;
-    ctx.shadowColor = g.color;
-    ctx.shadowBlur = 24;
-    ctx.beginPath();
-    ctx.arc(g.cx, g.cy, R, start, start + Math.PI * 2 * f);
-    ctx.stroke();
+  ctx.globalAlpha = 1;
+  if (p > 0) {
+    const fw = Math.max(h - 4, p * (w - 4));
+    const g = ctx.createLinearGradient(x, 0, x + w, 0);
+    g.addColorStop(0, c1);
+    g.addColorStop(1, c2);
+    ctx.shadowColor = c1;
+    ctx.shadowBlur = 8;
+    ctx.fillStyle = g;
+    roundRectPath(ctx, x + 2, y + 2, fw, h - 4, (h - 4) / 2);
+    ctx.fill();
   }
   ctx.restore();
 }
 
-// আর্ক যেন নিচের লেবেলের ওপর না পড়ে, তাই লেবেল আবার বসানো হয়
-function restorePill(ctx, bg, pillCx) {
-  const x0 = pillCx - 113, x1 = pillCx + 113, y0 = 578, y1 = 647, c = 26;
-  ctx.save();
-  ctx.beginPath();
-  ctx.moveTo(x0 + c, y0);
-  ctx.lineTo(x1 - c, y0);
-  ctx.lineTo(x1, y0 + c);
-  ctx.lineTo(x1, y1 - c);
-  ctx.lineTo(x1 - c, y1);
-  ctx.lineTo(x0 + c, y1);
-  ctx.lineTo(x0, y1 - c);
-  ctx.lineTo(x0, y0 + c);
-  ctx.closePath();
-  ctx.clip();
-  ctx.drawImage(bg, 0, 0);
-  ctx.restore();
-}
-
-function drawBigNumber(ctx, g, text) {
-  ctx.save();
-  ctx.textAlign = "center";
-  ctx.textBaseline = "alphabetic";
-  fitFont(ctx, text, "italic bold", 118, 165);
-  const grad = ctx.createLinearGradient(0, 470, 0, 568);
-  grad.addColorStop(0, "#fff7b0");
-  grad.addColorStop(1, "#ffb300");
-  ctx.shadowColor = g.color;
-  ctx.shadowBlur = 18;
-  ctx.fillStyle = grad;
-  ctx.fillText(text, g.cx, 565);
-  ctx.restore();
-}
-
-function drawValue(ctx, text, x, y, color, size, maxW) {
-  ctx.save();
-  ctx.textAlign = "left";
-  ctx.textBaseline = "alphabetic";
-  fitFont(ctx, text, "italic bold", size, maxW);
-  ctx.shadowColor = color;
-  ctx.shadowBlur = 10;
-  ctx.fillStyle = color;
-  ctx.fillText(text, x, y);
-  ctx.restore();
-}
-
 async function render(data) {
-  const bgPath = BG_PATHS.find(p => fs.existsSync(p));
-  if (!bgPath) throw new Error("upt_bg.png পাওয়া যায়নি (cache ফোল্ডারে রাখুন)");
+  const bgPath = findBg();
+  if (!bgPath) throw new Error("upt_bg.png পাওয়া যায়নি। খোঁজা হয়েছে: " + CACHE_DIR + " এবং " + __dirname);
 
   const bg = await loadImage(bgPath);
   const canvas = createCanvas(bg.width, bg.height);
   const ctx = canvas.getContext("2d");
   ctx.drawImage(bg, 0, 0);
 
-  // Day / Hours / Minutes গজ
-  const fractions = [Math.min(data.days, 30) / 30, data.hours / 24, data.minutes / 60];
-  const numbers = [String(data.days), String(data.hours), String(data.minutes)];
-  GAUGES.forEach((g, i) => {
-    drawRing(ctx, g, fractions[i]);
-    restorePill(ctx, bg, g.pillCx);
-    drawBigNumber(ctx, g, numbers[i]);
+  // টেমপ্লেট ১৫৩৬x১০২৪ ধরে সব পজিশন। সরে গেলে শুধু নিচের সংখ্যা বদলান।
+  const k = bg.width / 1536;
+  ctx.save();
+  ctx.scale(k, k);
+
+  // ---------- ওপরের চার বক্স ----------
+  drawText(ctx, data.uptime, 328, 640, {
+    align: "center", style: "bold", size: 44, maxW: 320, minScale: 0.7,
+    top: "#f3ffe6", bottom: "#6dff3a", glow: "#39ff14"
+  });
+  drawText(ctx, String(data.days), 643, 648, {
+    align: "center", style: "bold", size: 66, maxW: 150, minScale: 0.6,
+    top: "#ffd6fb", bottom: "#c86bff", glow: "#d34bff"
+  });
+  drawText(ctx, String(data.hours), 940, 648, {
+    align: "center", style: "bold", size: 66, maxW: 150, minScale: 0.6,
+    top: "#d6f3ff", bottom: "#3fb6ff", glow: "#2bb7ff"
+  });
+  drawText(ctx, String(data.minutes), 1223, 648, {
+    align: "center", style: "bold", size: 66, maxW: 190, minScale: 0.6,
+    top: "#fff7a8", bottom: "#ffc400", glow: "#ffb300"
   });
 
-  // বাম প্যানেল
-  const vx = 470;
-  drawValue(ctx, data.uptime, vx, 713, "#7dff4f", 30, 305);
-  drawValue(ctx, `${Math.round(data.ram)}%`, vx, 759, "#ff5ce1", 30, 305);
-  drawValue(ctx, `${data.memUsed} GB / ${data.memTotal} GB`, vx, 805, "#c77dff", 30, 305);
-  drawValue(ctx, data.ping === null ? "N/A" : `${data.ping}ms`, vx, 851, "#ffc400", 30, 305);
+  // ---------- নিচের প্যানেল ----------
+  drawText(ctx, `${Math.round(data.ram)}%`, 690, 751, {
+    style: "bold", size: 26, maxW: 150, minScale: 0.75,
+    top: "#ffb3f6", bottom: "#ff3fd8", glow: "#ff2bd6"
+  });
+  drawText(ctx, `${data.memUsed} GB / ${data.memTotal} GB`, 690, 798, {
+    style: "bold", size: 24, maxW: 195, minScale: 0.7,
+    top: "#b8fbff", bottom: "#19d9ff", glow: "#19e6ff"
+  });
+  drawText(ctx, data.ping === null ? "N/A" : `${data.ping}ms`, 690, 844, {
+    style: "bold", size: 26, maxW: 150, minScale: 0.75,
+    top: "#fff27a", bottom: "#ffb800", glow: "#ffc400"
+  });
 
-  // ডান প্যানেল: Disk
-  drawValue(ctx, data.disk === null ? "N/A" : `${Math.round(data.disk)}%`, 965, 828, "#19e6ff", 52, 130);
+  // Disk (ডানের বড় অংশ)
+  drawText(ctx, data.disk === null ? "N/A" : `${Math.round(data.disk)}%`, 1100, 825, {
+    style: "bold", size: 56, maxW: 200, minScale: 0.75,
+    top: "#c9ffc9", bottom: "#2bff3a", glow: "#2bff3a"
+  });
+  drawBar(ctx, 1100, 835, 280, 12, data.disk, "#2bff3a", "#a6ff9e");
 
+  ctx.restore();
   return canvas.toBuffer("image/png");
 }
 
@@ -248,7 +274,6 @@ async function render(data) {
 module.exports.handleEvent = async function ({ api, event }) {
   if (!event.body) return;
 
-  // বটের নিজের মেসেজ গুনবে না
   try {
     if (event.senderID === api.getCurrentUserID()) return;
   } catch (e) {}
@@ -256,7 +281,6 @@ module.exports.handleEvent = async function ({ api, event }) {
   const body = event.body.trim();
   if (!body) return;
 
-  // prefix থাকলে বাদ দাও (না থাকলেও সমস্যা নেই)
   let prefix = (global.config && global.config.PREFIX) || "";
   try {
     const td = global.data && global.data.threadData && global.data.threadData.get(String(event.threadID));
@@ -270,29 +294,32 @@ module.exports.handleEvent = async function ({ api, event }) {
   const cmdName = text.split(/\s+/)[0].toLowerCase();
   if (!cmdName) return;
 
-  // "upt" লিখলে গুনবে; prefix ছাড়া লিখলে এখান থেকেই চালাবে
-  if (cmdName === "upt") {
+  // "up" আর "upt" দুটোই চলবে (prefix থাকুক বা না থাকুক)
+  if (cmdName === "up" || cmdName === "upt") {
+    if (text.toLowerCase() !== cmdName) return;
     addCount();
-    // prefix দিয়ে লিখলে বটের নিজের সিস্টেমই run চালায়, এখানে আবার চালালে ছবি দুইবার যেত
-    const usedPrefix = !!prefix && body.startsWith(prefix);
-    if (!usedPrefix && text.toLowerCase() === "upt") {
-      log("prefix ছাড়া upt ধরা পড়েছে, চালানো হচ্ছে");
-      return module.exports.run({ api, event });
-    }
-    return;
+    log(cmdName, "ধরা পড়েছে, চালানো হচ্ছে");
+    return module.exports.run({ api, event });
   }
 
   const commands = (global.client && global.client.commands) || (global.GoatBot && global.GoatBot.commands);
   if (!commands) return;
 
-  // বটের কমান্ড লিস্টে নাম মিললে গুনবে (prefix থাকুক বা না থাকুক)
   if (commands.has(cmdName)) {
     addCount();
   }
 };
 
 // ---------- Run ----------
+const handled = new Set();
+
 module.exports.run = async function ({ api, event }) {
+  // একই মেসেজে বট আর handleEvent দুটোই চালালে ছবি দুইবার যাবে না
+  const key = event.messageID || `${event.threadID}_${Date.now()}`;
+  if (handled.has(key)) return;
+  handled.add(key);
+  setTimeout(() => handled.delete(key), 60000);
+
   try {
     log("run শুরু, thread:", event.threadID);
     if (!createCanvas) {
