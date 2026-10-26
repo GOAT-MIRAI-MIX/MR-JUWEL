@@ -113,6 +113,42 @@ Authenticator সিক্রেট কী দিলে 2FA কোডও নি�
 
 ---
 
+<!-- ═══════════════ TELEGRAM START/STOP NOTICE ═══════════════ -->
+<p align="center">
+  <img src="assets/telegram-alert-banner.svg" alt="MR JUWEL — Bot Start / Stop Notice on Telegram" width="85%"/>
+</p>
+
+<h1 align="center">📡 TELEGRAM START / STOP NOTICE</h1>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/🟢_BOT_START-NOTICE-00e676?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/🔴_BOT_STOP-NOTICE-ff4d4d?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/🔒_ID_LOCK-ALERT-7c4dff?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/✈️_TELEGRAM-READY-26A5E4?style=for-the-badge"/>
+</p>
+
+<p align="center"><b>MR JUWEL</b> — বট চালু/বন্ধ হলে, ফেসবুক আইডি লক বা লগআউট হলে সাথে সাথে আপনার <b>Telegram</b>-এ নোটিশ যায়।</p>
+
+| নোটিশ | কখন যায় |
+|:---|:---|
+| 🟢 **STARTED** | বট লগইন করে চালু হলে |
+| 🔴 **STOPPED** | বট বন্ধ/ক্র্যাশ হলে (কারণ ও কতক্ষণ চালু ছিল সহ) |
+| 🚨 **ALERT** | আইডি লক/সেশন সমস্যা ধরা পড়লে |
+| ✅ **BACK ONLINE** | সমস্যা মিটে বট ঠিকভাবে চললে |
+
+### ⚙️ কীভাবে চালু করবেন
+
+| ধাপ | কাজ |
+|:---|:---|
+| 1️⃣ | Telegram-এ **@BotFather** থেকে বট বানিয়ে **Token** নিন |
+| 2️⃣ | সেই বটকে একবার `/start` দিন এবং আপনার **Chat ID** নিন |
+| 3️⃣ | `config.json`-এর `JUWEL_ALERT` অংশে `TG_TOKEN` ও `TG_CHAT` বসান *(অথবা হোস্টের Variables-এ `JUWEL_TG_TOKEN`, `JUWEL_TG_CHAT`)* |
+| 4️⃣ | বট চালু করে `juwelalert test` দিন — Telegram-এ টেস্ট নোটিশ আসবে |
+
+> ⚠️ **নিরাপত্তা:** Telegram Token কখনো পাবলিক GitHub-এ কমিট করবেন না। হোস্টের **Environment Variables** ব্যবহার করুন।
+
+---
+
 <h1 align="center">🚀 PROJECT STATUS</h1>
 
 <p align="center">
