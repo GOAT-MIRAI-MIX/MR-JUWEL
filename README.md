@@ -113,6 +113,82 @@ Authenticator সিক্রেট কী দিলে 2FA কোডও নি�
 
 ---
 
+<!-- ═══════════════ RENDER AUTO KEEP-ALIVE ═══════════════ -->
+<p align="center">
+  <img src="assets/render-keepalive-banner.svg" alt="JUWEL CHAT BOT — Render Auto Keep-Alive — No UptimeRobot Needed" width="85%"/>
+</p>
+
+<h1 align="center">🌐 RENDER AUTO KEEP-ALIVE</h1>
+
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=700&size=20&duration=2600&pause=800&color=00FFA3&center=true&vCenter=true&width=820&lines=%E2%9C%85+Just+Deploy+On+Render+%E2%80%94+Bot+Never+Sleeps;%F0%9F%9A%AB+No+UptimeRobot+Needed;%F0%9F%94%81+Bot+Pings+Itself+Every+4+Minutes;%E2%9A%A1+One+File+%E2%80%94+Zero+Extra+Setup" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/🌐_RENDER-24%2F7_ONLINE-00e676?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/🚫_UPTIMEROBOT-NOT_NEEDED-ff4d6d?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/🔁_SELF-PING-00b2ff?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/⚙️_SETUP-1_MINUTE-ffd200?style=for-the-badge"/>
+</p>
+
+Render-এর ফ্রি প্ল্যানে ১৫ মিনিট কেউ ঢুকলে সার্ভিস ঘুমিয়ে যায় — আগে তাই **UptimeRobot-এ Render-এর লিংক অ্যাড** করতে হতো। এখন আর লাগবে না! বট নিজেই নিজের লিংকে নিয়মিত পিং পাঠিয়ে সারাক্ষণ জেগে থাকে।
+
+<table align="center">
+<tr>
+<td align="center" width="25%">
+
+### 🔗 Auto Link
+Render নিজে যে লিংক দেয় (`RENDER_EXTERNAL_URL`) বট সেটা নিজেই খুঁজে নেয় — লিংক কপি-পেস্ট করতে হয় না।
+
+</td>
+<td align="center" width="25%">
+
+### 🔁 Self Ping
+প্রতি **৪ মিনিটে** নিজের লিংকে রিকুয়েস্ট পাঠায়, তাই ১৫ মিনিটের স্লিপ কখনো আসে না।
+
+</td>
+<td align="center" width="25%">
+
+### 🚫 No UptimeRobot
+আলাদা কোনো ওয়েবসাইট বা মনিটরে লিংক অ্যাড করার ঝামেলা নেই।
+
+</td>
+<td align="center" width="25%">
+
+### 🛡️ Safe Fallback
+লোকাল / Railway / Heroku-তে চালালে নিজে বন্ধ থাকে, বট আগের মতোই চলে।
+
+</td>
+</tr>
+</table>
+
+### ⚙️ Render-এ কীভাবে চালু করবেন
+
+| ধাপ | কাজ |
+|:---|:---|
+| 1️⃣ | `juwelKeepAlive.js` ফাইলটা রিপোতে `Juwel.js`-এর পাশে থাকতে হবে |
+| 2️⃣ | Render → আপনার সার্ভিস → **Settings** → **Build & Deploy** |
+| 3️⃣ | **Start Command** এ লিখুন: `node juwelKeepAlive.js` |
+| 4️⃣ | **Save Changes** → **Manual Deploy → Deploy latest commit** |
+| 5️⃣ | লগে `[KEEPALIVE] ... (200)` দেখলেই কাজ হচ্ছে ✅ — UptimeRobot-এ আর কিছু করতে হবে না |
+
+> 🍪 **Auto Cookie (Guardian) ও চালাতে চাইলে:** Start Command একই থাকবে (`node juwelKeepAlive.js`), শুধু Render-এর **Environment Variables**-এ `USE_GUARDIAN` = `1` দিন। তাহলে Keep-Alive + Auto Cookie দুটোই একসাথে চলবে।
+>
+> ℹ️ Render ফ্রি প্ল্যানে মাসে ৭৫০ ঘণ্টা পাওয়া যায় — একটা বট ২৪/৭ চালানোর জন্য এটাই যথেষ্ট, তাই একই অ্যাকাউন্টে একটার বেশি সার্ভিস চালাবেন না।
+
+<details>
+<summary><b>🔧 Environment Variables (ঐচ্ছিক)</b></summary>
+
+| Variable | কাজ |
+|:---|:---|
+| `KEEPALIVE_URL` | অটো লিংক না পেলে নিজের Render লিংক দিন |
+| `KEEPALIVE_INTERVAL_MS` | পিংয়ের সময় (ডিফল্ট `240000` = ৪ মিনিট) |
+| `USE_GUARDIAN` | `1` দিলে Auto Cookie Guardian-সহ চালু হয় |
+
+</details>
+
+---
+
 <!-- ═══════════════ TELEGRAM START/STOP NOTICE ═══════════════ -->
 <p align="center">
   <img src="assets/telegram-alert-banner.svg" alt="MR JUWEL — Bot Start / Stop Notice on Telegram" width="85%"/>
@@ -156,6 +232,7 @@ Authenticator সিক্রেট কী দিলে 2FA কোডও নি�
   <img src="https://img.shields.io/badge/PLATFORM-MESSENGER-0084ff?style=for-the-badge&logo=messenger&logoColor=white"/>
   <img src="https://img.shields.io/badge/STATUS-ACTIVE-00e676?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/UPTIME-24%2F7-00e676?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/RENDER-KEEP--ALIVE-00ffa3?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/LICENSE-MIT-ffd200?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/NODE.JS-%E2%89%A520-68a063?style=for-the-badge&logo=nodedotjs&logoColor=white"/>
 </p>
@@ -288,7 +365,7 @@ Ramadan auto-time, সূরা, Islamic video।
 <td align="center">
 
 ### 🌐 24/7 Uptime
-Render / Railway / Heroku-তে সারাক্ষণ অনলাইন।
+Render-এ Self Keep-Alive — UptimeRobot ছাড়াই সারাক্ষণ অনলাইন।
 
 </td>
 </tr>
@@ -586,7 +663,13 @@ npm install
 node Juwel.js        # অথবা: npm start
 ```
 
-> ⚠️ সবসময় `npm start` / `node Juwel.js` — `node Main.js` নয়।
+**Render-এ** (UptimeRobot ছাড়া সারাক্ষণ অনলাইন):
+
+```bash
+node juwelKeepAlive.js
+```
+
+> ⚠️ সবসময় `npm start` / `node Juwel.js` / `node juwelKeepAlive.js` — `node Main.js` নয়।
 > `appstate.json` এ কুকি বসান, `config.json` এ `ADMINBOT` / `DEVELOPER` এ আপনার UID দিন।
 
 ---
