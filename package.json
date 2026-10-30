@@ -29,9 +29,9 @@
   "author": "乛 M𝆠፝֟R ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/GOAT-MIRAI-MIX/MR-JUWEL.git/issues"
+    "url": "https://github.com/GOAT-MIRAI-MIX/MR-JUWEL/issues"
   },
-  "homepage": "https://github.com/GOAT-MIRAI-MIX/MR-JUWEL.git/issues",
+  "homepage": "https://github.com/GOAT-MIRAI-MIX/MR-JUWEL#readme",
   "dependencies": {
     "@miraipr0ject/assets": "^1.0.9",
     "axios": "^1.6.0",
@@ -43,9 +43,9 @@
     "image-downloader": "^4.3.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
+    "mr-juwel-fca": "^1.0.4",
     "node-schedule": "^2.1.1",
     "request": "^2.88.2",
-    "mr-juwel-fca": "^1.0.3",
     "sequelize": "^6.21.4",
     "shaon-videos-downloader": "^1.0.1",
     "sqlite3": "^5.1.7",
