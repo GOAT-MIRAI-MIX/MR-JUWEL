@@ -4,7 +4,20 @@
  *  Credit : 乛 M𝆠፝֟R ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐
  * ╚══════════════════════════════════════════════════════════╝
  *
- *  v1.9.0 — ক্রেডিট/কমান্ডের নাম/নোটিশ বদলালে কোড বন্ধ হয়ে যায়; কমান্ড দিলে নোটিশ দেখায়।
+ *  ⚠️ লাইসেন্স / মালিকানা নোটিশ ⚠️
+ *  এই ফাইলটি "乛 M𝆠፝֟R ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐" কর্তৃক তৈরি ও কপিরাইটকৃত।
+ *  উপরের ক্রেডিট লাইন, এই নোটিশ, বা নিচের WATERMARK কমেন্ট মুছে ফেলা, বদলানো,
+ *  বা অন্য কারও নামে এই কোড পুনঃবিতরণ করা কপিরাইট লঙ্ঘন — অনুমতি ছাড়া করা যাবে না।
+ *  প্রতিটি বট-নোটিশে (START/STOP/ALERT/TEST) এই ক্রেডিট স্বচ্ছভাবে দেখানো হয়, যাতে
+ *  যে কেউ যাচাই করতে পারে কোডটি আসল কি না।
+ *  WATERMARK-ID: JUWEL-ALERT-9f3c2a1e  (এই আইডি দিয়ে কোডের আসল উৎস শনাক্ত করা যায়)
+ *
+ *  v2.0.0 — কপিরাইট সুরক্ষা: ক্রেডিট/ওয়াটারমার্ক বদলালে বা মুছলে কোড কাজ করবে না।
+ *           অ্যাডমিনকে "LOCKED" নোটিশ যাবে, যেখানে বদলানো ক্রেডিট ও আসল ক্রেডিট দুটোই দেখায়।
+ *  v1.9.0 — একসাথে ৫-৬টা "STOPPED" নোটিশ আসার সমস্যা ঠিক: পাঠানোর আগেই ফাইল-লক দিয়ে
+ *           দখল (claim) নেওয়া হয়, তাই রিস্টার্ট/ওয়াচডগ একসাথে পাঠাতে পারে না।
+ *           ALERT নোটিশেও চালু থাকার সময় + STARTED যোগ। রিস্টার্ট লুপে সময় ০ থেকে শুরু হয় না
+ *           (৫ মিনিটের মধ্যে রিস্টার্ট হলে আগের সময় থেকেই গোনা চলে)।
  *  v1.8.0 — সব নোটিশে (লক/সেশন ALERT সহ) বট কতক্ষণ চালু ছিল তা দেখায়।
  *           সময়ের ক্রম: সেকেন্ড → মিনিট → ঘণ্টা → দিন।
  *  v1.7.0 — আইডি লক/সেশন সমস্যার নোটিশ একবারই, বট বন্ধের নোটিশও একবারই (রিস্টার্টেও বারবার যাবে না)।
@@ -49,8 +62,12 @@ const STOP_NOTICE_WAIT_MS = 6000; // বন্ধ হওয়ার আগে �
 const RECOVER_STABLE_MS = Number(process.env.JUWEL_RECOVER_MS) || 5 * 60 * 1000; // এতক্ষণ টানা সুস্থ থাকলে তবেই "ফিরে এসেছে"
 const EPISODE_MAX_MS = 6 * 60 * 60 * 1000; // নিরাপত্তা: ৬ ঘণ্টা পর লক নিজে খুলে যাবে
 
-/* ───────────── একবারই-পাঠানো লক (ফাইলে থাকে, রিস্টার্টেও টিকে) ───────────── */
+/* ───────────── একবারই-পাঠানো লক (ফাইলে, প্রসেস-নিরাপদ) ───────────── */
 const LATCH_FILE = require("path").join(__dirname, "..", "..", "juwelalert.latch.json");
+const LOCK_FILE = LATCH_FILE + ".lock";
+const RUN_FILE = require("path").join(__dirname, "..", "..", "juwelalert.run.json");
+const PENDING_MS = 20 * 1000; // "পাঠানো চলছে" ধরে নেওয়ার সর্বোচ্চ সময়
+
 function latchRead() {
   try { return JSON.parse(require("fs").readFileSync(LATCH_FILE, "utf8")) || {}; }
   catch (_) { return {}; }
@@ -58,17 +75,65 @@ function latchRead() {
 function latchWrite(o) {
   try { require("fs").writeFileSync(LATCH_FILE, JSON.stringify(o)); } catch (_) {}
 }
+// একসাথে একাধিক প্রসেস ভেতরে ঢুকতে পারবে না
+function withFileLock(fn) {
+  const fs = require("fs");
+  const t0 = Date.now();
+  while (true) {
+    try { fs.writeFileSync(LOCK_FILE, String(process.pid), { flag: "wx" }); break; }
+    catch (_) {
+      try { if (Date.now() - fs.statSync(LOCK_FILE).mtimeMs > 5000) fs.unlinkSync(LOCK_FILE); } catch (__) {}
+      if (Date.now() - t0 > 3000) break;
+      const end = Date.now() + 25; while (Date.now() < end) {}
+    }
+  }
+  try { return fn(); } finally { try { fs.unlinkSync(LOCK_FILE); } catch (_) {} }
+}
 // key: "alert" (লক/সেশন সমস্যা) | "stop" (বট বন্ধ)
+// পাঠানো হয়ে গেছে বা কেউ এখন পাঠাচ্ছে → false
 function canSend(key) {
-  const t = latchRead()[key];
-  return !(t && Date.now() - t < EPISODE_MAX_MS);
+  const o = latchRead();
+  const t = o[key], p = o[key + "_p"];
+  if (t && Date.now() - t < EPISODE_MAX_MS) return false;
+  if (p && Date.now() - p < PENDING_MS) return false;
+  return true;
+}
+// পাঠানোর আগে দখল নেয়; সফল হলে true
+function claim(key) {
+  return withFileLock(() => {
+    if (!canSend(key)) return false;
+    const o = latchRead(); o[key + "_p"] = Date.now(); latchWrite(o);
+    return true;
+  });
 }
 function markSent(key) {
-  const o = latchRead();
-  o[key] = Date.now();
-  latchWrite(o);
+  withFileLock(() => { const o = latchRead(); o[key] = Date.now(); delete o[key + "_p"]; latchWrite(o); });
 }
-function clearLatch() { latchWrite({}); }
+function release(key) {
+  withFileLock(() => { const o = latchRead(); delete o[key + "_p"]; latchWrite(o); });
+}
+function clearLatch() { withFileLock(() => latchWrite({})); }
+
+/* ───────────── চালু থাকার সময় (রিস্টার্টেও টিকে থাকে) ───────────── */
+const PROC_START = Date.now() - Math.round(process.uptime() * 1000);
+const RUN_START = (function () {
+  try {
+    const r = JSON.parse(require("fs").readFileSync(RUN_FILE, "utf8"));
+    // ৫ মিনিটের মধ্যে রিস্টার্ট হলে আগের সময় থেকেই গোনা চলবে
+    if (r && r.since && r.seen && PROC_START - r.seen < 5 * 60 * 1000) return r.since;
+  } catch (_) {}
+  return PROC_START;
+})();
+function saveRunInfo() {
+  try {
+    if (global.client && global.client.api)
+      require("fs").writeFileSync(RUN_FILE, JSON.stringify({ since: RUN_START, seen: Date.now() }));
+  } catch (_) {}
+}
+const fmtDate = (ms) => {
+  try { return new Date(ms).toLocaleString("en-GB", { timeZone: "Asia/Dhaka", hour12: true }); }
+  catch (_) { return new Date(ms).toISOString(); }
+};
 
 const state = global.__juwelAlert || (global.__juwelAlert = {
   started: false,
@@ -89,10 +154,7 @@ const state = global.__juwelAlert || (global.__juwelAlert = {
 });
 
 /* ───────────── helpers ───────────── */
-const dhakaTime = () => {
-  try { return new Date().toLocaleString("en-GB", { timeZone: "Asia/Dhaka", hour12: true }); }
-  catch (_) { return new Date().toISOString(); }
-};
+const dhakaTime = () => fmtDate(Date.now());
 const pad2 = (n) => String(n).padStart(2, "0");
 // সেকেন্ড থেকে দিন/ঘণ্টা/মিনিট/সেকেন্ড
 const uptimeParts = (sec) => {
@@ -121,28 +183,6 @@ const fx = (str) => String(str).replace(/[A-Za-z0-9]/g, (c) => {
 });
 const CREDIT = "乛 M𝆠፝֟R ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐"; // ফন্ট-রূপান্তর হয় না, যেমন আছে তেমন
 
-
-/* ───────────── সুরক্ষা: ক্রেডিট/নাম বদলালে কোড বন্ধ ───────────── */
-// ক্রেডিট (বডি মেসেজের CREDIT), ক্রেডিট (config.credits), কমান্ডের নাম (config.name) —
-// এই তিনটার যেকোনো একটা বদলালে কোড চলবে না; কমান্ড দিলে নিচের নোটিশ দেখাবে।
-// নোটিশের লেখা বদলালেও কোড চলবে না। (মান সরাসরি নয়, SHA-256 হ্যাশে যাচাই হয়)
-const _sha = (x) => require("crypto").createHash("sha256").update(String(x), "utf8").digest("hex");
-const _H = {
-  credit: "8f74924e81a157abaf089d90717e48a4949617a7379d20a2df567cb0ab0dad81",
-  name: "864f6c9e58252e2bf3c51f9ca68be25dcfaf82ebdf23b4b51e8a40f974e6d06d",
-  notice: "c4dbf6d8de79cd4a8c5f048046657a9a4267911ae0798e6559adf61f7b6d6ac6"
-};
-const TAMPER_NOTICE = "⛔ এই কোডের ক্রেডিট বা কমান্ডের নাম পরিবর্তন করা হয়েছে, তাই কোড বন্ধ করা হয়েছে।\nআসল ক্রেডিট ও নাম ফিরিয়ে দিন, তারপর বট রিস্টার্ট দিন।";
-function integrityOK() {
-  try {
-    const cfg = (module.exports && module.exports.config) || {};
-    return _sha(CREDIT) === _H.credit &&
-           _sha(cfg.credits) === _H.credit &&
-           _sha(cfg.name) === _H.name &&
-           _sha(TAMPER_NOTICE) === _H.notice;
-  } catch (_) { return false; }
-}
-
 const stripAnsi = (s) => String(s).replace(/\u001b\[[0-9;]*m/g, "");
 
 function log(msg, level) {
@@ -164,7 +204,6 @@ function withLock(reason) {
 }
 
 async function sendExternal(text) {
-  if (!integrityOK()) return false; // ক্রেডিট/নাম বদলানো — পাঠানো বন্ধ
   text = withCredit(text); // ফন্ট + ক্রেডিট সব বার্তায়
   const tgToken = process.env.JUWEL_TG_TOKEN, tgChat = process.env.JUWEL_TG_CHAT;
   const dc = process.env.JUWEL_DISCORD_WEBHOOK;
@@ -201,7 +240,6 @@ async function sendExternal(text) {
 }
 
 async function sendMessengerToAdmins(text) {
-  if (!integrityOK()) return;
   text = withCredit(text); // ফন্ট + ক্রেডিট সব বার্তায়
   const api = global.client && global.client.api;
   if (!api) return;
@@ -218,31 +256,34 @@ const LINE = "━━━━━━━━━━━━━━━━━━━━";
 async function raiseAlert(reason) {
   const now = Date.now();
   if (!state.down) { state.down = true; state.downSince = now; }
-  if (!canSend("alert")) return; // আগেই একবার গেছে → আর নয়
+  if (!canSend("alert")) return; // আগেই একবার গেছে বা কেউ পাঠাচ্ছে
   // পাঠানো চলছে, বা আগের চেষ্টা ব্যর্থ হয়ে থাকলে ১ মিনিটের আগে আবার নয়
   if (state.alertSending || now - state.lastAlertAt < 60 * 1000) return;
+  if (!claim("alert")) return; // অন্য প্রসেস আগেই দখল নিয়েছে
   state.alertSending = true;
   state.lastAlertAt = now;
-  const upA = uptimeParts(process.uptime());
+  const upA = uptimeParts((now - RUN_START) / 1000);
   const text =
     HEAD("🚨 JUWEL BOT • ALERT") + "\n\n" +
     "🔴 STATUS ➤ SESSION PROBLEM\n" + LINE + "\n" +
     "📛 কারণ ➤ " + reason + "\n" + LINE + "\n" +
     "⏱ চালু ছিল\n" + uptimeLines(upA) + "\n" + LINE + "\n" +
+    "📅 STARTED ➤ " + fmtDate(RUN_START) + "\n" +
     "🕒 TIME ➤ " + dhakaTime() + "\n" + LINE + "\n" +
     "🛠 করণীয়: নতুন appstate.json (কুকি) বসিয়ে বট রিস্টার্ট দিন।";
   log("সতর্কতা: " + reason, "error");
   try {
     const ok = await sendExternal(text);
-    if (ok) markSent("alert");
-  } finally { state.alertSending = false; }
+    if (ok) markSent("alert"); else release("alert");
+  } catch (_) { release("alert"); }
+  finally { state.alertSending = false; }
 }
 
 // সমস্যা মিটে টানা ৫ মিনিট সুস্থ থাকলে একবার "BACK ONLINE" + লক খুলে দেয়
 async function raiseRecovery() {
-  const hadAlert = state.down || !canSend("alert");
   const o = latchRead();
-  const ts = Object.values(o).filter(Boolean);
+  const hadAlert = state.down || !!o.alert || !!o.stop;
+  const ts = [o.alert, o.stop].filter(Boolean);
   const since = state.downSince || (ts.length ? Math.min.apply(null, ts) : Date.now());
   const downFor = Date.now() - since;
   clearLatch(); // নতুন সমস্যা হলে আবার একবার নোটিশ যাবে
@@ -265,22 +306,16 @@ let stopPromise = null;
 // startMs/endMs দিলে সেটা দিয়ে uptime হিসাব হয় (watchdog ব্যবহার করে)
 function stopText(reason, startMs, endMs) {
   const end = endMs || Date.now();
-  const start = startMs || (end - process.uptime() * 1000);
+  const start = startMs || RUN_START;
   const up = uptimeParts((end - start) / 1000);
-  let started;
-  try { started = new Date(start).toLocaleString("en-GB", { timeZone: "Asia/Dhaka", hour12: true }); }
-  catch (_) { started = new Date(start).toISOString(); }
-  let stopped;
-  try { stopped = new Date(end).toLocaleString("en-GB", { timeZone: "Asia/Dhaka", hour12: true }); }
-  catch (_) { stopped = new Date(end).toISOString(); }
 
   return (
     HEAD("🔴 JUWEL BOT • STOPPED") + "\n\n" +
     "🔴 STATUS ➤ OFFLINE\n" + LINE + "\n" +
     "📛 কারণ ➤ " + reason + "\n" + LINE + "\n" +
     "⏱ চালু ছিল\n" + uptimeLines(up) + "\n" + LINE + "\n" +
-    "📅 STARTED ➤ " + started + "\n" +
-    "🕒 STOPPED ➤ " + stopped
+    "📅 STARTED ➤ " + fmtDate(start) + "\n" +
+    "🕒 STOPPED ➤ " + fmtDate(end)
   );
 }
 
@@ -308,14 +343,16 @@ function sendStopNotice(reason) {
   log("বট বন্ধ হচ্ছে: " + reason, "warn");
   watchSend("REASON:" + reason);
   heartbeatFail();
-  // এই সমস্যায় আগেই একবার STOPPED গেছে → আর পাঠাবে না (ওয়াচডগকেও জানিয়ে দেয়)
-  if (!canSend("stop")) {
+  // আগেই গেছে বা অন্য প্রসেস পাঠাচ্ছে → আর নয় (ওয়াচডগকেও জানিয়ে দেয়)
+  if (!claim("stop")) {
     watchSend("SENT");
     stopPromise = Promise.resolve(false);
     return stopPromise;
   }
   stopPromise = Promise.race([
-    sendExternal(stopText(reason)).then((ok) => { if (ok) { markSent("stop"); watchSend("SENT"); } return ok; }).catch(() => false),
+    sendExternal(stopText(reason))
+      .then((ok) => { if (ok) { markSent("stop"); watchSend("SENT"); } else release("stop"); return ok; })
+      .catch(() => { release("stop"); return false; }),
     new Promise((res) => setTimeout(res, STOP_NOTICE_WAIT_MS))
   ]);
   return stopPromise;
@@ -385,7 +422,7 @@ function startWatchdog() {
       windowsHide: true,
       env: Object.assign({}, process.env, {
         JW_PID: String(process.pid),
-        JW_START: String(Date.now() - Math.round(process.uptime() * 1000))
+        JW_START: String(RUN_START)
       })
     });
     child.on("error", () => {});
@@ -428,19 +465,27 @@ function runWatcher() {
     finishing = true;
     // বট মরে গেছে, তাই আর কোনো SENT আসবে না; পাইপের বাকি ডাটা পড়ার জন্য অল্প অপেক্ষা
     await new Promise((r) => setTimeout(r, 300));
-    // বট নিজে পাঠায়নি এবং এই সমস্যায় আগে STOPPED যায়নি — তখনই ওয়াচডগ পাঠাবে
-    if (!handled && canSend("stop")) {
-      const why = reason || crash ||
-        (exitCode !== null && exitCode !== "undefined"
-          ? "বট বন্ধ হয়েছে (exit code " + exitCode + ")"
-          : "হঠাৎ বন্ধ — kill -9 / মেমরি শেষ / হোস্ট জোর করে বন্ধ করেছে");
-      const msg = stopText(why + " [watchdog]", startMs, Date.now());
-      // একবার ব্যর্থ হলে আরও ২ বার চেষ্টা
-      for (let i = 0; i < 3; i++) {
-        let ok = false;
-        try { ok = await sendExternal(msg); } catch (_) {}
-        if (ok) { markSent("stop"); break; }
-        await new Promise((r) => setTimeout(r, 1500));
+    if (!handled) {
+      // বট নিজে পাঠানোর মাঝখানে মারা গেলে, তার দখলের মেয়াদ শেষ হওয়া পর্যন্ত অপেক্ষা
+      for (let i = 0; i < 25; i++) {
+        const p = latchRead().stop_p;
+        if (!p || Date.now() - p >= PENDING_MS) break;
+        await new Promise((r) => setTimeout(r, 1000));
+      }
+      // বট নিজে পাঠায়নি এবং এই সমস্যায় আগে STOPPED যায়নি — তখনই ওয়াচডগ পাঠাবে
+      if (claim("stop")) {
+        const why = reason || crash ||
+          (exitCode !== null && exitCode !== "undefined"
+            ? "বট বন্ধ হয়েছে (exit code " + exitCode + ")"
+            : "হঠাৎ বন্ধ — kill -9 / মেমরি শেষ / হোস্ট জোর করে বন্ধ করেছে");
+        const msg = stopText(why + " [watchdog]", startMs, Date.now());
+        // একবার ব্যর্থ হলে আরও ২ বার চেষ্টা
+        let sentOk = false;
+        for (let i = 0; i < 3 && !sentOk; i++) {
+          try { sentOk = await sendExternal(msg); } catch (_) {}
+          if (!sentOk) await new Promise((r) => setTimeout(r, 1500));
+        }
+        if (sentOk) markSent("stop"); else release("stop");
       }
     }
     process.exit(0);
@@ -556,7 +601,8 @@ function probe() {
       } else {
         state.probeFails = 0; state.lastProbeOk = true;
         // সমস্যার পর টানা RECOVER_STABLE_MS সুস্থ থাকলে তবেই রিকভারি (বারবার ওঠানামায় নোটিশ যাবে না)
-        if (state.down || !canSend("alert") || !canSend("stop")) {
+        const o = latchRead();
+        if (state.down || o.alert || o.stop) {
           if (!state.okSince) state.okSince = Date.now();
           const stable = Date.now() - state.okSince >= RECOVER_STABLE_MS;
           const noRecentLock = Date.now() - (state.lockAt || 0) >= RECOVER_STABLE_MS;
@@ -586,19 +632,22 @@ function startHeartbeat() {
 /* ───────────── boot ───────────── */
 function start() {
   if (state.started) return;
-  if (!integrityOK()) { try { console.log("[JuwelAlert] ক্রেডিট/কমান্ডের নাম বদলানো হয়েছে — কোড বন্ধ।"); } catch (_) {} return; }
   state.started = true;
   installLogWatcher();
   installShutdownHook();
   startWatchdog();
   startHeartbeat();
+  saveRunInfo();
+  const rs = setInterval(saveRunInfo, 30 * 1000);
+  if (rs.unref) rs.unref();
   const t = setInterval(probe, PROBE_EVERY_MS);
   if (t.unref) t.unref();
 
   // চালু-নোটিশ: লগইন সফল হওয়ার পর (api পাওয়া গেলে) পাঠায়।
   // লগইন না হলে "চালু" নোটিশ যাবে না; সেক্ষেত্রে probe() সতর্কতা দেবে।
   const sendBoot = async () => {
-    if (!canSend("alert")) return; // আইডি লক/সেশন সমস্যা চলছে — "STARTED" নোটিশ নয়
+    const o = latchRead();
+    if (o.alert || o.stop || o.alert_p || o.stop_p) return; // আইডি লক/সেশন সমস্যা চলছে — "STARTED" নোটিশ নয়
     const text =
       HEAD("🟢 JUWEL BOT • STARTED") + "\n\n" +
       "🟢 STATUS ➤ ONLINE\n" + LINE + "\n" +
@@ -628,8 +677,7 @@ function start() {
 }
 
 function healthText() {
-  const up = uptimeParts(process.uptime());
-  const startedAt = new Date(Date.now() - process.uptime() * 1000);
+  const up = uptimeParts((Date.now() - RUN_START) / 1000);
   const probeTxt = state.lastProbeOk === null ? "PENDING" : state.lastProbeOk ? "✅ OK" : "❌ FAILED";
   const probeAgo = state.lastProbeAt ? " (" + fmtDur(Date.now() - state.lastProbeAt) + " ago)" : "";
   const tg = process.env.JUWEL_TG_TOKEN && process.env.JUWEL_TG_CHAT ? "ON ✅" : "OFF ❌";
@@ -638,15 +686,12 @@ function healthText() {
   const hb = process.env.JUWEL_HEARTBEAT_URL ? "ON ✅" : "OFF ❌";
   const ram = Math.round(process.memoryUsage().rss / 1048576);
   const cmds = global.client && global.client.commands ? global.client.commands.size : "?";
-  let started;
-  try { started = startedAt.toLocaleString("en-GB", { timeZone: "Asia/Dhaka", hour12: true }); }
-  catch (_) { started = startedAt.toISOString(); }
 
   return (
     HEAD("🤖 JUWEL BOT • STATUS") + "\n\n" +
     (state.down ? "🔴 STATUS ➤ PROBLEM" : "🟢 STATUS ➤ ONLINE") + "\n" + LINE + "\n" +
     "⏱ UPTIME\n" + uptimeLines(up) + "\n" + LINE + "\n" +
-    "📅 STARTED ➤ " + started + "\n" +
+    "📅 STARTED ➤ " + fmtDate(RUN_START) + "\n" +
     "🕒 NOW ➤ " + dhakaTime() + "\n" + LINE + "\n" +
     "🩺 HEALTH CHECK\n" +
     " ┌ RESULT ➤ " + probeTxt + probeAgo + "\n" +
@@ -664,12 +709,8 @@ function healthText() {
 
 /* ───────────── uptime ব্লক (test ও চালু-নোটিশে ব্যবহার হয়) ───────────── */
 function uptimeBlock() {
-  const up = uptimeParts(process.uptime());
-  const startedAt = new Date(Date.now() - process.uptime() * 1000);
-  let started;
-  try { started = startedAt.toLocaleString("en-GB", { timeZone: "Asia/Dhaka", hour12: true }); }
-  catch (_) { started = startedAt.toISOString(); }
-  return "⏱ UPTIME\n" + uptimeLines(up) + "\n" + LINE + "\n" + "📅 STARTED ➤ " + started;
+  const up = uptimeParts((Date.now() - RUN_START) / 1000);
+  return "⏱ UPTIME\n" + uptimeLines(up) + "\n" + LINE + "\n" + "📅 STARTED ➤ " + fmtDate(RUN_START);
 }
 
 /* ───────────── test notice (সাজানো) ───────────── */
@@ -745,11 +786,65 @@ const infoBlock = () => {
 // কার্ড = ফন্ট-রূপান্তরিত টেক্সট + বট/অ্যাডমিন/UID + (রূপান্তরহীন) ক্রেডিট লাইন
 const withCredit = (t) => fx(t) + "\n" + LINE + "\n" + infoBlock() + "\n" + LINE + "\n✨ Credit ➤ " + CREDIT;
 
+/* ───────────── কপিরাইট সুরক্ষা (ক্রেডিট বদলালে কোড কাজ করবে না) ───────────── */
+// আসল ক্রেডিট base64-এ রাখা, যাতে খুঁজে-বদলে (find/replace) ধরা না যায়
+const _ORIG_B64 = "5LmbIE3wnYag4Y2d1p9SIOC9kOC9suC8j+C9i+C+gCBKVfCdhqDhjZ3Wn1fwnYag4Y2d1p9FTOqcm+C9kOC9suC8j+C9i+C+gOC/kA==";
+const ORIGINAL_CREDIT = Buffer.from(_ORIG_B64, "base64").toString("utf8");
+const _CREDIT_SHA = "8f74924e81a157abaf089d90717e48a4949617a7379d20a2df567cb0ab0dad81";
+const _sha = (s) => require("crypto").createHash("sha256").update(String(s), "utf8").digest("hex");
+
+let _integ = null;
+// যাচাই: CREDIT ভেরিয়েবল, config.credits, ফাইলের হেডারে আসল ক্রেডিট ও WATERMARK-ID
+function integrity() {
+  if (_integ) return _integ;
+  const bad = [];
+  if (_sha(CREDIT) !== _CREDIT_SHA) bad.push("CREDIT ভেরিয়েবল");
+  const cfgCredit = module.exports.config && module.exports.config.credits;
+  if (_sha(cfgCredit) !== _CREDIT_SHA) bad.push("config.credits");
+  try {
+    const head = require("fs").readFileSync(__filename, "utf8").slice(0, 3000);
+    if (head.indexOf(ORIGINAL_CREDIT) === -1) bad.push("ফাইলের হেডার ক্রেডিট");
+    if (head.indexOf("WATERMARK-ID: JUWEL-ALERT-9f3c2a1e") === -1) bad.push("WATERMARK-ID");
+  } catch (_) {}
+  _integ = { ok: bad.length === 0, bad, shown: String(cfgCredit || CREDIT) };
+  return _integ;
+}
+
+// ক্রেডিট বদলানো হলে এই নোটিশ যায় — বদলানো ক্রেডিটের পাশাপাশি আসল ক্রেডিটও দেখায়
+function lockText() {
+  const i = integrity();
+  return (
+    HEAD("⛔ JUWEL ALERT • LOCKED") + "\n\n" +
+    "🚫 কপিরাইট ক্রেডিট পরিবর্তন/মুছে ফেলা হয়েছে, তাই এই কোড কাজ করবে না।\n" + LINE + "\n" +
+    "⚠️ পরিবর্তিত জায়গা ➤ " + i.bad.join(", ") + "\n" +
+    "❌ বর্তমান ক্রেডিট ➤ " + i.shown + "\n" +
+    "✅ আসল ক্রেডিট ➤ " + ORIGINAL_CREDIT + "\n" + LINE + "\n" +
+    "🛠 সমাধান: আসল ক্রেডিট ফিরিয়ে দিন, তারপর বট রিস্টার্ট দিন।\n" +
+    "🔖 WATERMARK-ID ➤ JUWEL-ALERT-9f3c2a1e"
+  );
+}
+
+// লক অবস্থায় শুধু নোটিশ দেয় (কনসোলে + লগইনের পর অ্যাডমিনদের মেসেঞ্জারে); আর কিছু চালু হয় না
+function lockedStart() {
+  if (global.__juwelLockWarned) return;
+  global.__juwelLockWarned = true;
+  const text = lockText();
+  try { console.error("\n" + text + "\n"); } catch (_) {}
+  const tick = () => {
+    const api = global.client && global.client.api;
+    if (!api) return;
+    clearInterval(timer);
+    for (const id of adminIDs()) { try { api.sendMessage(text, id, () => {}); } catch (_) {} }
+  };
+  const timer = setInterval(tick, 5000);
+  if (timer.unref) timer.unref();
+}
+
 /* ───────────── command ───────────── */
 module.exports.config = {
   name: "juwelalert",
   aliases: ["jalert"],
-  version: "1.9.0",
+  version: "2.0.0",
   hasPermssion: 2,
   credits: "乛 M𝆠፝֟R ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐",
   description: "সেশন সতর্কতা ও বট চালু/বন্ধ নোটিশ",
@@ -759,18 +854,19 @@ module.exports.config = {
 };
 
 module.exports.onLoad = function () {
+  if (!integrity().ok) return lockedStart();
   try { start(); } catch (e) { log("start ত্রুটি: " + e.message, "error"); }
 };
 
 // onLoad না চললেও (কিছু লোডারে) প্রথম ইভেন্টেই চালু হয়ে যাবে
 module.exports.handleEvent = function () {
-  if (!integrityOK()) return;
+  if (!integrity().ok) return lockedStart();
   if (!state.started) { try { start(); } catch (_) {} }
 };
 
 module.exports.run = async function ({ api, event, args }) {
   const { threadID, messageID } = event;
-  if (!integrityOK()) return api.sendMessage(TAMPER_NOTICE, threadID, messageID); // ক্রেডিট/নাম বদলানো
+  if (!integrity().ok) return api.sendMessage(lockText(), threadID, messageID);
   if (!state.started) start();
   if ((args[0] || "").toLowerCase() === "test") {
     const ok = await sendExternal(testText());
@@ -781,9 +877,10 @@ module.exports.run = async function ({ api, event, args }) {
 
 // ওয়াচডগ মোডে শুধু নজরদারি চলে; নইলে স্বাভাবিকভাবে চালু
 if (IS_WATCHER) {
-  if (!integrityOK()) process.exit(0); // ক্রেডিট/নাম বদলানো — ওয়াচডগও চলবে না
   try { runWatcher(); } catch (_) { process.exit(1); }
 } else {
   // ফাইল লোড হওয়ার সাথে সাথেই চালু — onLoad/handleEvent না চললেও নজরদারি কাজ করবে
-  try { start(); } catch (e) { log("start ত্রুটি: " + e.message, "error"); }
-          }
+  // ক্রেডিট বদলানো থাকলে চালু হবে না, শুধু LOCKED নোটিশ যাবে
+  if (!integrity().ok) lockedStart();
+  else { try { start(); } catch (e) { log("start ত্রুটি: " + e.message, "error"); } }
+  }
