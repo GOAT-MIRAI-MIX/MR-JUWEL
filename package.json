@@ -43,7 +43,7 @@
     "image-downloader": "^4.3.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
-    "mr-juwel-fca": "^1.0.4",
+    "mr-juwel-fca": "latest",
     "node-schedule": "^2.1.1",
     "request": "^2.88.2",
     "sequelize": "^6.21.4",
