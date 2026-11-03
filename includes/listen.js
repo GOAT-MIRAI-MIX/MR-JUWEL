@@ -58,7 +58,10 @@ module.exports = function ({
 
       const searchName = mentionMatch[1].toLowerCase().trim();
 
-      const threadInfo = await api.getThreadInfo(threadID);
+      const threadInfo = await Promise.race([
+        api.getThreadInfo(threadID),
+        new Promise((_, rej) => setTimeout(() => rej(new Error('mention lookup timeout')), 3000))
+      ]);
       const userInfo = threadInfo.userInfo || [];
       const nicknames = threadInfo.nicknames || {};
 
