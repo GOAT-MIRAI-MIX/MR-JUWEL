@@ -74,7 +74,7 @@
 <td align="center" width="25%">
 
 ### 🍪 Auto Cookie
-ব্রাউজার থেকে ফেসবুক কুকি নিজে নিয়ে `appstate.json` সবসময় নতুন রাখে।
+ব্রাউজার থেকে ফেসবুক. কুকি নিজে নিয়ে `appstate.json` সবসময় নতুন রাখে।
 
 </td>
 <td align="center" width="25%">
