@@ -1,3 +1,14 @@
+<!-- ═══════════════ NEW VIDEO: HOW TO CREATE & RUN MESSENGER BOT ═══════════════ -->
+<p align="center">
+  <a href="https://youtu.be/kNHDYw8GoQg">
+    <img src="assets/bot-create-thumbnail.png" alt="কিভাবে Messenger Bot বানাবেন ও রান দিবেন? GitHub + Railway + Facebook" width="100%"/>
+  </a>
+</p>
+
+<p align="center"><b>▶️ ছবিতে ক্লিক করে নতুন YouTube টিউটোরিয়াল দেখুন — কিভাবে Messenger Bot বানাবেন ও রান দিবেন</b><br/>Click the image above to watch the new step-by-step tutorial on YouTube.</p>
+
+---
+
 <!-- ═══════════════ HEADER WAVE ═══════════════ -->
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,14,18,24&height=240&section=header&text=JUWEL%20CHAT%20BOT&fontSize=62&fontColor=ffffff&animation=fadeIn&fontAlignY=36&desc=Ultra%20Premium%20Messenger%20Automation%20System&descSize=20&descAlignY=58" width="100%"/>
