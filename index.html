@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MR JUWEL - PERSONAL PROFILE</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 25px 15px;
+      font-family: "Montserrat", sans-serif;
+      color: #fff;
+      background:
+        radial-gradient(circle at top left, rgba(139, 92, 246, .35), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(59, 130, 246, .25), transparent 35%),
+        linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 450px;
+      margin: auto;
+      padding: 25px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 28px;
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 25px 70px rgba(0,0,0,.35);
+    }
+
+    /* PROFILE */
+    .profile {
+      text-align: center;
+    }
+
+    .profile-photo {
+      width: 125px;
+      height: 125px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,.9);
+      box-shadow: 0 10px 35px rgba(0,0,0,.35);
+      margin-bottom: 15px;
+    }
+
+    .profile h1 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
+
+    .tagline {
+      margin-top: 7px;
+      color: #d8d5ff;
+      font-size: 13px;
+    }
+
+    /* COMMON CARD */
+    .card {
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 15px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    /* INFO */
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 11px 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      font-size: 13px;
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .info-label {
+      color: #bdb9dc;
+    }
+
+    .info-value {
+      text-align: right;
+      font-weight: 600;
+    }
+
+    /* ABOUT */
+    .about-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .about-list li {
+      padding: 10px 13px;
+      border-radius: 12px;
+      background: rgba(0,0,0,.15);
+    }
+
+    /* SKILLS */
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tag {
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      background: linear-gradient(135deg, rgba(99,102,241,.35), rgba(139,92,246,.35));
+      border: 1px solid rgba(255,255,255,.15);
+    }
+
+    /* PROJECT */
+    .project-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 15px;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 14px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.08);
+      transition: .25s ease;
+    }
+
+    .project-btn:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.13);
+    }
+
+    .project-name {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .project-btn > i {
+      color: #aaa;
+      font-size: 11px;
+    }
+
+    /* STATUS */
+    .status-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .status-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+
+    .status-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 20px;
+      background: rgba(34,197,94,.15);
+      color: #4ade80;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 10px #4ade80;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .status-item {
+      padding: 13px;
+      border-radius: 15px;
+      background: rgba(0,0,0,.15);
+    }
+
+    .status-label {
+      display: block;
+      margin-bottom: 6px;
+      color: #aaa6c8;
+      font-size: 10px;
+    }
+
+    .status-value {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .online {
+      color: #4ade80;
+    }
+
+    .offline {
+      color: #fb7185;
+    }
+
+    .checking {
+      color: #facc15;
+    }
+
+    .last-check {
+      margin-top: 13px;
+      text-align: center;
+      color: #aaa6c8;
+      font-size: 10px;
+    }
+
+    /* CONTACT */
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .contact-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 15px;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 14px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.08);
+      transition: .25s ease;
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.13);
+    }
+
+    .contact-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .contact-left i {
+      width: 20px;
+      text-align: center;
+    }
+
+    .whatsapp i { color: #25D366; }
+    .facebook i { color: #1877F2; }
+    .messenger i { color: #00B2FF; }
+    .github i { color: #fff; }
+    .email i { color: #f87171; }
+    .call i { color: #4ade80; }
+
+    .contact-btn > i {
+      color: #aaa;
+      font-size: 11px;
+    }
+
+    /* STATUS PAGE BUTTON */
+    .status-page-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      width: 100%;
+      margin-top: 15px;
+      padding: 13px;
+      border-radius: 14px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      transition: .25s ease;
+    }
+
+    .status-page-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(99,102,241,.3);
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top: 22px;
+      padding-top: 18px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: #aaa6c8;
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+    footer strong {
+      color: #fff;
+    }
+
+    /* MOBILE */
+    @media (max-width: 400px) {
+      .container {
+        padding: 20px;
+      }
+
+      .profile h1 {
+        font-size: 23px;
+      }
+
+      .status-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container">
+
+    <!-- PROFILE -->
+    <section class="profile">
+
+      <img
+        src="https://i.imgur.com/PbhPfTk.jpeg"
+        class="profile-photo"
+        alt="MR JUWEL">
+
+      <h1>MR JUWEL</h1>
+
+      <p class="tagline">
+        Student • Chatbot Developer
+      </p>
+
+    </section>
+
+
+    <!-- ABOUT ME -->
+    <section class="card">
+
+      <div class="card-title">
+        <i class="fa-solid fa-circle-info"></i>
+        About Me
+      </div>
+
+      <ul class="about-list">
+        <li>🎸 V.I.P. Account ©</li>
+        <li>📸 Photo Editing King 😇</li>
+        <li>😎 Music Star 🎵</li>
+        <li>😘 Love Mom Dad</li>
+        <li>🙂 Girl Respect ❣️</li>
+        <li>👉 Single 💓</li>
+      </ul>
+
+    </section>
+
+
+    <!-- PERSONAL INFORMATION -->
+    <section class="card">
+
+      <div class="card-title">
+        <i class="fa-solid fa-user"></i>
+        Personal Information
+      </div>
+
+      <div class="info-row">
+        <span class="info-label">Name</span>
+        <span class="info-value">MR JUWEL</span>
+      </div>
+
+      <div class="info-row">
+        <span class="info-label">Date of Birth</span>
+        <span class="info-value">24 April 2004</span>
+      </div>
+
+      <div class="info-row">
+        <span class="info-label">Age</span>
+        <span class="info-value" id="age">--</span>
+      </div>
+
+      <div class="info-row">
+        <span class="info-label">Education</span>
+        <span class="info-value">HSC</span>
+      </div>
+
+      <div class="info-row">
+        <span class="info-label">Gender</span>
+        <span class="info-value">Male</span>
+      </div>
+
+      <div class="info-row">
+        <span class="info-label">Relation</span>
+        <span class="info-value">Single</span>
+      </div>
+
+      <div class="info-row">
+        <span class="info-label">Religion</span>
+        <span class="info-value">Islam</span>
+      </div>
+
+      <div class="info-row">
+        <span class="info-label">Mobile</span>
+        <span class="info-value">01943488192</span>
+      </div>
+
+      <div class="info-row">
+        <span class="info-label">Email</span>
+        <span class="info-value">mrjuwel315@gmail.com</span>
+      </div>
+
+      <div class="info-row">
+        <span class="info-label">Address</span>
+        <span class="info-value">Rangpur City, BD</span>
+      </div>
+
+    </section>
+
+
+    <!-- SKILLS -->
+    <section class="card">
+
+      <div class="card-title">
+        <i class="fa-solid fa-code"></i>
+        Skills
+      </div>
+
+      <div class="skill-list">
+        <span class="skill-tag">Message Chat Bot</span>
+      </div>
+
+    </section>
+
+
+    <!-- PROJECTS -->
+    <section class="card">
+
+      <div class="card-title">
+        <i class="fa-solid fa-folder-open"></i>
+        Projects
+      </div>
+
+      <a
+        href="https://github.com/GOAT-MIRAI-MIX/MR-JUWEL.git"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="project-btn">
+
+        <span class="project-name">
+          <i class="fa-brands fa-github"></i>
+          MR JUWEL
+        </span>
+
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+      </a>
+
+    </section>
+
+
+    <!-- SYSTEM STATUS -->
+    <section class="card status-card">
+
+      <div class="status-header">
+
+        <div class="status-title">
+          <i class="fa-solid fa-server"></i>
+          System Status
+        </div>
+
+        <span class="live-badge">
+          <span class="live-dot"></span>
+          LIVE
+        </span>
+
+      </div>
+
+      <div class="status-grid">
+
+        <div class="status-item">
+          <span class="status-label">BOT STATUS</span>
+          <span id="botStatus" class="status-value checking">
+            CHECKING...
+          </span>
+        </div>
+
+        <div class="status-item">
+          <span class="status-label">WEBSITE</span>
+          <span id="websiteStatus" class="status-value checking">
+            CHECKING...
+          </span>
+        </div>
+
+        <div class="status-item">
+          <span class="status-label">UPTIME</span>
+          <span id="uptime" class="status-value">
+            --
+          </span>
+        </div>
+
+        <div class="status-item">
+          <span class="status-label">RESPONSE</span>
+          <span id="responseTime" class="status-value">
+            --
+          </span>
+        </div>
+
+      </div>
+
+      <div id="lastCheck" class="last-check">
+        Checking system...
+      </div>
+
+      <!-- UptimeRobot Public Status Page -->
+      <a
+        href="YOUR_UPTIMEROBOT_STATUS_PAGE"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="status-page-btn">
+
+        <i class="fa-solid fa-chart-line"></i>
+        View Full System Status
+
+      </a>
+
+    </section>
+
+
+    <!-- CONTACT -->
+    <section class="card">
+
+      <div class="card-title">
+        <i class="fa-solid fa-address-book"></i>
+        Contact Me
+      </div>
+
+      <div class="contact-list">
+
+        <a
+          href="https://wa.me/8801943488192"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-btn whatsapp">
+
+          <span class="contact-left">
+            <i class="fa-brands fa-whatsapp"></i>
+            WhatsApp
+          </span>
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+
+        <a
+          href="tel:+8801943488192"
+          class="contact-btn call">
+
+          <span class="contact-left">
+            <i class="fa-solid fa-phone"></i>
+            Call
+          </span>
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+
+        <a
+          href="email:mrjuwel315@gmail.com"
+          class="contact-btn email">
+
+          <span class="contact-left">
+            <i class="fa-solid fa-envelope"></i>
+            Email
+          </span>
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+
+        <a
+          href="https://www.fb.com/61595381866217"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-btn facebook">
+
+          <span class="contact-left">
+            <i class="fa-brands fa-facebook"></i>
+            Facebook
+          </span>
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+
+        <a
+          href="https://m.me/61595381866217"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-btn messenger">
+
+          <span class="contact-left">
+            <i class="fa-brands fa-facebook-messenger"></i>
+            Messenger
+          </span>
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+
+        <a
+          href="https://github.com/GOAT-MIRAI-MIX/MR-JUWEL.git"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-btn github">
+
+          <span class="contact-left">
+            <i class="fa-brands fa-github"></i>
+            GitHub
+          </span>
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+      <strong>MR JUWEL</strong><br>
+
+      Personal Profile • System Status
+
+      <br>
+
+      © <span id="year"></span> All Rights Reserved.
+
+    </footer>
+
+  </main>
+
+
+  <script>
+
+    /*
+     * ==========================================
+     * SYSTEM STATUS API
+     * ==========================================
+     *
+     * Backend endpoint example:
+     *
+     * GET /api/status
+     *
+     * Expected JSON:
+     *
+     * {
+     *   "bot": "online",
+     *   "website": "online",
+     *   "uptime": "99.99%",
+     *   "responseTime": "245 ms"
+     * }
+     *
+     * IMPORTANT:
+     * UptimeRobot API KEY কখনো এই HTML-এর মধ্যে রাখবে না।
+     */
+
+    const STATUS_API = "/api/status";
+
+
+    function setStatus(elementId, status) {
+
+      const element = document.getElementById(elementId);
+
+      if (!element) return;
+
+      if (status === "online") {
+
+        element.textContent = "● ONLINE";
+        element.className = "status-value online";
+
+      } else if (status === "offline") {
+
+        element.textContent = "● OFFLINE";
+        element.className = "status-value offline";
+
+      } else {
+
+        element.textContent = "CHECKING...";
+        element.className = "status-value checking";
+
+      }
+    }
+
+
+    async function loadSystemStatus() {
+
+      try {
+
+        const response = await fetch(
+          STATUS_API + "?t=" + Date.now(),
+          {
+            method: "GET",
+            cache: "no-store"
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Status API unavailable");
+        }
+
+        const data = await response.json();
+
+
+        setStatus(
+          "botStatus",
+          data.bot || "unknown"
+        );
+
+
+        setStatus(
+          "websiteStatus",
+          data.website || "unknown"
+        );
+
+
+        document.getElementById("uptime").textContent =
+          data.uptime || "--";
+
+
+        document.getElementById("responseTime").textContent =
+          data.responseTime || "--";
+
+
+        document.getElementById("lastCheck").textContent =
+          "Last checked: Just now";
+
+
+      } catch (error) {
+
+        setStatus("botStatus", "offline");
+        setStatus("websiteStatus", "offline");
+
+        document.getElementById("uptime").textContent = "--";
+        document.getElementById("responseTime").textContent = "--";
+
+        document.getElementById("lastCheck").textContent =
+          "Status temporarily unavailable";
+
+      }
+
+    }
+
+
+    /* Initial check */
+    loadSystemStatus();
+
+
+    /* Auto refresh every 60 seconds */
+    setInterval(
+      loadSystemStatus,
+      60 * 1000
+    );
+
+
+    /* Dynamic year */
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+
+    /* Auto age from date of birth (24 April 2004) */
+    (function () {
+      const dob = new Date(2004, 3, 24);
+      const today = new Date();
+      let age = today.getFullYear() - dob.getFullYear();
+      const m = today.getMonth() - dob.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+        age--;
+      }
+      document.getElementById("age").textContent = age + " Years";
+    })();
+
+  </script>
+
+</body>
+        </html>
