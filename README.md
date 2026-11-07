@@ -5,7 +5,11 @@
   </a>
 </p>
 
-<p align="center"><b>▶️ ছবিতে ক্লিক করে নতুন YouTube টিউটোরিয়াল দেখুন — কিভাবে Messenger Bot বানাবেন ও রান দিবেন</b><br/>Click the image above to watch the new step-by-step tutorial on YouTube.</p>
+<p align="center"><b>▶️ ছবিতে ক্লিক করে YouTube টিউটোরিয়াল দেখুন — কিভাবে Messenger Bot বানাবেন ও রান দিবেন</b><br/>Click the image above to watch the step-by-step tutorial on YouTube.</p>
+
+<p align="center">
+  <a href="https://www.youtube.com/@BdBotTame"><img alt="BD Bot Team YouTube Channel" src="https://img.shields.io/badge/YouTube-BD_Bot_Team-FF0000?style=for-the-badge&logo=youtube&logoColor=white"></a>
+</p>
 
 ---
 
@@ -660,10 +664,6 @@ jobs:
 ---
 
 <h1 align="center">🚀 HOW TO RUN THIS CHAT BOT</h1>
-
-[![Watch the Video](https://i.imgur.com/EKtftdm.png)](https://youtu.be/blg0O7IgcrA?si=vpz42AK06uIblLN9)
-
-<p align="center"><b>▶️ ছবিতে ক্লিক করে YouTube টিউটোরিয়াল দেখুন</b><br/>Click the image above to watch the step-by-step tutorial on YouTube.</p>
 
 ### Steps to Run the Bot
 
